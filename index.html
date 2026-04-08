@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>GoEstilistas! | Peluquería en Alcobendas</title>
+    <!-- Scroll Reveal CDN -->
     <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Font Awesome (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
+    <!-- HEADER CON NAV CENTRADO -->
     <header>
         <div class="logo">
             <a href="index.html">
                 <span style="font-size: 1.5rem; font-weight: bold; color: #1A1A1A;">GoEstilistas!</span>
             </a>
         </div>
+        
         <nav>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
@@ -30,6 +34,7 @@
                 <li><a href="quienes-somos.html">Quiénes somos</a></li>
             </ul>
         </nav>
+        
         <div class="header-right">
             <div class="placeholder-buttons">
                 <span>🌓</span>
@@ -41,17 +46,22 @@
         </div>
     </header>
 
+    <!-- HERO SECTION CON PARTÍCULAS DE FONDO -->
     <section class="hero">
+        <!-- Contenedor de partículas -->
+        <div class="particle-container" id="particleContainer"></div>
+        
         <div class="hero-contenido">
             <h1 class="hero-titulo">GoEstilistas!</h1>
-            <p class="hero-texto">Tu estilo, nuestra pasión. En el corazón de Alcobendas.</p>
+            <p class="hero-texto">Tu estilo, nuestra pasión. Tu peluquería de confianza en Alcobendas, con profesionales que se adaptan a ti y utilizan productos de la mejor calidad.</p>
             <a href="servicios-hombre.html" class="btn-hero">Descubre nuestros servicios</a>
         </div>
         <div class="hero-imagen">
-            <img src="https://placehold.co/600x400/4EA8DE/white?text=Peluquería" alt="Peluquería GoEstilistas!">
+            <img src="https://placehold.co/700x500/4EA8DE/white?text=Peluquería" alt="Peluquería GoEstilistas!">
         </div>
     </section>
 
+    <!-- SECCIÓN DE CARACTERÍSTICAS -->
     <section class="features">
         <div class="feature">
             <i class="fas fa-cut"></i>
@@ -70,6 +80,7 @@
         </div>
     </section>
 
+    <!-- FOOTER MEJORADO -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -86,13 +97,21 @@
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
+            <div class="footer-col contacto-col">
                 <h4>Contacto</h4>
-                <p><i class="fas fa-phone"></i> <a href="tel:+34123456789">+34 123 456 789</a></p>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:info@goestilistas.com">info@goestilistas.com</a></p>
-                <p><i class="fas fa-map-pin"></i> <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank">Centro Comercial La Vega, Alcobendas</a></p>
+                <div class="contacto-item">
+                    <i class="fas fa-phone" style="color: #4EA8DE; margin-right: 12px;"></i>
+                    <a href="tel:+34123456789">+34 123 456 789</a>
+                </div>
+                <div class="contacto-item">
+                    <i class="fas fa-envelope" style="color: #FF9F4A; margin-right: 12px;"></i>
+                    <a href="mailto:info@goestilistas.com">info@goestilistas.com</a>
+                </div>
+                <div class="contacto-item">
+                    <i class="fas fa-map-pin" style="color: #4EA8DE; margin-right: 12px;"></i>
+                    <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer">Centro Comercial La Vega, Alcobendas</a>
+                </div>
             </div>
-            <!-- Columna 4: Mapa CORREGIDO - SIN API KEY -->
             <div class="footer-col">
                 <h4>Ubicación</h4>
                 <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none;">
@@ -117,9 +136,58 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 GoEstilistas! - Todos los derechos reservados.</p>
+            <p>&copy; 2026 GoEstilistas! - Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Script de partículas para el fondo del hero -->
+    <script>
+        // Generar partículas flotantes en el fondo del hero
+        (function() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            
+            const PARTICLE_COUNT = 80;
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamaño aleatorio entre 2px y 8px
+                const size = Math.random() * 6 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Posición horizontal aleatoria
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Duración de la animación entre 8 y 20 segundos
+                const duration = Math.random() * 12 + 8;
+                particle.style.animationDuration = duration + 's';
+                
+                // Retraso aleatorio
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                
+                // Opacidad aleatoria
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                
+                // Color ligeramente diferente (blanco o naranja claro)
+                const colorVariation = Math.random();
+                if (colorVariation > 0.7) {
+                    particle.style.background = 'rgba(255, 140, 0, 0.5)';
+                } else {
+                    particle.style.background = 'rgba(255, 255, 255, 0.4)';
+                }
+                
+                return particle;
+            }
+            
+            // Crear todas las partículas
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                container.appendChild(createParticle());
+            }
+        })();
+    </script>
 
     <script src="assets/js/main.js"></script>
 </body>
