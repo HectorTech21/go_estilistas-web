@@ -4,23 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>GoEstilistas! | Peluquería en Alcobendas</title>
-    <!-- Scroll Reveal CDN -->
     <script src="https://unpkg.com/scrollreveal"></script>
-    <!-- Font Awesome (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-    <!-- HEADER CON NAV CENTRADO -->
     <header>
         <div class="logo">
             <a href="index.html">
-                <!-- Logo temporal (cámbialo cuando tengas el logo real) -->
                 <span style="font-size: 1.5rem; font-weight: bold; color: #1A1A1A;">GoEstilistas!</span>
             </a>
         </div>
-        
         <nav>
             <ul class="nav-links">
                 <li><a href="index.html">Inicio</a></li>
@@ -35,8 +30,6 @@
                 <li><a href="quienes-somos.html">Quiénes somos</a></li>
             </ul>
         </nav>
-        
-        <!-- Espacio reservado para futuros botones (Dark mode + idiomas) -->
         <div class="header-right">
             <div class="placeholder-buttons">
                 <span>🌓</span>
@@ -48,7 +41,6 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-contenido">
             <h1 class="hero-titulo">GoEstilistas!</h1>
@@ -60,7 +52,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE CARACTERÍSTICAS -->
     <section class="features">
         <div class="feature">
             <i class="fas fa-cut"></i>
@@ -79,7 +70,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -100,12 +90,24 @@
                 <h4>Contacto</h4>
                 <p><i class="fas fa-phone"></i> <a href="tel:+34123456789">+34 123 456 789</a></p>
                 <p><i class="fas fa-envelope"></i> <a href="mailto:info@goestilistas.com">info@goestilistas.com</a></p>
-                <p><i class="fas fa-map-pin"></i> <a href="https://maps.google.com/?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer">Centro Comercial La Vega, Alcobendas</a></p>
+                <p><i class="fas fa-map-pin"></i> <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank">Centro Comercial La Vega, Alcobendas</a></p>
             </div>
+            <!-- Columna 4: Mapa CORREGIDO - SIN API KEY -->
             <div class="footer-col">
                 <h4>Ubicación</h4>
-                <a href="https://maps.google.com/?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer">
-                    <img src="https://placehold.co/200x120/cccccc/666?text=Mapa" alt="Mapa ubicación" style="width:100%; max-width:200px; border-radius:8px;">
+                <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none;">
+                    <div class="mapa-miniatura">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.654321!2d-3.642800!3d40.537400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229e4b6e8e3e1%3A0x123456789abcdef!2sCentro%20Comercial%20La%20Vega!5e0!3m2!1ses!2ses!4v1234567890123!5m2!1ses!2ses" 
+                            width="100%" 
+                            height="180" 
+                            style="border:0; border-radius: 14px; pointer-events: none;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa Centro Comercial La Vega">
+                        </iframe>
+                    </div>
                 </a>
                 <div class="social-icons">
                     <a href="https://instagram.com" target="_blank" class="social instagram"><i class="fab fa-instagram"></i></a>

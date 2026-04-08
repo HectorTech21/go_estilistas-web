@@ -1,6 +1,8 @@
+// Espera a que todo el HTML esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     console.log('JavaScript cargado correctamente');
     
+    // Menú hamburguesa para móvil
     const hamburguesa = document.querySelector('.menu-hamburguesa');
     const navLinks = document.querySelector('.nav-links');
     
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Scroll Reveal - Animaciones al hacer scroll
     if (typeof ScrollReveal !== 'undefined') {
         ScrollReveal().reveal('.hero', {
             origin: 'top',
