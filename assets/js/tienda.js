@@ -4,7 +4,7 @@
 // ============================================
 
 // Configuración
-const API_URL = 'https://TU-PROYECTO.vercel.app/api/create-checkout-session';
+const API_URL = 'https://go-estilistas-web.vercel.app/api/create-checkout-session';
 const CART_KEY = 'goestilistas_cart';
 
 // Productos de ejemplo
