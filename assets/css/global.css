@@ -1,3 +1,8 @@
+/* ============================================
+   GLOBAL.CSS - ESTILOS COMUNES A TODAS LAS PÁGINAS
+   Header, Footer, Hero, Features, Colores, Tipografías, Responsive
+   ============================================ */
+
 /* RESET Y BASE */
 * {
     margin: 0;
@@ -12,7 +17,9 @@ body {
     line-height: 1.6;
 }
 
-/* HEADER - MÁS ANCHO Y GORDITO CON LÍNEA AZUL INFERIOR */
+/* ============================================
+   HEADER (común a todas las páginas)
+   ============================================ */
 header {
     display: flex;
     justify-content: space-between;
@@ -36,8 +43,8 @@ header {
 }
 
 .logo span {
-    font-size: 1.6rem !important;
-    font-weight: 800 !important;
+    font-size: 1.6rem;
+    font-weight: 800;
 }
 
 nav {
@@ -129,7 +136,9 @@ nav {
     display: block;
 }
 
-/* HERO - MÁS ALTO CON PARTÍCULAS DE FONDO */
+/* ============================================
+   HERO (solo en index.html)
+   ============================================ */
 .hero {
     position: relative;
     display: flex;
@@ -187,7 +196,6 @@ nav {
     z-index: 1;
 }
 
-/* Título más grande */
 .hero-titulo {
     font-size: 5.5rem;
     font-weight: 800;
@@ -214,14 +222,12 @@ nav {
     }
 }
 
-/* Texto descriptivo más grande */
 .hero-texto {
     font-size: 1.4rem;
     margin-bottom: 2rem;
     line-height: 1.4;
 }
 
-/* Botón más grande */
 .btn-hero {
     display: inline-block;
     background: #1A1A1A;
@@ -241,7 +247,6 @@ nav {
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
-/* Imagen más grande con hover */
 .hero-imagen {
     flex: 1;
     text-align: center;
@@ -264,7 +269,9 @@ nav {
     box-shadow: 0 25px 50px rgba(0,0,0,0.35);
 }
 
-/* FEATURES */
+/* ============================================
+   FEATURES (solo en index.html)
+   ============================================ */
 .features {
     display: flex;
     justify-content: space-around;
@@ -294,7 +301,9 @@ nav {
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-/* FOOTER MEJORADO */
+/* ============================================
+   FOOTER (común a todas las páginas)
+   ============================================ */
 footer {
     background: #1A1A1A;
     color: #ccc;
@@ -308,7 +317,6 @@ footer {
     margin-bottom: 2rem;
 }
 
-/* Títulos de columnas con color azul y subrayado */
 .footer-col h3, .footer-col h4 {
     color: #4EA8DE;
     margin-bottom: 1.2rem;
@@ -318,7 +326,6 @@ footer {
     padding-bottom: 0.5rem;
 }
 
-/* Efecto de subrayado con barra */
 .footer-col h3::after, .footer-col h4::after {
     content: '';
     position: absolute;
@@ -353,7 +360,7 @@ footer {
     color: #FF9F4A;
 }
 
-/* Sección de Contacto con más separación y emoticonos coloreados */
+/* Contacto */
 .contacto-col .contacto-item {
     margin-bottom: 1rem;
     display: flex;
@@ -375,7 +382,7 @@ footer {
     color: #FF9F4A;
 }
 
-/* Mapa mejorado */
+/* Mapa */
 .mapa-miniatura {
     display: block;
     width: 100%;
@@ -400,7 +407,7 @@ footer {
     pointer-events: none;
 }
 
-/* Redes sociales con hover degradado/neon */
+/* Redes Sociales */
 .social-icons {
     display: flex;
     gap: 1.2rem;
@@ -440,28 +447,24 @@ footer {
     z-index: 1;
 }
 
-/* Instagram - degradado realista */
 .social.instagram:hover {
     background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
     box-shadow: 0 0 15px rgba(214, 41, 118, 0.6);
     transform: scale(1.15) rotate(5deg);
 }
 
-/* WhatsApp - verde neón */
 .social.whatsapp:hover {
     background: linear-gradient(135deg, #25D366, #128C7E);
     box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
     transform: scale(1.15);
 }
 
-/* Facebook - azul neón */
 .social.facebook:hover {
     background: linear-gradient(135deg, #1877F2, #0c5bd0);
     box-shadow: 0 0 15px rgba(24, 119, 242, 0.7);
     transform: scale(1.15);
 }
 
-/* Footer bottom con línea azul */
 .footer-bottom {
     text-align: center;
     padding-top: 1.5rem;
@@ -469,14 +472,16 @@ footer {
     font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
+/* ============================================
+   RESPONSIVE (común a todas las páginas)
+   ============================================ */
 @media (max-width: 768px) {
     header {
         padding: 1rem 5%;
     }
     
     .logo span {
-        font-size: 1.3rem !important;
+        font-size: 1.3rem;
     }
     
     .nav-links {
