@@ -1,0 +1,60 @@
+/* ============================================
+   SUCCESS.CSS - Estilos exclusivos de la página de éxito
+   ============================================ */
+
+.success-container {
+    text-align: center;
+    padding: 5rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+.success-icon {
+    font-size: 5rem;
+    color: #4EA8DE;
+    margin-bottom: 1rem;
+}
+
+.success-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #1A1A1A;
+}
+
+.success-message {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.btn-volver {
+    display: inline-block;
+    background: #FF9F4A;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-volver:hover {
+    background: #F12711;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .success-container {
+        padding: 3rem 1.5rem;
+    }
+    
+    .success-title {
+        font-size: 1.5rem;
+    }
+    
+    .success-icon {
+        font-size: 3.5rem;
+    }
+}
