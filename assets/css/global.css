@@ -80,15 +80,43 @@ nav {
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 1rem;
 }
 
 .placeholder-buttons {
     display: flex;
+    align-items: center;
     gap: 0.8rem;
-    opacity: 0.6;
 }
 
+/* BOTÓN RESERVAR CITA (WhatsApp sólido) */
+.btn-reservar {
+    background: #25D366;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-reservar i {
+    font-size: 1rem;
+}
+
+.btn-reservar:hover {
+    background: #128C7E;
+    transform: scale(1.05);
+    color: white;
+}
+
+/* Botón modo oscuro */
 .placeholder-buttons span {
     font-size: 0.9rem;
     color: #666;
@@ -389,7 +417,7 @@ footer {
     pointer-events: none;
 }
 
-/* Redes Sociales */
+/* Redes Sociales - COLORES SÓLIDOS Y VIBRANTES */
 .social-icons {
     display: flex;
     gap: 1.2rem;
@@ -412,37 +440,28 @@ footer {
     overflow: hidden;
 }
 
-.social::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-}
-
 .social i {
     position: relative;
     z-index: 1;
 }
 
+/* Instagram - degradado original (ya es vibrante) */
 .social.instagram:hover {
     background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
     box-shadow: 0 0 15px rgba(214, 41, 118, 0.6);
     transform: scale(1.15) rotate(5deg);
 }
 
+/* WhatsApp - verde sólido vibrante */
 .social.whatsapp:hover {
-    background: linear-gradient(135deg, #25D366, #128C7E);
+    background: #25D366;
     box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
     transform: scale(1.15);
 }
 
+/* Facebook - azul sólido vibrante */
 .social.facebook:hover {
-    background: linear-gradient(135deg, #1877F2, #0c5bd0);
+    background: #1877F2;
     box-shadow: 0 0 15px rgba(24, 119, 242, 0.7);
     transform: scale(1.15);
 }
@@ -662,7 +681,7 @@ footer {
 }
 
 .dark-mode .hero-titulo {
-    color: transparent; /* El gradiente se mantiene */
+    color: transparent;
 }
 
 /* Enlaces del header en modo oscuro */
@@ -724,33 +743,7 @@ footer {
     color: #ffffff;
 }
 
-/* Botón Reservar Cita */
-.btn-reservar {
-    background: #25D366;
-    color: white;
-    padding: 0.5rem 1.2rem;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.btn-reservar i {
-    font-size: 1rem;
-}
-
-.btn-reservar:hover {
-    background: #128C7E;
-    transform: scale(1.05);
-    color: white;
-}
-
-/* Modo oscuro - botón reservar */
+/* Botón reservar cita en modo oscuro */
 .dark-mode .btn-reservar {
     background: #25D366;
     color: white;
