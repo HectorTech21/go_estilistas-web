@@ -1,0 +1,184 @@
+/* ============================================
+   SERVICIOS.CSS - Estilos exclusivos de servicios.html
+   Dos cards siempre una al lado de la otra
+   Ocupan toda la pantalla (sin footer visible hasta scroll)
+   ============================================ */
+
+/* Contenedor principal - ocupa toda la pantalla menos header y footer */
+.servicios-container {
+    min-height: calc(100vh - 80px - 300px); /* Ajusta según altura de header y footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+/* Header de la página */
+.servicios-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.servicios-header h1 {
+    font-size: 2.5rem;
+    color: #1A1A1A;
+    margin-bottom: 0.5rem;
+}
+
+.servicios-header p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Grid de cards - SIEMPRE en fila (horizontal) */
+.servicios-cards {
+    display: flex;
+    flex-direction: row;  /* Siempre horizontal */
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Card individual */
+.servicio-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.servicio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* Icono */
+.servicio-icono {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #4EA8DE20, #FF9F4A20);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+}
+
+.servicio-icono i {
+    font-size: 2.5rem;
+    color: #4EA8DE;
+    transition: color 0.3s;
+}
+
+.servicio-card:hover .servicio-icono i {
+    color: #FF9F4A;
+}
+
+/* Título */
+.servicio-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #1A1A1A;
+}
+
+/* Descripción */
+.servicio-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Botón interno */
+.servicio-btn {
+    display: inline-block;
+    color: #4EA8DE;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.servicio-card:hover .servicio-btn {
+    color: #FF9F4A;
+}
+
+/* ============================================
+   RESPONSIVE: Siempre horizontal, incluso en móvil
+   ============================================ */
+@media (max-width: 768px) {
+    .servicios-container {
+        min-height: calc(100vh - 70px - 400px);
+        padding: 2rem 1.5rem;
+    }
+    
+    .servicios-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .servicios-header p {
+        font-size: 0.9rem;
+    }
+    
+    /* SEGUIMOS EN FILA (horizontal) incluso en móvil */
+    .servicios-cards {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .servicio-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .servicio-icono {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .servicio-icono i {
+        font-size: 1.8rem;
+    }
+    
+    .servicio-card h2 {
+        font-size: 1.2rem;
+    }
+    
+    .servicio-card p {
+        font-size: 0.8rem;
+    }
+    
+    .servicio-btn {
+        font-size: 0.85rem;
+    }
+}
+
+/* Para pantallas muy pequeñas (menos de 500px) seguimos en horizontal */
+@media (max-width: 500px) {
+    .servicios-cards {
+        gap: 0.8rem;
+    }
+    
+    .servicio-card {
+        padding: 1rem 0.8rem;
+    }
+    
+    .servicio-card h2 {
+        font-size: 1rem;
+    }
+    
+    .servicio-card p {
+        font-size: 0.7rem;
+    }
+}
