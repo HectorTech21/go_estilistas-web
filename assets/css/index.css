@@ -1,0 +1,331 @@
+/* ============================================
+   INDEX.CSS - Estilos exclusivos de la página principal
+   Hero, Features, Testimonios (carrusel)
+   ============================================ */
+
+/* HERO */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8rem 5%;
+    background: linear-gradient(135deg, #4EA8DE 0%, #FF9F4A 100%);
+    color: white;
+    gap: 3rem;
+    flex-wrap: wrap;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.hero-titulo {
+    font-size: 5.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #F5AF19, #F12711, #FF8C00, #FFD700, #F5AF19);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(245, 175, 25, 0.3);
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+.hero-texto {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.btn-hero {
+    display: inline-block;
+    background: #1A1A1A;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-hero:hover {
+    background: #FF9F4A;
+    transform: scale(1.05);
+}
+
+.hero-imagen img {
+    max-width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    transition: all 0.4s;
+}
+
+.hero-imagen img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 4rem 5%;
+    gap: 2rem;
+    text-align: center;
+    background: white;
+}
+
+.feature {
+    flex: 1;
+    min-width: 200px;
+    padding: 1.5rem;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+.feature i {
+    font-size: 2.5rem;
+    color: #4EA8DE;
+    margin-bottom: 1rem;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* ============================================
+   TESTIMONIOS (exclusivo del index)
+   ============================================ */
+
+.testimonios {
+    padding: 4rem 5%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.testimonios-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonios-header h2 {
+    font-size: 2.2rem;
+    color: #1A1A1A;
+    margin-bottom: 0.5rem;
+}
+
+.testimonios-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.testimonios-carrusel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.testimonios-carrusel {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    padding: 1rem 0.5rem;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Tarjeta de testimonio - con altura fija */
+.testimonio-card {
+    min-width: 320px;
+    max-width: 320px;
+    height: 380px;  /* Altura fija para todas las tarjetas */
+    flex: 0 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.testimonio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* Contenedor del texto con scroll si es necesario */
+.testimonio-texto-container {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    padding-right: 5px;
+}
+
+/* Personalizar scrollbar */
+.testimonio-texto-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.testimonio-texto-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+
+.testimonio-texto-container::-webkit-scrollbar-thumb {
+    background: #4EA8DE;
+    border-radius: 4px;
+}
+
+.testimonio-texto {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Estrellas */
+.testimonio-estrellas {
+    color: #FFD700;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Autor (siempre abajo) */
+.testimonio-autor {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-top: 1px solid #eee;
+    padding-top: 0.8rem;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.testimonio-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4EA8DE, #FF9F4A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.carrusel-btn {
+    background: #4EA8DE;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carrusel-btn:hover {
+    background: #FF9F4A;
+    transform: scale(1.05);
+}
+
+.carrusel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: #4EA8DE;
+    width: 25px;
+    border-radius: 10px;
+}
+
+/* Responsive index */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 4rem 5%;
+        min-height: auto;
+    }
+    
+    .hero-titulo {
+        font-size: 3rem;
+    }
+    
+    .hero-texto {
+        font-size: 1.1rem;
+    }
+    
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .testimonios-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .testimonio-card {
+        min-width: 280px;
+    }
+}

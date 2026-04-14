@@ -8,7 +8,10 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Font Awesome (iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CSS Global -->
     <link rel="stylesheet" href="assets/css/global.css">
+    <!-- CSS específico del index -->
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
 
@@ -47,7 +50,6 @@
 
     <!-- HERO SECTION CON PARTÍCULAS DE FONDO -->
     <section class="hero">
-        <!-- Contenedor de partículas -->
         <div class="particle-container" id="particleContainer"></div>
         
         <div class="hero-contenido">
@@ -79,7 +81,27 @@
         </div>
     </section>
 
-    <!-- FOOTER MEJORADO -->
+    <!-- SECCIÓN DE OPINIONES / TESTIMONIOS -->
+    <section class="testimonios">
+        <div class="testimonios-header">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <p>Opiniones reales de quienes confían en GoEstilistas!</p>
+        </div>
+        
+        <div class="testimonios-carrusel-container">
+            <button class="carrusel-btn prev" id="prevBtn">❮</button>
+            
+            <div class="testimonios-carrusel" id="testimoniosCarrusel">
+                <!-- Las tarjetas se generarán con JavaScript -->
+            </div>
+            
+            <button class="carrusel-btn next" id="nextBtn">❯</button>
+        </div>
+        
+        <div class="carrusel-dots" id="carruselDots"></div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -138,55 +160,8 @@
         </div>
     </footer>
 
-    <!-- Script de partículas para el fondo del hero -->
-    <script>
-        // Generar partículas flotantes en el fondo del hero
-        (function() {
-            const container = document.getElementById('particleContainer');
-            if (!container) return;
-            
-            const PARTICLE_COUNT = 80;
-            
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Tamaño aleatorio entre 2px y 8px
-                const size = Math.random() * 6 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                // Posición horizontal aleatoria
-                particle.style.left = Math.random() * 100 + '%';
-                
-                // Duración de la animación entre 8 y 20 segundos
-                const duration = Math.random() * 12 + 8;
-                particle.style.animationDuration = duration + 's';
-                
-                // Retraso aleatorio
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                
-                // Opacidad aleatoria
-                particle.style.opacity = Math.random() * 0.5 + 0.2;
-                
-                // Color ligeramente diferente (blanco o naranja claro)
-                const colorVariation = Math.random();
-                if (colorVariation > 0.7) {
-                    particle.style.background = 'rgba(255, 140, 0, 0.5)';
-                } else {
-                    particle.style.background = 'rgba(255, 255, 255, 0.4)';
-                }
-                
-                return particle;
-            }
-            
-            // Crear todas las partículas
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                container.appendChild(createParticle());
-            }
-        })();
-    </script>
-
+    <!-- Scripts -->
     <script src="assets/js/global.js"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>
