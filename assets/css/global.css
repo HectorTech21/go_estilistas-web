@@ -116,19 +116,23 @@ nav {
     color: white;
 }
 
-/* Botón modo oscuro */
-.placeholder-buttons span {
-    font-size: 0.9rem;
-    color: #666;
+/* Botón modo oscuro - CORREGIDO */
+.dark-mode-toggle {
     background: #f0f0f0;
-    padding: 0.5rem 1rem;
+    border: none;
     border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.placeholder-buttons span:hover {
+.dark-mode-toggle:hover {
     background: #FF9F4A;
     color: white;
 }
@@ -137,9 +141,254 @@ nav {
     display: none;
     font-size: 1.8rem;
     cursor: pointer;
+    background: none;
+    border: none;
+    color: #1A1A1A;
 }
 
-/* DROPDOWN */
+/* ============================================
+   MENÚ HAMBURGUESA RESPONSIVE (PANTALLA COMPLETA)
+   ============================================ */
+
+/* Overlay del menú */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menú lateral */
+.menu-responsive {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 2001;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.menu-responsive.active {
+    right: 0;
+}
+
+/* Cabecera del menú */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.menu-header .logo span {
+    font-size: 1.3rem;
+}
+
+.menu-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #1A1A1A;
+}
+
+/* Navegación del menú */
+.menu-nav {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+.menu-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-nav li {
+    margin-bottom: 1rem;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: #1A1A1A;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: block;
+    padding: 0.5rem 0;
+    transition: color 0.3s;
+}
+
+.menu-nav a:hover {
+    color: #FF9F4A;
+}
+
+/* Submenú de servicios */
+.submenu-item {
+    position: relative;
+}
+
+.submenu-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.submenu-toggle span:first-child {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #1A1A1A;
+}
+
+.submenu-toggle .submenu-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.submenu-toggle.active .submenu-arrow {
+    transform: rotate(180deg);
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.submenu.active {
+    max-height: 200px;
+}
+
+.submenu li {
+    margin-bottom: 0.5rem;
+}
+
+.submenu li a {
+    font-size: 1rem;
+    padding: 0.4rem 0;
+}
+
+/* Sección de contacto en el menú */
+.menu-contacto {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+}
+
+.menu-contacto h4 {
+    font-size: 1rem;
+    color: #4EA8DE;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contacto-item-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.contacto-item-menu i {
+    width: 20px;
+    color: #4EA8DE;
+}
+
+.contacto-item-menu a {
+    text-decoration: none;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.contacto-item-menu a:hover {
+    color: #FF9F4A;
+}
+
+/* Redes sociales en el menú */
+.menu-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.menu-social .social {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+}
+
+/* Modo oscuro para el menú responsive */
+.dark-mode .menu-responsive {
+    background: #1a1a2e;
+}
+
+.dark-mode .menu-header {
+    border-bottom-color: #2a2a3e;
+}
+
+.dark-mode .close-menu {
+    color: #f0f0f0;
+}
+
+.dark-mode .menu-nav a,
+.dark-mode .submenu-toggle span:first-child {
+    color: #f0f0f0;
+}
+
+.dark-mode .menu-nav a:hover,
+.dark-mode .submenu-toggle span:first-child:hover {
+    color: #FF9F4A;
+}
+
+.dark-mode .menu-contacto {
+    border-top-color: #2a2a3e;
+}
+
+.dark-mode .contacto-item-menu {
+    color: #aaa;
+}
+
+.dark-mode .contacto-item-menu a {
+    color: #aaa;
+}
+
+.dark-mode .contacto-item-menu a:hover {
+    color: #FF9F4A;
+}
+
+/* ============================================
+   DROPDOWN (solo escritorio)
+   ============================================ */
 .dropdown {
     position: relative;
 }
@@ -560,36 +809,30 @@ footer {
         font-size: 1.3rem;
     }
     
-    .nav-links {
+    /* Ocultar navegación de escritorio */
+    nav {
         display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: white;
-        padding: 1.5rem;
-        gap: 1.2rem;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        text-align: center;
     }
     
-    .nav-links li a {
-        font-size: 1.1rem;
-        padding: 0.5rem;
-        display: block;
-    }
-    
-    .nav-links.active {
-        display: flex;
-    }
-    
+    /* Mostrar menú hamburguesa */
     .menu-hamburguesa {
         display: block;
     }
     
-    .header-right .placeholder-buttons {
-        display: none;
+    /* Botón reservar cita más pequeño en móvil */
+    .btn-reservar {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .btn-reservar i {
+        font-size: 0.8rem;
+    }
+    
+    /* Botón de tema más pequeño en móvil */
+    .dark-mode-toggle {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.8rem;
     }
     
     .hero {
@@ -702,12 +945,12 @@ footer {
     background: linear-gradient(135deg, #1a1a2e 0%, #2a1a0f 100%);
 }
 
-.dark-mode .placeholder-buttons span {
+.dark-mode .dark-mode-toggle {
     background: #2a2a3e;
     color: #ccc;
 }
 
-.dark-mode .placeholder-buttons span:hover {
+.dark-mode .dark-mode-toggle:hover {
     background: #FF9F4A;
     color: white;
 }

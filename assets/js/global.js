@@ -1,20 +1,155 @@
 // ============================================
 // GLOBAL.JS - FUNCIONALIDAD COMÚN A TODAS LAS PÁGINAS
-// Menú hamburguesa, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba
+// Menú hamburguesa responsive, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Global JS cargado correctamente');
     
-    // ========== MENÚ HAMBURGUESA (responsive) ==========
-    const hamburguesa = document.querySelector('.menu-hamburguesa');
-    const navLinks = document.querySelector('.nav-links');
+    // ========== MODO OSCURO / CLARO ==========
     
-    if (hamburguesa && navLinks) {
-        hamburguesa.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            console.log('Menú hamburguesa clickeado');
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode);
+        
+        // Actualizar todos los botones de modo oscuro
+        const darkModeBtns = document.querySelectorAll('.dark-mode-toggle');
+        darkModeBtns.forEach(btn => {
+            btn.textContent = isDarkMode ? '☀️' : '🌓';
         });
+        
+        console.log('Modo oscuro activado:', isDarkMode);
+    }
+    
+    function checkDarkModePreference() {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        
+        if (savedDarkMode === 'true') {
+            document.body.classList.add('dark-mode');
+            const darkModeBtns = document.querySelectorAll('.dark-mode-toggle');
+            darkModeBtns.forEach(btn => {
+                btn.textContent = '☀️';
+            });
+            console.log('Modo oscuro cargado desde localStorage');
+        }
+    }
+    
+    // ========== MENÚ HAMBURGUESA RESPONSIVE (PANTALLA COMPLETA) ==========
+    
+    // Crear estructura del menú responsive si no existe
+    function createMenuResponsive() {
+        // Verificar si ya existe el menú para no duplicarlo
+        if (document.querySelector('.menu-overlay')) return;
+        
+        // Crear overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        
+        // Crear menú lateral
+        const menu = document.createElement('div');
+        menu.className = 'menu-responsive';
+        
+        // Cabecera del menú
+        menu.innerHTML = `
+            <div class="menu-header">
+                <div class="logo">
+                    <span>GoEstilistas!</span>
+                </div>
+                <div class="menu-header-buttons">
+                    <button class="dark-mode-toggle" id="darkModeToggleMobile">🌓</button>
+                    <button class="close-menu" id="closeMenuBtn">&times;</button>
+                </div>
+            </div>
+            <div class="menu-nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="submenu-item">
+                        <div class="submenu-toggle">
+                            <span>Servicios</span>
+                            <span class="submenu-arrow">▼</span>
+                        </div>
+                        <ul class="submenu">
+                            <li><a href="servicios-hombre.html">Servicios Hombre</a></li>
+                            <li><a href="servicios-mujer.html">Servicios Mujer</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="quienes-somos.html">Quiénes somos</a></li>
+                    <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
+                </ul>
+            </div>
+            <div class="menu-contacto">
+                <h4>Contacto</h4>
+                <div class="contacto-item-menu">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+34123456789">+34 123 456 789</a>
+                </div>
+                <div class="contacto-item-menu">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@goestilistas.com">info@goestilistas.com</a>
+                </div>
+                <div class="contacto-item-menu">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank">Centro Comercial La Vega, Alcobendas</a>
+                </div>
+                <div class="menu-social">
+                    <a href="https://instagram.com" target="_blank" class="social instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/34123456789" target="_blank" class="social whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="social facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(overlay);
+        document.body.appendChild(menu);
+        
+        // Eventos del menú
+        const hamburguesa = document.querySelector('.menu-hamburguesa');
+        const closeBtn = document.getElementById('closeMenuBtn');
+        const submenuToggle = menu.querySelector('.submenu-toggle');
+        const submenu = menu.querySelector('.submenu');
+        
+        // Abrir menú
+        if (hamburguesa) {
+            hamburguesa.addEventListener('click', function() {
+                overlay.classList.add('active');
+                menu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        // Cerrar menú
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeMenu);
+        }
+        
+        overlay.addEventListener('click', closeMenu);
+        
+        function closeMenu() {
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Submenú de servicios
+        if (submenuToggle && submenu) {
+            submenuToggle.addEventListener('click', function() {
+                submenu.classList.toggle('active');
+                submenuToggle.classList.toggle('active');
+            });
+        }
+        
+        // Sincronizar modo oscuro con el botón del menú
+        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
+        if (darkModeToggleMobile) {
+            darkModeToggleMobile.addEventListener('click', function() {
+                toggleDarkMode();
+                // Actualizar el botón del menú también
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                darkModeToggleMobile.textContent = isDarkMode ? '☀️' : '🌓';
+            });
+        }
     }
     
     // ========== SCROLL REVEAL (animaciones) ==========
@@ -53,35 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('ScrollReveal no se cargó correctamente');
     }
     
-    // ========== MODO OSCURO / CLARO ==========
-    
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode);
-        
-        const darkModeBtn = document.getElementById('darkModeToggle');
-        if (darkModeBtn) {
-            darkModeBtn.textContent = isDarkMode ? '☀️' : '🌓';
-        }
-        
-        console.log('Modo oscuro activado:', isDarkMode);
-    }
-    
-    function checkDarkModePreference() {
-        const savedDarkMode = localStorage.getItem('darkMode');
-        
-        if (savedDarkMode === 'true') {
-            document.body.classList.add('dark-mode');
-            const darkModeBtn = document.getElementById('darkModeToggle');
-            if (darkModeBtn) {
-                darkModeBtn.textContent = '☀️';
-            }
-            console.log('Modo oscuro cargado desde localStorage');
-        }
-    }
-    
+    // Asignar evento al botón de modo oscuro del header
     const darkModeBtn = document.getElementById('darkModeToggle');
     if (darkModeBtn) {
         darkModeBtn.addEventListener('click', toggleDarkMode);
@@ -144,4 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Botón volver arriba configurado');
     }
+    
+    // ========== INICIALIZAR MENÚ RESPONSIVE ==========
+    createMenuResponsive();
 });
