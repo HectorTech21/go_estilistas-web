@@ -116,7 +116,7 @@ nav {
     color: white;
 }
 
-/* Botón modo oscuro - CORREGIDO */
+/* Botón modo oscuro */
 .dark-mode-toggle {
     background: #f0f0f0;
     border: none;
@@ -274,55 +274,6 @@ nav {
     transform: scale(1.02);
 }
 
-/* Submenú de servicios */
-.submenu-item {
-    position: relative;
-}
-
-.submenu-toggle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 0.5rem 0;
-}
-
-.submenu-toggle span:first-child {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #1A1A1A;
-}
-
-.submenu-toggle .submenu-arrow {
-    font-size: 0.8rem;
-    transition: transform 0.3s;
-}
-
-.submenu-toggle.active .submenu-arrow {
-    transform: rotate(180deg);
-}
-
-.submenu {
-    list-style: none;
-    padding-left: 1.5rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.submenu.active {
-    max-height: 200px;
-}
-
-.submenu li {
-    margin-bottom: 0.5rem;
-}
-
-.submenu li a {
-    font-size: 1rem;
-    padding: 0.4rem 0;
-}
-
 /* Sección de contacto en el menú */
 .menu-contacto {
     padding: 1.5rem;
@@ -375,85 +326,6 @@ nav {
     font-size: 1.1rem;
 }
 
-/* Modo oscuro para el menú responsive */
-.dark-mode .menu-responsive {
-    background: #1a1a2e;
-}
-
-.dark-mode .menu-header {
-    border-bottom-color: #2a2a3e;
-}
-
-.dark-mode .close-menu {
-    color: #f0f0f0;
-}
-
-.dark-mode .menu-nav a,
-.dark-mode .submenu-toggle span:first-child {
-    color: #f0f0f0;
-}
-
-.dark-mode .menu-nav a:hover,
-.dark-mode .submenu-toggle span:first-child:hover {
-    color: #FF9F4A;
-}
-
-.dark-mode .menu-contacto {
-    border-top-color: #2a2a3e;
-}
-
-.dark-mode .contacto-item-menu {
-    color: #aaa;
-}
-
-.dark-mode .contacto-item-menu a {
-    color: #aaa;
-}
-
-.dark-mode .contacto-item-menu a:hover {
-    color: #FF9F4A;
-}
-
-.dark-mode .btn-reservar-menu {
-    background: #25D366;
-    color: white;
-}
-
-.dark-mode .btn-reservar-menu:hover {
-    background: #128C7E;
-}
-
-/* ============================================
-   DROPDOWN (solo escritorio)
-   ============================================ */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    background: white;
-    list-style: none;
-    top: 100%;
-    left: 0;
-    min-width: 150px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    z-index: 1001;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: 0.75rem 1rem;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
 /* ============================================
    INDICADOR DE PÁGINA ACTIVA (subrayado)
    ============================================ */
@@ -472,15 +344,6 @@ nav {
     height: 3px;
     background: #FF9F4A;
     border-radius: 3px;
-}
-
-/* Modo oscuro */
-.dark-mode .nav-links li a.active {
-    color: #FF9F4A;
-}
-
-.dark-mode .nav-links li a.active::after {
-    background: #FF9F4A;
 }
 
 /* ============================================
@@ -732,7 +595,7 @@ footer {
     pointer-events: none;
 }
 
-/* Redes Sociales - COLORES SÓLIDOS Y VIBRANTES */
+/* Redes Sociales */
 .social-icons {
     display: flex;
     gap: 1.2rem;
@@ -760,21 +623,18 @@ footer {
     z-index: 1;
 }
 
-/* Instagram - degradado original */
 .social.instagram:hover {
     background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
     box-shadow: 0 0 15px rgba(214, 41, 118, 0.6);
     transform: scale(1.15) rotate(5deg);
 }
 
-/* WhatsApp - verde sólido vibrante */
 .social.whatsapp:hover {
     background: #25D366;
     box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
     transform: scale(1.15);
 }
 
-/* Facebook - azul sólido vibrante */
 .social.facebook:hover {
     background: #1877F2;
     box-shadow: 0 0 15px rgba(24, 119, 242, 0.7);
@@ -825,15 +685,6 @@ footer {
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
-/* Modo oscuro */
-.dark-mode .btn-volver-arriba {
-    background: #FF9F4A;
-}
-
-.dark-mode .btn-volver-arriba:hover {
-    background: #4EA8DE;
-}
-
 /* ============================================
    RESPONSIVE (común a todas las páginas)
    ============================================ */
@@ -846,7 +697,6 @@ footer {
         font-size: 1.2rem;
     }
     
-    /* Ajustar el contenedor derecho del header */
     .header-right {
         gap: 0.5rem;
     }
@@ -855,7 +705,6 @@ footer {
         gap: 0.5rem;
     }
     
-    /* Botón reservar cita más pequeño y con menos padding */
     .btn-reservar {
         padding: 0.3rem 0.7rem;
         font-size: 0.65rem;
@@ -866,26 +715,19 @@ footer {
         font-size: 0.7rem;
     }
     
-    /* Botón de tema más pequeño */
     .dark-mode-toggle {
         padding: 0.3rem 0.6rem;
         font-size: 0.7rem;
     }
     
-    /* Menú hamburguesa */
     .menu-hamburguesa {
         font-size: 1.5rem;
-        margin-left: 0;
+        display: block;
     }
     
-    /* Ocultar navegación de escritorio */
+    /* Ocultar navegación de escritorio en móvil */
     nav {
         display: none;
-    }
-    
-    /* Mostrar menú hamburguesa */
-    .menu-hamburguesa {
-        display: block;
     }
     
     .hero {
@@ -986,15 +828,6 @@ footer {
     background: var(--footer-bg);
 }
 
-/* Cards y elementos que usan blanco */
-.producto-card,
-.testimonio-card,
-.servicio-card,
-.feature {
-    background: var(--card-bg);
-}
-
-/* Ajustes específicos para modo oscuro - Fondos */
 .dark-mode .hero {
     background: linear-gradient(135deg, #1a1a2e 0%, #2a1a0f 100%);
 }
@@ -1022,113 +855,64 @@ footer {
     background: #2a2a3e;
 }
 
-.dark-mode .testimonios {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-}
-
-.dark-mode .servicios-container {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-}
-
-/* Ajustes específicos para modo oscuro - TEXTOS */
-.dark-mode .testimonios-header h2,
-.dark-mode .testimonios-header p,
-.dark-mode .servicios-header h1,
-.dark-mode .servicios-header p,
-.dark-mode .servicio-card h2,
-.dark-mode .servicio-card p,
-.dark-mode .servicio-card .servicio-btn {
-    color: var(--text-primary);
-}
-
-/* Títulos principales en modo oscuro */
-.dark-mode h1, 
-.dark-mode h2, 
-.dark-mode h3, 
-.dark-mode h4 {
-    color: var(--text-primary);
-}
-
-/* Textos de features */
-.dark-mode .feature h3,
-.dark-mode .feature p {
-    color: var(--text-primary);
-}
-
-/* Texto del hero en modo oscuro */
-.dark-mode .hero-texto {
-    color: white;
-}
-
-.dark-mode .hero-titulo {
-    color: transparent;
-}
-
-/* Enlaces del header en modo oscuro */
-.dark-mode .nav-links li a {
-    color: var(--text-primary);
-}
-
-.dark-mode .nav-links li a:hover {
-    color: #FF9F4A;
-}
-
-/* Texto del logo */
-.dark-mode .logo span {
-    color: var(--text-primary);
-}
-
-/* Dropdown en modo oscuro */
-.dark-mode .dropdown-menu {
-    background: var(--header-bg);
-}
-
-.dark-mode .dropdown-menu li a {
-    color: var(--text-primary);
-}
-
-.dark-mode .dropdown-menu li a:hover {
-    color: #FF9F4A;
-}
-
-/* Testimonios cards en modo oscuro */
-.dark-mode .testimonio-card {
-    background: #252540;
-    border-color: #3a3a5a;
-}
-
-.dark-mode .testimonio-card .testimonio-texto {
-    color: #e0e0e0;
-}
-
-.dark-mode .testimonio-card .testimonio-autor h4 {
-    color: #ffffff;
-}
-
-.dark-mode .testimonio-card .testimonio-info p {
-    color: #aaaaaa;
-}
-
-/* Servicios cards en modo oscuro */
-.dark-mode .servicio-card {
-    background: #252540;
-    border-color: #3a3a5a;
-}
-
-.dark-mode .servicio-card p {
-    color: #e0e0e0;
-}
-
-.dark-mode .servicio-card h2 {
-    color: #ffffff;
-}
-
-/* Botón reservar cita en modo oscuro */
 .dark-mode .btn-reservar {
     background: #25D366;
     color: white;
 }
 
 .dark-mode .btn-reservar:hover {
+    background: #128C7E;
+}
+
+.dark-mode .btn-volver-arriba {
+    background: #FF9F4A;
+}
+
+.dark-mode .btn-volver-arriba:hover {
+    background: #4EA8DE;
+}
+
+.dark-mode .menu-responsive {
+    background: #1a1a2e;
+}
+
+.dark-mode .menu-header {
+    border-bottom-color: #2a2a3e;
+}
+
+.dark-mode .close-menu {
+    color: #f0f0f0;
+}
+
+.dark-mode .menu-nav a {
+    color: #f0f0f0;
+}
+
+.dark-mode .menu-nav a:hover {
+    color: #FF9F4A;
+}
+
+.dark-mode .menu-contacto {
+    border-top-color: #2a2a3e;
+}
+
+.dark-mode .contacto-item-menu {
+    color: #aaa;
+}
+
+.dark-mode .contacto-item-menu a {
+    color: #aaa;
+}
+
+.dark-mode .contacto-item-menu a:hover {
+    color: #FF9F4A;
+}
+
+.dark-mode .btn-reservar-menu {
+    background: #25D366;
+    color: white;
+}
+
+.dark-mode .btn-reservar-menu:hover {
     background: #128C7E;
 }
