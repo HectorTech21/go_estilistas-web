@@ -169,6 +169,35 @@ nav {
 }
 
 /* ============================================
+   INDICADOR DE PÁGINA ACTIVA (subrayado)
+   ============================================ */
+
+.nav-links li a.active {
+    position: relative;
+    color: #FF9F4A;
+}
+
+.nav-links li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #FF9F4A;
+    border-radius: 3px;
+}
+
+/* Modo oscuro */
+.dark-mode .nav-links li a.active {
+    color: #FF9F4A;
+}
+
+.dark-mode .nav-links li a.active::after {
+    background: #FF9F4A;
+}
+
+/* ============================================
    HERO (solo en index.html)
    ============================================ */
 .hero {
@@ -445,7 +474,7 @@ footer {
     z-index: 1;
 }
 
-/* Instagram - degradado original (ya es vibrante) */
+/* Instagram - degradado original */
 .social.instagram:hover {
     background: linear-gradient(45deg, #f09433, #d62976, #962fbf, #4f5bd5);
     box-shadow: 0 0 15px rgba(214, 41, 118, 0.6);
@@ -471,6 +500,52 @@ footer {
     padding-top: 1.5rem;
     border-top: 2px solid #4EA8DE;
     font-size: 0.9rem;
+}
+
+/* ============================================
+   BOTÓN VOLVER ARRIBA
+   ============================================ */
+
+.btn-volver-arriba {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #4EA8DE;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-volver-arriba.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-volver-arriba:hover {
+    background: #FF9F4A;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Modo oscuro */
+.dark-mode .btn-volver-arriba {
+    background: #FF9F4A;
+}
+
+.dark-mode .btn-volver-arriba:hover {
+    background: #4EA8DE;
 }
 
 /* ============================================
@@ -561,6 +636,14 @@ footer {
     
     .contacto-col .contacto-item {
         justify-content: center;
+    }
+    
+    .btn-volver-arriba {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
     }
 }
 

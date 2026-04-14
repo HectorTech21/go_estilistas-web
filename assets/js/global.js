@@ -1,6 +1,6 @@
 // ============================================
 // GLOBAL.JS - FUNCIONALIDAD COMÚN A TODAS LAS PÁGINAS
-// Menú hamburguesa, Scroll Reveal, Modo oscuro, Reservar cita
+// Menú hamburguesa, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========== SCROLL REVEAL (animaciones) ==========
     if (typeof ScrollReveal !== 'undefined') {
-        // Hero (solo si existe en la página)
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
             ScrollReveal().reveal('.hero', {
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Features (solo si existen en la página)
         const featuresSection = document.querySelector('.features');
         if (featuresSection) {
             ScrollReveal().reveal('.feature', {
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Footer (todas las páginas)
         ScrollReveal().reveal('.footer-container', {
             origin: 'bottom',
             distance: '30px',
@@ -58,25 +55,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========== MODO OSCURO / CLARO ==========
     
-    // Función para activar/desactivar modo oscuro
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
         
-        // Guardar preferencia en localStorage
         const isDarkMode = document.body.classList.contains('dark-mode');
         localStorage.setItem('darkMode', isDarkMode);
         
-        // Actualizar texto del botón
         const darkModeBtn = document.getElementById('darkModeToggle');
         if (darkModeBtn) {
             darkModeBtn.textContent = isDarkMode ? '☀️' : '🌓';
         }
         
-        // Debug: comprobar que funciona
         console.log('Modo oscuro activado:', isDarkMode);
     }
     
-    // Verificar preferencia guardada al cargar la página
     function checkDarkModePreference() {
         const savedDarkMode = localStorage.getItem('darkMode');
         
@@ -90,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Asignar evento al botón de modo oscuro
     const darkModeBtn = document.getElementById('darkModeToggle');
     if (darkModeBtn) {
         darkModeBtn.addEventListener('click', toggleDarkMode);
@@ -99,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Botón modo oscuro NO encontrado en esta página');
     }
     
-    // Inicializar modo oscuro
     checkDarkModePreference();
     
     // ========== BOTÓN RESERVAR CITA (WhatsApp) ==========
@@ -107,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnReservar) {
         btnReservar.addEventListener('click', function() {
             // CAMBIA ESTE NÚMERO POR EL TELÉFONO REAL DE LA PELUQUERÍA
-            // Formato: código país + número sin símbolos (ej: 34612345678)
             const telefono = '34123456789';
             const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
             window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
@@ -115,5 +104,44 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Botón reservar cita configurado');
     } else {
         console.log('Botón reservar cita NO encontrado en esta página');
+    }
+    
+    // ========== INDICADOR DE PÁGINA ACTIVA ==========
+    function setActivePage() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinksItems = document.querySelectorAll('.nav-links li a');
+        
+        navLinksItems.forEach(link => {
+            const linkPage = link.getAttribute('href');
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    
+    setActivePage();
+    
+    // ========== BOTÓN VOLVER ARRIBA ==========
+    const btnVolverArriba = document.getElementById('btnVolverArriba');
+    
+    if (btnVolverArriba) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                btnVolverArriba.classList.add('visible');
+            } else {
+                btnVolverArriba.classList.remove('visible');
+            }
+        });
+        
+        btnVolverArriba.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        console.log('Botón volver arriba configurado');
     }
 });
