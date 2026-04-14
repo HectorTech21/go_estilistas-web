@@ -1,80 +1,63 @@
 // ============================================
-// GLOBAL.JS - FUNCIONALIDAD COMÚN A TODAS LAS PÁGINAS
-// Menú hamburguesa responsive, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba
+// GLOBAL.JS - FUNCIONALIDAD COMÚN
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Global JS cargado correctamente');
     
-    // ========== MODO OSCURO / CLARO ==========
-    
+    // ========== MODO OSCURO ==========
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
         
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode);
-        
-        // Actualizar todos los botones de modo oscuro
-        const darkModeBtns = document.querySelectorAll('.dark-mode-toggle');
-        darkModeBtns.forEach(btn => {
-            btn.textContent = isDarkMode ? '☀️' : '🌓';
+        // Cambiar icono (luna/sol)
+        document.querySelectorAll('.dark-mode-toggle i').forEach(icon => {
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
         });
-        
-        console.log('Modo oscuro activado:', isDarkMode);
     }
     
     function checkDarkModePreference() {
-        const savedDarkMode = localStorage.getItem('darkMode');
-        
-        if (savedDarkMode === 'true') {
+        if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
-            const darkModeBtns = document.querySelectorAll('.dark-mode-toggle');
-            darkModeBtns.forEach(btn => {
-                btn.textContent = '☀️';
+            document.querySelectorAll('.dark-mode-toggle i').forEach(icon => {
+                icon.className = 'fas fa-sun';
             });
-            console.log('Modo oscuro cargado desde localStorage');
         }
     }
     
-    // ========== MENÚ HAMBURGUESA RESPONSIVE (PANTALLA COMPLETA) ==========
+    const darkModeBtn = document.getElementById('darkModeToggle');
+    if (darkModeBtn) darkModeBtn.addEventListener('click', toggleDarkMode);
     
-    // Crear estructura del menú responsive si no existe
+    checkDarkModePreference();
+
+    // ========== MENÚ HAMBURGUESA ==========
     function createMenuResponsive() {
-        // Verificar si ya existe el menú para no duplicarlo
         if (document.querySelector('.menu-overlay')) return;
         
-        // Crear overlay
         const overlay = document.createElement('div');
         overlay.className = 'menu-overlay';
         
-        // Crear menú lateral
         const menu = document.createElement('div');
         menu.className = 'menu-responsive';
-        
-        // Cabecera del menú - SIN SUBMENÚ
         menu.innerHTML = `
             <div class="menu-header">
-                <div class="logo">
-                    <span>GoEstilistas!</span>
-                </div>
+                <div class="logo"><span>Go Estilistas</span></div>
                 <div class="menu-header-buttons">
-                    <button class="dark-mode-toggle" id="darkModeToggleMobile">🌓</button>
-                    <button class="close-menu" id="closeMenuBtn">&times;</button>
+                    <button class="dark-mode-toggle" id="darkModeToggleMobile" aria-label="Cambiar modo de color"><i class="fas fa-moon"></i></button>
+                    <button class="close-menu" id="closeMenuBtn" aria-label="Cerrar menú">&times;</button>
                 </div>
             </div>
-            <div class="menu-nav">
+            <nav class="menu-nav">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
                     <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
                 </ul>
-                
-                <!-- Botón Reservar Cita dentro del menú -->
                 <button class="btn-reservar-menu" id="btnReservarMenu">
                     <i class="fab fa-whatsapp"></i> Reservar Cita
                 </button>
-            </div>
+            </nav>
             <div class="menu-contacto">
                 <h4>Contacto</h4>
                 <div class="contacto-item-menu">
@@ -87,12 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-map-marker-alt"></i>
-                    <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank">Centro Comercial La Vega, Alcobendas</a>
+                    <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank">C.C. La Vega, Alcobendas</a>
                 </div>
                 <div class="menu-social">
-                    <a href="https://instagram.com" target="_blank" class="social instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/34123456789" target="_blank" class="social whatsapp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://facebook.com" target="_blank" class="social facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/34123456789" target="_blank" class="social whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="social facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
         `;
@@ -100,25 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(overlay);
         document.body.appendChild(menu);
         
-        // Eventos del menú
         const hamburguesa = document.querySelector('.menu-hamburguesa');
         const closeBtn = document.getElementById('closeMenuBtn');
-        
-        // Abrir menú
-        if (hamburguesa) {
-            hamburguesa.addEventListener('click', function() {
-                overlay.classList.add('active');
-                menu.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        
-        // Cerrar menú
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeMenu);
-        }
-        
-        overlay.addEventListener('click', closeMenu);
         
         function closeMenu() {
             overlay.classList.remove('active');
@@ -126,127 +92,59 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
         
-        // Sincronizar modo oscuro con el botón del menú
-        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
-        if (darkModeToggleMobile) {
-            darkModeToggleMobile.addEventListener('click', function() {
-                toggleDarkMode();
-                const isDarkMode = document.body.classList.contains('dark-mode');
-                darkModeToggleMobile.textContent = isDarkMode ? '☀️' : '🌓';
-            });
-        }
-        
-        // Botón Reservar Cita dentro del menú
-        const btnReservarMenu = document.getElementById('btnReservarMenu');
-        if (btnReservarMenu) {
-            btnReservarMenu.addEventListener('click', function() {
-                const telefono = '34123456789';
-                const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
-                window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
-                closeMenu();
-            });
-        }
-    }
-    
-    // ========== SCROLL REVEAL (animaciones) ==========
-    if (typeof ScrollReveal !== 'undefined') {
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            ScrollReveal().reveal('.hero', {
-                origin: 'top',
-                distance: '50px',
-                duration: 1000,
-                easing: 'ease-in-out',
-                reset: false
-            });
-        }
-        
-        const featuresSection = document.querySelector('.features');
-        if (featuresSection) {
-            ScrollReveal().reveal('.feature', {
-                origin: 'bottom',
-                distance: '40px',
-                duration: 800,
-                interval: 200,
-                reset: false
-            });
-        }
-        
-        ScrollReveal().reveal('.footer-container', {
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            reset: false
+        if (hamburguesa) hamburguesa.addEventListener('click', () => {
+            overlay.classList.add('active');
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
         
-        console.log('ScrollReveal activado');
-    } else {
-        console.error('ScrollReveal no se cargó correctamente');
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        
+        // Modo oscuro móvil
+        const darkModeMobile = document.getElementById('darkModeToggleMobile');
+        if (darkModeMobile) darkModeMobile.addEventListener('click', toggleDarkMode);
+        
+        // Reservar móvil
+        const btnReservarMenu = document.getElementById('btnReservarMenu');
+        if (btnReservarMenu) btnReservarMenu.addEventListener('click', function() {
+            window.open('https://wa.me/34123456789?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20cita%20en%20GoEstilistas!', '_blank');
+            closeMenu();
+        });
     }
     
-    // Asignar evento al botón de modo oscuro del header
-    const darkModeBtn = document.getElementById('darkModeToggle');
-    if (darkModeBtn) {
-        darkModeBtn.addEventListener('click', toggleDarkMode);
-        console.log('Botón modo oscuro encontrado y evento asignado');
-    } else {
-        console.log('Botón modo oscuro NO encontrado en esta página');
-    }
-    
-    checkDarkModePreference();
-    
-    // ========== BOTÓN RESERVAR CITA (WhatsApp) ==========
+    createMenuResponsive();
+
+    // ========== BOTÓN RESERVAR (HEADER) ==========
     const btnReservar = document.getElementById('btnReservar');
     if (btnReservar) {
         btnReservar.addEventListener('click', function() {
-            const telefono = '34123456789';
-            const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
-            window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
-        });
-        console.log('Botón reservar cita configurado');
-    } else {
-        console.log('Botón reservar cita NO encontrado en esta página');
-    }
-    
-    // ========== INDICADOR DE PÁGINA ACTIVA ==========
-    function setActivePage() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinksItems = document.querySelectorAll('.nav-links li a');
-        
-        navLinksItems.forEach(link => {
-            const linkPage = link.getAttribute('href');
-            if (linkPage === currentPage) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
+            window.open('https://wa.me/34123456789?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20cita%20en%20GoEstilistas!', '_blank');
         });
     }
-    
-    setActivePage();
-    
-    // ========== BOTÓN VOLVER ARRIBA ==========
+
+    // ========== PÁGINA ACTIVA ==========
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links li a').forEach(link => {
+        if (link.getAttribute('href') === currentPage) link.classList.add('active');
+    });
+
+    // ========== VOLVER ARRIBA ==========
     const btnVolverArriba = document.getElementById('btnVolverArriba');
-    
     if (btnVolverArriba) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                btnVolverArriba.classList.add('visible');
-            } else {
-                btnVolverArriba.classList.remove('visible');
-            }
+        window.addEventListener('scroll', () => {
+            btnVolverArriba.classList.toggle('visible', window.scrollY > 400);
         });
-        
-        btnVolverArriba.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        console.log('Botón volver arriba configurado');
+        btnVolverArriba.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
-    
-    // ========== INICIALIZAR MENÚ RESPONSIVE ==========
-    createMenuResponsive();
+
+    // ========== SCROLL REVEAL ==========
+    if (typeof ScrollReveal !== 'undefined') {
+        const sr = ScrollReveal();
+        if (document.querySelector('.hero')) sr.reveal('.hero-contenido', { origin: 'left', distance: '40px', duration: 800 });
+        if (document.querySelector('.hero-imagen')) sr.reveal('.hero-imagen', { origin: 'right', distance: '40px', duration: 800, delay: 200 });
+        if (document.querySelector('.features')) sr.reveal('.feature', { origin: 'bottom', distance: '30px', duration: 600, interval: 150 });
+        sr.reveal('.testimonios-header', { origin: 'bottom', distance: '20px', duration: 600 });
+        sr.reveal('.footer-container', { origin: 'bottom', distance: '20px', duration: 600 });
+    }
 });

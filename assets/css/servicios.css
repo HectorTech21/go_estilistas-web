@@ -1,228 +1,145 @@
 /* ============================================
-   SERVICIOS.CSS - Estilos exclusivos de servicios.html
-   Dos cards siempre una al lado de la otra
-   Ocupan toda la pantalla (sin footer visible hasta scroll)
-   Fondo: gradiente suave + partículas lentas
+   SERVICIOS.CSS - PÁGINA DE SERVICIOS
    ============================================ */
 
-/* Contenedor principal - ocupa toda la pantalla menos header y footer */
 .servicios-container {
-    min-height: calc(100vh - 80px - 300px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 5%;
-    position: relative;
-    overflow: hidden;
-    /* Gradiente suave de fondo */
-    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 5%;
+  background: var(--color-bg-main);
 }
 
-/* Header de la página (con z-index para estar por encima de las partículas) */
 .servicios-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-    z-index: 1;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .servicios-header h1 {
-    font-size: 2.5rem;
-    color: #1A1A1A;
-    margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
 }
 
 .servicios-header p {
-    font-size: 1.1rem;
-    color: #666;
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-/* Grid de cards - SIEMPRE en fila (horizontal) */
 .servicios-cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    gap: 2rem;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  width: 100%;
+  max-width: 850px;
 }
 
-/* Card individual */
 .servicio-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(2px);
-    border-radius: 24px;
-    padding: 2.5rem 2rem;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    border: 1px solid rgba(78, 168, 222, 0.1);
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .servicio-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-    background: white;
-    border-color: rgba(78, 168, 222, 0.3);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-accent);
 }
 
-/* Icono */
 .servicio-icono {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #4EA8DE20, #FF9F4A20);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem auto;
+  width: 80px;
+  height: 80px;
+  background: var(--color-bg-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all var(--transition-base);
 }
 
 .servicio-icono i {
-    font-size: 2.5rem;
-    color: #4EA8DE;
-    transition: color 0.3s;
+  font-size: 2.2rem;
+  color: var(--color-accent);
+  transition: color var(--transition-base);
+}
+
+.servicio-card:hover .servicio-icono {
+  background: var(--color-accent);
 }
 
 .servicio-card:hover .servicio-icono i {
-    color: #FF9F4A;
+  color: white;
 }
 
-/* Título */
 .servicio-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #1A1A1A;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
 }
 
-/* Descripción */
 .servicio-card p {
-    font-size: 0.95rem;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-/* Botón interno */
 .servicio-btn {
-    display: inline-block;
-    color: #4EA8DE;
-    font-weight: 600;
-    transition: color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
 }
 
 .servicio-card:hover .servicio-btn {
-    color: #FF9F4A;
+  gap: 8px; /* Animación sutil de la flecha al hacer hover */
 }
 
-/* ============================================
-   RESPONSIVE: Siempre horizontal, incluso en móvil
-   ============================================ */
+/* --- RESPONSIVE SERVICIOS --- */
 @media (max-width: 768px) {
-    .servicios-container {
-        min-height: calc(100vh - 70px - 400px);
-        padding: 2rem 1.5rem;
-    }
-    
-    .servicios-header h1 {
-        font-size: 1.8rem;
-    }
-    
-    .servicios-header p {
-        font-size: 0.9rem;
-    }
-    
-    /* SEGUIMOS EN FILA (horizontal) incluso en móvil */
-    .servicios-cards {
-        flex-direction: row;
-        gap: 1rem;
-    }
-    
-    .servicio-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .servicio-icono {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .servicio-icono i {
-        font-size: 1.8rem;
-    }
-    
-    .servicio-card h2 {
-        font-size: 1.2rem;
-    }
-    
-    .servicio-card p {
-        font-size: 0.8rem;
-    }
-    
-    .servicio-btn {
-        font-size: 0.85rem;
-    }
+  .servicios-container {
+    padding: 3rem 1.5rem;
+  }
+  
+  .servicios-header h1 {
+    font-size: 2rem;
+  }
+  
+  .servicios-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .servicio-card {
+    max-width: 100%;
+  }
 }
 
-/* Para pantallas muy pequeñas (menos de 500px) seguimos en horizontal */
-@media (max-width: 500px) {
-    .servicios-cards {
-        gap: 0.8rem;
-    }
-    
-    .servicio-card {
-        padding: 1rem 0.8rem;
-    }
-    
-    .servicio-card h2 {
-        font-size: 1rem;
-    }
-    
-    .servicio-card p {
-        font-size: 0.7rem;
-    }
-}
-
-/* ============================================
-   MODO OSCURO - AJUSTES HOVER CARDS
-   ============================================ */
-
-/* Hover de cards en modo oscuro - más sutil */
-.dark-mode .servicio-card {
-    background: #252540;
-    border-color: #3a3a5a;
-    transition: all 0.3s ease;
-}
-
-.dark-mode .servicio-card:hover {
-    background: #2d2d50;
-    border-color: #4EA8DE;
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-/* Mantener el texto legible en hover */
-.dark-mode .servicio-card:hover h2,
-.dark-mode .servicio-card:hover p,
-.dark-mode .servicio-card:hover .servicio-btn {
-    color: var(--text-primary);
-}
-
-/* Icono en hover */
-.dark-mode .servicio-card:hover .servicio-icono i {
-    color: #FF9F4A;
-}
-
-/* Fondo del icono en hover */
-.dark-mode .servicio-card:hover .servicio-icono {
-    background: linear-gradient(135deg, #4EA8DE20, #FF9F4A30);
+@media (max-width: 400px) {
+  .servicio-card {
+    padding: 2rem 1.5rem;
+  }
 }

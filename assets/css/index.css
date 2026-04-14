@@ -1,334 +1,429 @@
 /* ============================================
-   INDEX.CSS - Estilos exclusivos de la página principal
-   Hero, Features, Testimonios (carrusel)
+   INDEX.CSS - PÁGINA PRINCIPAL
    ============================================ */
 
-/* HERO */
+/* --- HERO --- */
 .hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8rem 5%;
-    background: linear-gradient(135deg, #4EA8DE 0%, #FF9F4A 100%);
-    color: white;
-    gap: 3rem;
-    flex-wrap: wrap;
-    overflow: hidden;
-    min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6rem 5%;
+  background: var(--color-bg-white);
+  color: var(--color-text-main);
+  gap: 4rem;
+  overflow: hidden;
+  min-height: 85vh;
 }
 
-.particle-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0;
+.hero-contenido {
+  flex: 1;
+  max-width: 550px;
 }
 
-/* Partículas más llamativas */
-.particle {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    will-change: transform;
+.hero-subtitulo {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 40px;
 }
 
-/* Opcional: eliminar la animación CSS antigua (ya no la usamos, usamos JS) */
-/* Las partículas ahora se animan con JavaScript, no con CSS */
-
-@keyframes floatParticle {
-    0% {
-        transform: translateY(100vh) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100vh) translateX(100px) rotate(360deg);
-        opacity: 0;
-    }
+.hero-subtitulo::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background: var(--color-accent);
 }
 
 .hero-titulo {
-    font-size: 5.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, #F5AF19, #F12711, #FF8C00, #FFD700, #F5AF19);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 20px rgba(245, 175, 25, 0.3);
-    animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% center; }
-    50% { background-position: 100% center; }
-    100% { background-position: 0% center; }
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
 }
 
 .hero-texto {
-    font-size: 1.4rem;
-    margin-bottom: 2rem;
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+.hero-botones {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn-hero {
-    display: inline-block;
-    background: #1A1A1A;
-    color: white;
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  gap: 0.5rem;
 }
 
-.btn-hero:hover {
-    background: #FF9F4A;
-    transform: scale(1.05);
+.btn-hero-primario {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-hero-primario:hover {
+  background: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  color: white;
+}
+
+.btn-hero-secundario {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-border);
+}
+
+.btn-hero-secundario:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.hero-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .hero-imagen img {
-    max-width: 100%;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    transition: all 0.4s;
+  max-width: 100%;
+  width: 600px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .hero-imagen img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+  transform: scale(1.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
 }
 
-/* FEATURES */
+/* --- FEATURES --- */
 .features {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 4rem 5%;
-    gap: 2rem;
-    text-align: center;
-    background: white;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: var(--space-xl) 5%;
+  gap: 2rem;
+  text-align: center;
+  background: var(--color-bg-main);
 }
 
 .feature {
-    flex: 1;
-    min-width: 200px;
-    padding: 1.5rem;
-    border-radius: 15px;
-    transition: all 0.3s;
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
 
-.feature i {
-    font-size: 2.5rem;
-    color: #4EA8DE;
-    margin-bottom: 1rem;
+/* Línea decorativa superior premium */
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
+}
+
+.feature:hover::before {
+  transform: scaleX(1);
 }
 
 .feature:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
 }
 
-/* ============================================
-   TESTIMONIOS (exclusivo del index)
-   ============================================ */
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--color-bg-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  color: var(--color-accent);
+  font-size: 1.4rem;
+  transition: all var(--transition-base);
+}
 
+.feature:hover .feature-icon {
+  background: var(--color-accent);
+  color: white;
+}
+
+.feature h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--color-primary);
+}
+
+.feature p {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* --- TESTIMONIOS --- */
 .testimonios {
-    padding: 4rem 5%;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: var(--space-xl) 5%;
+  background: var(--color-bg-soft);
 }
 
 .testimonios-header {
-    text-align: center;
-    margin-bottom: 3rem;
+  text-align: center;
+  margin-bottom: var(--space-lg);
 }
 
 .testimonios-header h2 {
-    font-size: 2.2rem;
-    color: #1A1A1A;
-    margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
 }
 
 .testimonios-header p {
-    color: #666;
-    font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
 }
 
 .testimonios-carrusel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .testimonios-carrusel {
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    gap: 1.5rem;
-    padding: 1rem 0.5rem;
-    width: 100%;
-    max-width: 1100px;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: 1000px;
 }
 
-/* Tarjeta de testimonio - con altura fija */
 .testimonio-card {
-    min-width: 320px;
-    max-width: 320px;
-    height: 380px;  /* Altura fija para todas las tarjetas */
-    flex: 0 0 auto;
-    background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  min-width: 300px;
+  max-width: 300px;
+  height: auto;
+  min-height: 350px;
+  flex: 0 0 auto;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
 }
 
-/* Contenedor del texto con scroll si es necesario */
 .testimonio-texto-container {
-    flex: 1;
-    overflow-y: auto;
-    margin-bottom: 1rem;
-    padding-right: 5px;
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1.2rem;
+  padding-right: 4px;
 }
 
-/* Personalizar scrollbar */
-.testimonio-texto-container::-webkit-scrollbar {
-    width: 4px;
-}
-
-.testimonio-texto-container::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 4px;
-}
-
-.testimonio-texto-container::-webkit-scrollbar-thumb {
-    background: #4EA8DE;
-    border-radius: 4px;
-}
+.testimonio-texto-container::-webkit-scrollbar { width: 3px; }
+.testimonio-texto-container::-webkit-scrollbar-track { background: transparent; }
+.testimonio-texto-container::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 3px; }
 
 .testimonio-texto {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #333;
-    font-style: italic;
-    margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  font-style: italic;
 }
 
-/* Estrellas */
 .testimonio-estrellas {
-    color: #FFD700;
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
-    flex-shrink: 0;
+  color: #F1C40F;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+  display: flex;
+  gap: 2px;
 }
 
-/* Autor (siempre abajo) */
 .testimonio-autor {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    border-top: 1px solid #eee;
-    padding-top: 0.8rem;
-    margin-top: 0.5rem;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1rem;
+  margin-top: auto;
 }
 
 .testimonio-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #4EA8DE, #FF9F4A);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.testimonio-info h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.testimonio-info p {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  margin-top: 2px;
 }
 
 .carrusel-btn {
-    background: #4EA8DE;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
+  background: var(--color-bg-white);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .carrusel-btn:hover {
-    background: #FF9F4A;
-    transform: scale(1.05);
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
 }
 
 .carrusel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    cursor: pointer;
-    transition: all 0.3s;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-base);
 }
 
 .dot.active {
-    background: #4EA8DE;
-    width: 25px;
-    border-radius: 10px;
+  background: var(--color-accent);
+  width: 24px;
+  border-radius: 10px;
 }
 
-/* Responsive index */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 4rem 5%;
-        min-height: auto;
-    }
-    
-    .hero-titulo {
-        font-size: 3rem;
-    }
-    
-    .hero-texto {
-        font-size: 1.1rem;
-    }
-    
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .testimonios-header h2 {
-        font-size: 1.6rem;
-    }
-    
-    .testimonio-card {
-        min-width: 280px;
-    }
+/* --- RESPONSIVE INDEX --- */
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 4rem 5%;
+    min-height: auto;
+  }
+  
+  .hero-contenido {
+    max-width: 100%;
+  }
+  
+  .hero-subtitulo {
+    padding-left: 0;
+  }
+  
+  .hero-subtitulo::before {
+    display: none;
+  }
+  
+  .hero-titulo {
+    font-size: 2.8rem;
+  }
+  
+  .hero-botones {
+    justify-content: center;
+  }
+  
+  .hero-imagen {
+    width: 100%;
+  }
+  
+  .hero-imagen img {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-titulo {
+    font-size: 2.2rem;
+  }
+  
+  .hero-texto {
+    font-size: 1rem;
+  }
+  
+  .testimonio-card {
+    min-width: 260px;
+    max-width: 260px;
+  }
+  
+  .testimonios-header h2 {
+    font-size: 1.6rem;
+  }
 }
