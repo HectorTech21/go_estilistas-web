@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const menu = document.createElement('div');
         menu.className = 'menu-responsive';
         
-        // Cabecera del menú
+        // Cabecera del menú - SIN SUBMENÚ
         menu.innerHTML = `
             <div class="menu-header">
                 <div class="logo">
@@ -65,16 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="menu-nav">
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
-                    <li class="submenu-item">
-                        <div class="submenu-toggle">
-                            <span>Servicios</span>
-                            <span class="submenu-arrow">▼</span>
-                        </div>
-                        <ul class="submenu">
-                            <li><a href="servicios-hombre.html">Servicios Hombre</a></li>
-                            <li><a href="servicios-mujer.html">Servicios Mujer</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
                     <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
                 </ul>
@@ -112,8 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Eventos del menú
         const hamburguesa = document.querySelector('.menu-hamburguesa');
         const closeBtn = document.getElementById('closeMenuBtn');
-        const submenuToggle = menu.querySelector('.submenu-toggle');
-        const submenu = menu.querySelector('.submenu');
         
         // Abrir menú
         if (hamburguesa) {
@@ -137,20 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
         
-        // Submenú de servicios
-        if (submenuToggle && submenu) {
-            submenuToggle.addEventListener('click', function() {
-                submenu.classList.toggle('active');
-                submenuToggle.classList.toggle('active');
-            });
-        }
-        
         // Sincronizar modo oscuro con el botón del menú
         const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
         if (darkModeToggleMobile) {
             darkModeToggleMobile.addEventListener('click', function() {
                 toggleDarkMode();
-                // Actualizar el botón del menú también
                 const isDarkMode = document.body.classList.contains('dark-mode');
                 darkModeToggleMobile.textContent = isDarkMode ? '☀️' : '🌓';
             });
