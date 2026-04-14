@@ -78,6 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
                     <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
                 </ul>
+                
+                <!-- Botón Reservar Cita dentro del menú -->
+                <button class="btn-reservar-menu" id="btnReservarMenu">
+                    <i class="fab fa-whatsapp"></i> Reservar Cita
+                </button>
             </div>
             <div class="menu-contacto">
                 <h4>Contacto</h4>
@@ -150,6 +155,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 darkModeToggleMobile.textContent = isDarkMode ? '☀️' : '🌓';
             });
         }
+        
+        // Botón Reservar Cita dentro del menú
+        const btnReservarMenu = document.getElementById('btnReservarMenu');
+        if (btnReservarMenu) {
+            btnReservarMenu.addEventListener('click', function() {
+                const telefono = '34123456789';
+                const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
+                window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+                closeMenu();
+            });
+        }
     }
     
     // ========== SCROLL REVEAL (animaciones) ==========
@@ -203,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnReservar = document.getElementById('btnReservar');
     if (btnReservar) {
         btnReservar.addEventListener('click', function() {
-            // CAMBIA ESTE NÚMERO POR EL TELÉFONO REAL DE LA PELUQUERÍA
             const telefono = '34123456789';
             const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
             window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
