@@ -802,11 +802,43 @@ footer {
    ============================================ */
 @media (max-width: 768px) {
     header {
-        padding: 1rem 5%;
+        padding: 0.8rem 5%;
     }
     
     .logo span {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+    }
+    
+    /* Ajustar el contenedor derecho del header */
+    .header-right {
+        gap: 0.5rem;
+    }
+    
+    .placeholder-buttons {
+        gap: 0.5rem;
+    }
+    
+    /* Botón reservar cita más pequeño y con menos padding */
+    .btn-reservar {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.65rem;
+        gap: 0.3rem;
+    }
+    
+    .btn-reservar i {
+        font-size: 0.7rem;
+    }
+    
+    /* Botón de tema más pequeño */
+    .dark-mode-toggle {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Menú hamburguesa */
+    .menu-hamburguesa {
+        font-size: 1.5rem;
+        margin-left: 0;
     }
     
     /* Ocultar navegación de escritorio */
@@ -819,45 +851,30 @@ footer {
         display: block;
     }
     
-    /* Botón reservar cita más pequeño en móvil */
-    .btn-reservar {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.7rem;
-    }
-    
-    .btn-reservar i {
-        font-size: 0.8rem;
-    }
-    
-    /* Botón de tema más pequeño en móvil */
-    .dark-mode-toggle {
-        padding: 0.3rem 0.7rem;
-        font-size: 0.8rem;
-    }
-    
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 4rem 5%;
+        padding: 3rem 5%;
         min-height: auto;
     }
     
     .hero-titulo {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
     
     .hero-texto {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .btn-hero {
-        padding: 0.8rem 2rem;
-        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
     }
     
     .features {
         flex-direction: column;
         align-items: center;
+        padding: 2rem 5%;
     }
     
     .footer-container {
@@ -884,9 +901,9 @@ footer {
     .btn-volver-arriba {
         bottom: 1.5rem;
         right: 1.5rem;
-        width: 45px;
-        height: 45px;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 }
 
