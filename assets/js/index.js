@@ -1,6 +1,6 @@
 // ============================================
 // INDEX.JS - Lógica exclusiva de la página principal
-// Partículas del hero + Carrusel de testimonios
+// Partículas del hero + Carrusel de testimonios + Carrusel de imágenes
 // ============================================
 
 // ========== 1. PARTÍCULAS DEL HERO (versión llamativa) ==========
@@ -97,7 +97,7 @@
 
 // ========== 2. CARRUSEL DE TESTIMONIOS ==========
 (function() {
-        const testimonios = [
+    const testimonios = [
         {
             nombre: "Noushinmehdi Farasatrahimi",
             avatar: "NF",
@@ -108,7 +108,7 @@
         {
             nombre: "Cristina Agasid Layugan",
             avatar: "CL",
-            texto: "He probado el centro por primera vez y no puedo estar más encantada.Desde el primer momento, Virginia me asesoró con una atención de diez, haciéndome sentir como si nos conociéramos de toda la vida. Es súper simpática, atenta y empática. ¡Da gusto encontrar profesionales así! He salido feliz con el resultado, tanto que nada más salir he pedido cita para la semana que viene. ¡Recomendadísima!",
+            texto: "He probado el centro por primera vez y no puedo estar más encantada. Desde el primer momento, Virginia me asesoró con una atención de diez, haciéndome sentir como si nos conociéramos de toda la vida. Es súper simpática, atenta y empática. ¡Da gusto encontrar profesionales así! He salido feliz con el resultado, tanto que nada más salir he pedido cita para la semana que viene. ¡Recomendadísima!",
             estrellas: 5,
             fecha: "Hace poco"
         },
@@ -144,27 +144,27 @@
     }
     
     function renderTestimonios() {
-    const container = document.getElementById('testimoniosCarrusel');
-    if (!container) return;
-    
-    container.innerHTML = testimonios.map(t => `
-        <div class="testimonio-card">
-            <div class="testimonio-estrellas">${renderEstrellas(t.estrellas)}</div>
-            <div class="testimonio-texto-container">
-                <p class="testimonio-texto">"${t.texto}"</p>
-            </div>
-            <div class="testimonio-autor">
-                <div class="testimonio-avatar">${t.avatar}</div>
-                <div class="testimonio-info">
-                    <h4>${t.nombre}</h4>
-                    <p>${t.fecha}</p>
+        const container = document.getElementById('testimoniosCarrusel');
+        if (!container) return;
+        
+        container.innerHTML = testimonios.map(t => `
+            <div class="testimonio-card">
+                <div class="testimonio-estrellas">${renderEstrellas(t.estrellas)}</div>
+                <div class="testimonio-texto-container">
+                    <p class="testimonio-texto">"${t.texto}"</p>
+                </div>
+                <div class="testimonio-autor">
+                    <div class="testimonio-avatar">${t.avatar}</div>
+                    <div class="testimonio-info">
+                        <h4>${t.nombre}</h4>
+                        <p>${t.fecha}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
-}
+        `).join('');
+    }
     
-    function initCarrusel() {
+    function initCarruselTestimonios() {
         const container = document.getElementById('testimoniosCarrusel');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -233,11 +233,191 @@
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
                 renderTestimonios();
-                initCarrusel();
+                initCarruselTestimonios();
             });
         } else {
             renderTestimonios();
-            initCarrusel();
+            initCarruselTestimonios();
+        }
+    }
+})();
+
+// ========== 3. CARRUSEL DE IMÁGENES DEL HERO ==========
+(function() {
+    // Array de imágenes (CAMBIAR POR LAS IMÁGENES REALES DE LA PELUQUERÍA)
+    const imagenesCarrusel = [
+        {
+            src: "assets/img/img-index/imagen1.png",
+            alt: "Imagen 1"
+        },
+        {
+            src: "assets/img/img-index/imagen2.png",
+            alt: "Imagen 2"
+        },
+        {
+            src: "assets/img/img-index/imagen3.png",
+            alt: "Imagen 3"
+        },
+        {
+            src: "assets/img/img-index/imagen4.png",
+            alt: "Imagen 4"
+        }
+    ];
+    
+    let currentIndex = 0;
+    let autoScrollInterval;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    // Renderizar imágenes
+    function renderCarruselImagenes() {
+        const container = document.getElementById('carruselSlides');
+        const dotsContainer = document.getElementById('carruselDots');
+        
+        if (!container || !dotsContainer) return;
+        
+        // Renderizar slides
+        container.innerHTML = imagenesCarrusel.map((img, index) => `
+            <div class="carrusel-slide ${index === currentIndex ? 'active' : ''}" data-index="${index}">
+                <img src="${img.src}" alt="${img.alt}" loading="lazy">
+            </div>
+        `).join('');
+        
+        // Renderizar dots
+        dotsContainer.innerHTML = imagenesCarrusel.map((_, index) => `
+            <div class="carrusel-dot ${index === currentIndex ? 'active' : ''}" data-index="${index}"></div>
+        `).join('');
+        
+        // Añadir eventos a los dots
+        document.querySelectorAll('.carrusel-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.dataset.index);
+                goToSlide(index);
+                resetAutoScroll();
+            });
+        });
+    }
+    
+    // Ir a un slide específico
+    function goToSlide(index) {
+        if (index < 0) index = imagenesCarrusel.length - 1;
+        if (index >= imagenesCarrusel.length) index = 0;
+        
+        currentIndex = index;
+        
+        // Actualizar slides
+        const slides = document.querySelectorAll('.carrusel-slide');
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentIndex);
+        });
+        
+        // Actualizar dots
+        const dots = document.querySelectorAll('.carrusel-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+    
+    // Siguiente slide
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+    
+    // Anterior slide
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+    
+    // Auto-scroll
+    function startAutoScroll() {
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+        autoScrollInterval = setInterval(() => {
+            nextSlide();
+        }, 5000);
+    }
+    
+    function stopAutoScroll() {
+        if (autoScrollInterval) clearInterval(autoScrollInterval);
+    }
+    
+    function resetAutoScroll() {
+        stopAutoScroll();
+        startAutoScroll();
+    }
+    
+    // Swipe táctil para móvil
+    function setupSwipe() {
+        const carruselContainer = document.querySelector('.carrusel-container');
+        if (!carruselContainer) return;
+        
+        carruselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoScroll();
+        });
+        
+        carruselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoScroll();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchEndX - touchStartX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+            }
+        }
+    }
+    
+    // Inicializar carrusel
+    function initCarruselImagenes() {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        // Verificar que los botones existan (son los del carrusel de imágenes)
+        // Nota: Los botones del carrusel de testimonios tienen otros IDs
+        const carruselPrevBtn = document.querySelector('.hero-imagen .prev-btn');
+        const carruselNextBtn = document.querySelector('.hero-imagen .next-btn');
+        
+        if (!carruselPrevBtn || !carruselNextBtn) return;
+        
+        renderCarruselImagenes();
+        
+        carruselPrevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoScroll();
+        });
+        
+        carruselNextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoScroll();
+        });
+        
+        startAutoScroll();
+        setupSwipe();
+        
+        // Pausar auto-scroll cuando el mouse está sobre el carrusel
+        const carruselContainer = document.querySelector('.carrusel-container');
+        if (carruselContainer) {
+            carruselContainer.addEventListener('mouseenter', stopAutoScroll);
+            carruselContainer.addEventListener('mouseleave', startAutoScroll);
+        }
+        
+        console.log('Carrusel de imágenes del hero inicializado');
+    }
+    
+    // Inicializar carrusel si existe el contenedor
+    if (document.getElementById('carruselSlides')) {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCarruselImagenes);
+        } else {
+            initCarruselImagenes();
         }
     }
 })();
