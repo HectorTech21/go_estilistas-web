@@ -3,39 +3,87 @@
 // Partículas del hero + Carrusel de testimonios
 // ============================================
 
-// ========== 1. PARTÍCULAS DEL HERO ==========
+// ========== 1. PARTÍCULAS DEL HERO (versión llamativa) ==========
 (function() {
     function initParticles() {
         const container = document.getElementById('particleContainer');
         if (!container) return;
         
-        const PARTICLE_COUNT = 80;
+        // Asegurar que el contenedor tiene position relative
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.style.position = 'relative';
+        }
+        
+        // Limpiar contenedor por si ya tenía partículas
+        container.innerHTML = '';
+        
+        // MÁS PARTÍCULAS: 120
+        const PARTICLE_COUNT = 120;
+        
+        // Colores vivos
+        const colors = [
+            '#4EA8DE',  // Azul
+            '#FF9F4A',  // Naranja
+            '#6CB4EE',  // Azul claro
+            '#FFB06A'   // Naranja claro
+        ];
         
         function createParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            const size = Math.random() * 6 + 2;
+            // Tamaño: 4-10px
+            const size = Math.random() * 6 + 4;
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
-            particle.style.animationDelay = (Math.random() * 10) + 's';
-            particle.style.opacity = Math.random() * 0.5 + 0.2;
             
-            const colorVariation = Math.random();
-            if (colorVariation > 0.7) {
-                particle.style.background = 'rgba(255, 140, 0, 0.5)';
-            } else {
-                particle.style.background = 'rgba(255, 255, 255, 0.4)';
-            }
+            // Posición inicial aleatoria
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            
+            // Color aleatorio
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const opacity = Math.random() * 0.4 + 0.3;
+            particle.style.backgroundColor = color;
+            particle.style.opacity = opacity;
+            
+            // Sombra para que destaquen
+            particle.style.boxShadow = `0 0 8px ${color}`;
+            particle.style.borderRadius = '50%';
+            particle.style.position = 'absolute';
+            
+            // Movimiento: 8-15 segundos
+            const duration = Math.random() * 7 + 8;
+            
+            // Movimiento amplio
+            const moveX = (Math.random() - 0.5) * 400;
+            const moveY = (Math.random() - 0.5) * 400;
+            
+            // Animación
+            const keyframes = [
+                { transform: 'translate(0, 0)' },
+                { transform: `translate(${moveX}px, ${moveY}px)` },
+                { transform: 'translate(0, 0)' }
+            ];
+            
+            const options = {
+                duration: duration * 1000,
+                iterations: Infinity,
+                easing: 'ease-in-out'
+            };
+            
+            particle.animate(keyframes, options);
             
             return particle;
         }
         
+        // Crear todas las partículas
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             container.appendChild(createParticle());
         }
+        
+        console.log(`Creadas ${PARTICLE_COUNT} partículas llamativas en el hero`);
     }
     
     if (document.getElementById('particleContainer')) {

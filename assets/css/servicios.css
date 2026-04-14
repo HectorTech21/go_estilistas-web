@@ -2,22 +2,29 @@
    SERVICIOS.CSS - Estilos exclusivos de servicios.html
    Dos cards siempre una al lado de la otra
    Ocupan toda la pantalla (sin footer visible hasta scroll)
+   Fondo: gradiente suave + partículas lentas
    ============================================ */
 
 /* Contenedor principal - ocupa toda la pantalla menos header y footer */
 .servicios-container {
-    min-height: calc(100vh - 80px - 300px); /* Ajusta según altura de header y footer */
+    min-height: calc(100vh - 80px - 300px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem 5%;
+    position: relative;
+    overflow: hidden;
+    /* Gradiente suave de fondo */
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
 }
 
-/* Header de la página */
+/* Header de la página (con z-index para estar por encima de las partículas) */
 .servicios-header {
     text-align: center;
     margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
 }
 
 .servicios-header h1 {
@@ -34,18 +41,21 @@
 /* Grid de cards - SIEMPRE en fila (horizontal) */
 .servicios-cards {
     display: flex;
-    flex-direction: row;  /* Siempre horizontal */
+    flex-direction: row;
     justify-content: center;
     align-items: stretch;
     gap: 2rem;
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 /* Card individual */
 .servicio-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(2px);
     border-radius: 24px;
     padding: 2.5rem 2rem;
     width: 100%;
@@ -55,15 +65,14 @@
     color: inherit;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: 1px solid rgba(78, 168, 222, 0.1);
 }
 
 .servicio-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    background: white;
+    border-color: rgba(78, 168, 222, 0.3);
 }
 
 /* Icono */
@@ -181,4 +190,39 @@
     .servicio-card p {
         font-size: 0.7rem;
     }
+}
+
+/* ============================================
+   MODO OSCURO - AJUSTES HOVER CARDS
+   ============================================ */
+
+/* Hover de cards en modo oscuro - más sutil */
+.dark-mode .servicio-card {
+    background: #252540;
+    border-color: #3a3a5a;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .servicio-card:hover {
+    background: #2d2d50;
+    border-color: #4EA8DE;
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Mantener el texto legible en hover */
+.dark-mode .servicio-card:hover h2,
+.dark-mode .servicio-card:hover p,
+.dark-mode .servicio-card:hover .servicio-btn {
+    color: var(--text-primary);
+}
+
+/* Icono en hover */
+.dark-mode .servicio-card:hover .servicio-icono i {
+    color: #FF9F4A;
+}
+
+/* Fondo del icono en hover */
+.dark-mode .servicio-card:hover .servicio-icono {
+    background: linear-gradient(135deg, #4EA8DE20, #FF9F4A30);
 }

@@ -28,13 +28,16 @@
     z-index: 0;
 }
 
+/* Partículas más llamativas */
 .particle {
     position: absolute;
-    background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     pointer-events: none;
-    animation: floatParticle linear infinite;
+    will-change: transform;
 }
+
+/* Opcional: eliminar la animación CSS antigua (ya no la usamos, usamos JS) */
+/* Las partículas ahora se animan con JavaScript, no con CSS */
 
 @keyframes floatParticle {
     0% {
