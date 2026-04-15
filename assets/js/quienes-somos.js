@@ -23,8 +23,8 @@
         },
         {
             src: "https://placehold.co/800x500/4EA8DE/white?text=Trabajadora+2",
-            alt: "Trabajadora 2",
-            nombre: "Virginia López",
+            alt: "Trabajador 2",
+            nombre: "Orlando",
             rol: "Estilista senior",
             esEquipo: false
         },
@@ -38,8 +38,8 @@
         {
             src: "https://placehold.co/800x500/4EA8DE/white?text=Trabajador+4",
             alt: "Trabajador 4",
-            nombre: "Carlos Gómez",
-            rol: "Estilista masculino",
+            nombre: "Virginia Lopez",
+            rol: "Estilista femenina",
             esEquipo: false
         }
     ];
