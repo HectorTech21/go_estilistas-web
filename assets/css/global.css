@@ -916,3 +916,14 @@ footer {
 .dark-mode .btn-reservar-menu:hover {
     background: #128C7E;
 }
+
+/* Enlaces del header en modo oscuro */
+.dark-mode .nav-links li a {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.dark-mode .nav-links li a:hover {
+    color: #FF9F4A;
+    opacity: 1;
+}

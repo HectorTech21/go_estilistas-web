@@ -33,9 +33,9 @@
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">Inicio</a></li>
-          <li class="dropdown">
-            <li><a href="servicios.html">Servicios</a></li>
-          </li>
+
+          <li><a href="servicios.html">Servicios</a></li>
+
           <li><a href="quienes-somos.html">Quiénes somos</a></li>
         </ul>
       </nav>
@@ -54,27 +54,33 @@
     </header>
 
     <!-- HERO SECTION CON PARTÍCULAS DE FONDO -->
-        <!-- HERO SECTION CON CARRUSEL DE IMÁGENES -->
+    <!-- HERO SECTION CON CARRUSEL DE IMÁGENES -->
     <section class="hero">
-        <!-- Contenedor de partículas -->
-        <div class="particle-container" id="particleContainer"></div>
-        
-        <div class="hero-contenido">
-            <h1 class="hero-titulo">GoEstilistas!</h1>
-            <p class="hero-texto">Tu estilo, nuestra pasión. Tu peluquería de confianza en Alcobendas, con profesionales que se adaptan a ti y utilizan productos de la mejor calidad.</p>
-            <a href="servicios.html" class="btn-hero">Descubre nuestros servicios</a>
+      <!-- Contenedor de partículas -->
+      <div class="particle-container" id="particleContainer"></div>
+
+      <div class="hero-contenido">
+        <h1 class="hero-titulo">GoEstilistas!</h1>
+        <p class="hero-texto">
+          Tu estilo, nuestra pasión. Tu peluquería de confianza en Alcobendas,
+          con profesionales que se adaptan a ti y utilizan productos de la mejor
+          calidad.
+        </p>
+        <a href="servicios.html" class="btn-hero"
+          >Descubre nuestros servicios</a
+        >
+      </div>
+
+      <div class="hero-imagen">
+        <div class="carrusel-container">
+          <button class="carrusel-btn prev-btn" id="prevBtn">❮</button>
+          <div class="carrusel-slides" id="carruselSlides">
+            <!-- Las imágenes se cargarán con JavaScript -->
+          </div>
+          <button class="carrusel-btn next-btn" id="nextBtn">❯</button>
         </div>
-        
-        <div class="hero-imagen">
-            <div class="carrusel-container">
-                <button class="carrusel-btn prev-btn" id="prevBtn">❮</button>
-                <div class="carrusel-slides" id="carruselSlides">
-                    <!-- Las imágenes se cargarán con JavaScript -->
-                </div>
-                <button class="carrusel-btn next-btn" id="nextBtn">❯</button>
-            </div>
-            <div class="carrusel-dots" id="carruselDots"></div>
-        </div>
+        <div class="carrusel-dots" id="carruselDots"></div>
+      </div>
     </section>
 
     <!-- SECCIÓN DE CARACTERÍSTICAS -->

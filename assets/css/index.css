@@ -411,6 +411,20 @@
     background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
 }
 
+/* Testimonios header en modo oscuro */
+.dark-mode .testimonios-header h2,
+.dark-mode .testimonios-header p {
+    color: #ffffff;
+}
+
+.dark-mode .testimonios-header h2 {
+    opacity: 0.95;
+}
+
+.dark-mode .testimonios-header p {
+    color: #cccccc;
+}
+
 .dark-mode .testimonio-card {
     background: #252540;
     border-color: #3a3a5a;
