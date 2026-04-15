@@ -1,0 +1,338 @@
+/* ============================================
+   QUIENES-SOMOS.CSS - Estilos exclusivos de la página Quiénes somos
+   ============================================ */
+
+/* ========== HERO CON CARRUSEL ========== */
+.hero-quienes {
+    padding: 4rem 5% 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.hero-quienes-content h1 {
+    font-size: 2.5rem;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+}
+
+.hero-quienes-content p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Carrusel de equipo */
+.carrusel-equipo-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.carrusel-equipo {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carrusel-equipo-slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.carrusel-equipo-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: left;
+}
+
+.slide-caption h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.slide-caption p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Botones del carrusel */
+.carrusel-equipo-prev,
+.carrusel-equipo-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.carrusel-equipo-prev:hover,
+.carrusel-equipo-next:hover {
+    background: rgba(0,0,0,0.8);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carrusel-equipo-prev {
+    left: 15px;
+}
+
+.carrusel-equipo-next {
+    right: 15px;
+}
+
+/* Dots del carrusel */
+.carrusel-equipo-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+.carrusel-equipo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carrusel-equipo-dot.active {
+    background: #4EA8DE;
+    width: 25px;
+    border-radius: 10px;
+}
+
+/* ========== TEXTO INTRODUCTORIO ========== */
+.intro-quienes {
+    padding: 3rem 5%;
+    background: white;
+}
+
+.intro-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    font-style: italic;
+}
+
+/* ========== VALORES ========== */
+.valores {
+    padding: 4rem 5%;
+    background: #f8f9fa;
+}
+
+.valores-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.valores-header h2 {
+    font-size: 2.2rem;
+    color: #1A1A1A;
+    margin-bottom: 0.5rem;
+}
+
+.valores-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.valor-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.valor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.valor-icono {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #4EA8DE20, #FF9F4A20);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.2rem;
+}
+
+.valor-icono i {
+    font-size: 2rem;
+    color: #4EA8DE;
+}
+
+.valor-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #1A1A1A;
+}
+
+.valor-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ========== ESTADÍSTICAS ========== */
+.estadisticas {
+    padding: 4rem 5%;
+    background: linear-gradient(135deg, #4EA8DE 0%, #FF9F4A 100%);
+    color: white;
+}
+
+.estadisticas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.estadistica-item {
+    padding: 1rem;
+}
+
+.estadistica-numero {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.estadistica-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ========== MODO OSCURO ========== */
+.dark-mode .hero-quienes {
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+}
+
+.dark-mode .hero-quienes-content h1 {
+    color: #f0f0f0;
+}
+
+.dark-mode .hero-quienes-content p {
+    color: #ccc;
+}
+
+.dark-mode .intro-quienes {
+    background: #1a1a2e;
+}
+
+.dark-mode .intro-container p {
+    color: #e0e0e0;
+}
+
+.dark-mode .valores {
+    background: #16213e;
+}
+
+.dark-mode .valor-card {
+    background: #1e1e2e;
+}
+
+.dark-mode .valor-card h3 {
+    color: #f0f0f0;
+}
+
+.dark-mode .valor-card p {
+    color: #aaa;
+}
+
+.dark-mode .valores-header h2 {
+    color: #f0f0f0;
+}
+
+.dark-mode .valores-header p {
+    color: #ccc;
+}
+
+.dark-mode .carrusel-equipo-dot {
+    background: #555;
+}
+
+.dark-mode .carrusel-equipo-dot.active {
+    background: #FF9F4A;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .hero-quienes-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .carrusel-equipo-slide img {
+        height: 350px;
+    }
+    
+    .slide-caption h3 {
+        font-size: 1.2rem;
+    }
+    
+    .slide-caption p {
+        font-size: 0.8rem;
+    }
+    
+    .intro-container p {
+        font-size: 1rem;
+    }
+    
+    .valores-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .estadistica-numero {
+        font-size: 2.5rem;
+    }
+    
+    .carrusel-equipo-prev,
+    .carrusel-equipo-next {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
