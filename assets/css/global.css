@@ -828,6 +828,17 @@ footer {
     background: var(--footer-bg);
 }
 
+/* Enlaces del header en modo oscuro */
+.dark-mode .nav-links li a {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.dark-mode .nav-links li a:hover {
+    color: #FF9F4A;
+    opacity: 1;
+}
+
 .dark-mode .hero {
     background: linear-gradient(135deg, #1a1a2e 0%, #2a1a0f 100%);
 }
@@ -917,13 +928,29 @@ footer {
     background: #128C7E;
 }
 
-/* Enlaces del header en modo oscuro */
-.dark-mode .nav-links li a {
-    color: #ffffff;
-    opacity: 0.9;
+/* FEATURES en modo oscuro - CORREGIDO */
+.dark-mode .features {
+    background: var(--bg-secondary);
 }
 
-.dark-mode .nav-links li a:hover {
+.dark-mode .feature {
+    background: var(--card-bg);
+}
+
+.dark-mode .feature h3,
+.dark-mode .feature p {
+    color: #ffffff;
+}
+
+.dark-mode .feature h3 {
+    font-weight: 600;
+    opacity: 0.95;
+}
+
+.dark-mode .feature p {
+    color: #cccccc;
+}
+
+.dark-mode .feature i {
     color: #FF9F4A;
-    opacity: 1;
 }
