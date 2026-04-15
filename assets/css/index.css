@@ -139,7 +139,7 @@
     object-fit: cover;
 }
 
-/* Botones del carrusel */
+/* Botones del carrusel de imágenes */
 .carrusel-btn {
     position: absolute;
     top: 50%;
@@ -172,7 +172,7 @@
     right: 15px;
 }
 
-/* Dots (indicadores) */
+/* Dots (indicadores) del carrusel de imágenes */
 .carrusel-dots {
     display: flex;
     justify-content: center;
@@ -256,22 +256,55 @@
     font-size: 1.1rem;
 }
 
+/* Contenedor principal del carrusel de testimonios */
 .testimonios-carrusel-container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* Botones específicos del carrusel de testimonios */
+.testimonios-carrusel-container .testimonio-prev,
+.testimonios-carrusel-container .testimonio-next {
+    background: #4EA8DE;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.testimonios-carrusel-container .testimonio-prev:hover,
+.testimonios-carrusel-container .testimonio-next:hover {
+    background: #FF9F4A;
+    transform: scale(1.05);
+}
+
+/* Contenedor de las cards */
 .testimonios-carrusel {
     display: flex;
-    overflow-x: hidden;
+    overflow-x: auto;
     scroll-behavior: smooth;
     gap: 1.5rem;
     padding: 1rem 0.5rem;
     width: 100%;
-    max-width: 1100px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.testimonios-carrusel::-webkit-scrollbar {
+    display: none;
 }
 
 /* Tarjeta de testimonio */
@@ -353,30 +386,15 @@
     font-weight: bold;
 }
 
-.carrusel-btn {
-    background: #4EA8DE;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.carrusel-btn:hover {
-    background: #FF9F4A;
-    transform: scale(1.05);
-}
-
-.carrusel-dots {
+/* Dots del carrusel de testimonios */
+.testimonios-dots {
     display: flex;
     justify-content: center;
     gap: 0.6rem;
     margin-top: 2rem;
 }
 
-.dot {
+.testimonios-dots .dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -385,7 +403,7 @@
     transition: all 0.3s;
 }
 
-.dot.active {
+.testimonios-dots .dot.active {
     background: #4EA8DE;
     width: 25px;
     border-radius: 10px;
@@ -409,20 +427,6 @@
 
 .dark-mode .testimonios {
     background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
-}
-
-/* Testimonios header en modo oscuro */
-.dark-mode .testimonios-header h2,
-.dark-mode .testimonios-header p {
-    color: #ffffff;
-}
-
-.dark-mode .testimonios-header h2 {
-    opacity: 0.95;
-}
-
-.dark-mode .testimonios-header p {
-    color: #cccccc;
 }
 
 .dark-mode .testimonio-card {
@@ -452,6 +456,20 @@
 
 .dark-mode .testimonio-texto-container::-webkit-scrollbar-thumb {
     background: #FF9F4A;
+}
+
+/* Testimonios header en modo oscuro */
+.dark-mode .testimonios-header h2,
+.dark-mode .testimonios-header p {
+    color: #ffffff;
+}
+
+.dark-mode .testimonios-header h2 {
+    opacity: 0.95;
+}
+
+.dark-mode .testimonios-header p {
+    color: #cccccc;
 }
 
 /* ============================================
@@ -507,5 +525,16 @@
     
     .testimonio-card {
         min-width: 280px;
+    }
+    
+    .testimonios-carrusel-container {
+        gap: 0.5rem;
+    }
+    
+    .testimonios-carrusel-container .testimonio-prev,
+    .testimonios-carrusel-container .testimonio-next {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
     }
 }
