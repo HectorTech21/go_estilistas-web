@@ -954,3 +954,61 @@ footer {
 .dark-mode .feature i {
     color: #FF9F4A;
 }
+
+/* ============================================
+   FOOTER LEGAL - ENLACES
+   ============================================ */
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #4EA8DE;
+    font-size: 0.85rem;
+}
+
+.footer-copyright {
+    color: #ccc;
+}
+
+.footer-legales {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-legales a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-legales a:hover {
+    color: #FF9F4A;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .footer-legales {
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+/* Modo oscuro */
+.dark-mode .footer-legales a {
+    color: #aaa;
+}
+
+.dark-mode .footer-legales a:hover {
+    color: #FF9F4A;
+}
