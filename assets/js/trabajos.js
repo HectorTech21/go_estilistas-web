@@ -1,6 +1,6 @@
 // ============================================
 // TRABAJOS.JS - Datos y lógica de la galería de trabajos
-// CON CARRUSEL INTERNO EN CADA CARD
+// CON CARRUSEL INTERNO EN CADA CARD + LIGHTBOX
 // ============================================
 
 // Datos de trabajos (ejemplo - CAMBIAR POR IMÁGENES REALES)
@@ -88,6 +88,115 @@ const trabajosData = [
     }
 ];
 
+// ============================================
+// VARIABLES GLOBALES DEL LIGHTBOX
+// ============================================
+let lightboxActive = false;
+let currentCardId = null;
+let currentImageIndex = 0;
+let currentImagesArray = []; // Array de objetos { antes, despues }
+let currentImageUrls = []; // Array plano de URLs (para navegación en lightbox)
+
+// ============================================
+// FUNCIONES DEL LIGHTBOX
+// ============================================
+
+// Abrir lightbox con la imagen clickada
+function openLightbox(cardId, imageIndex, imageType) {
+    const trabajo = trabajosData.find(t => t.id === cardId);
+    if (!trabajo) return;
+    
+    currentCardId = cardId;
+    currentImagesArray = trabajo.imagenes;
+    
+    // Construir array plano de URLs (todas las imágenes, tanto antes como después)
+    currentImageUrls = [];
+    trabajo.imagenes.forEach(img => {
+        currentImageUrls.push({ url: img.antes, type: 'antes', nombre: trabajo.nombre });
+        currentImageUrls.push({ url: img.despues, type: 'despues', nombre: trabajo.nombre });
+    });
+    
+    // Calcular el índice en el array plano
+    // Cada par de imágenes (antes, después) ocupa 2 posiciones
+    currentImageIndex = (imageIndex * 2) + (imageType === 'antes' ? 0 : 1);
+    
+    // Actualizar lightbox
+    updateLightboxImage();
+    updateLightboxCounter();
+    
+    // Mostrar lightbox
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        lightboxActive = true;
+    }
+}
+
+// Cerrar lightbox
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        lightboxActive = false;
+    }
+}
+
+// Actualizar imagen del lightbox
+function updateLightboxImage() {
+    const lightboxImage = document.getElementById('lightboxImage');
+    const currentImage = currentImageUrls[currentImageIndex];
+    if (lightboxImage && currentImage) {
+        lightboxImage.src = currentImage.url;
+        lightboxImage.alt = `${currentImage.nombre} - ${currentImage.type === 'antes' ? 'Antes' : 'Después'}`;
+    }
+}
+
+// Actualizar contador
+function updateLightboxCounter() {
+    const counter = document.getElementById('lightboxCounter');
+    if (counter) {
+        counter.textContent = `${currentImageIndex + 1} / ${currentImageUrls.length}`;
+    }
+}
+
+// Siguiente imagen
+function nextImage() {
+    if (currentImageIndex < currentImageUrls.length - 1) {
+        currentImageIndex++;
+    } else {
+        currentImageIndex = 0; // Loop infinito
+    }
+    updateLightboxImage();
+    updateLightboxCounter();
+}
+
+// Anterior imagen
+function prevImage() {
+    if (currentImageIndex > 0) {
+        currentImageIndex--;
+    } else {
+        currentImageIndex = currentImageUrls.length - 1; // Loop infinito
+    }
+    updateLightboxImage();
+    updateLightboxCounter();
+}
+
+// Abrir WhatsApp con el mensaje del servicio
+function openWhatsAppForCurrentService() {
+    const trabajo = trabajosData.find(t => t.id === currentCardId);
+    if (!trabajo) return;
+    
+    const telefono = '34123456789'; // Cambiar por el número real
+    const mensaje = encodeURIComponent(`Hola, me encanta el trabajo de "${trabajo.nombre}". ¿Podéis hacerme algo similar?`);
+    window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+}
+
+// ============================================
+// FUNCIONES DEL CARRUSEL INTERNO (cards)
+// ============================================
+
 // Función para renderizar trabajos con carrusel interno
 function renderizarTrabajos(trabajos) {
     const container = document.getElementById('trabajosGrid');
@@ -129,11 +238,11 @@ function renderizarImagenes(trabajo, indexActivo) {
     const imagenActual = imagenes[indexActivo];
     
     return `
-        <div class="trabajo-antes">
+        <div class="trabajo-antes" data-image-type="antes" data-image-index="${indexActivo}">
             <img src="${imagenActual.antes}" alt="Antes - ${trabajo.nombre}" loading="lazy">
             <span class="etiqueta">ANTES</span>
         </div>
-        <div class="trabajo-despues">
+        <div class="trabajo-despues" data-image-type="despues" data-image-index="${indexActivo}">
             <img src="${imagenActual.despues}" alt="Después - ${trabajo.nombre}" loading="lazy">
             <span class="etiqueta">DESPUÉS</span>
         </div>
@@ -172,15 +281,18 @@ function initCarruselCard(cardId, totalImagenes) {
         
         // Actualizar imágenes
         imagenesContainer.innerHTML = `
-            <div class="trabajo-antes">
+            <div class="trabajo-antes" data-image-type="antes" data-image-index="${currentIndex}">
                 <img src="${imagenActual.antes}" alt="Antes - ${trabajo.nombre}" loading="lazy">
                 <span class="etiqueta">ANTES</span>
             </div>
-            <div class="trabajo-despues">
+            <div class="trabajo-despues" data-image-type="despues" data-image-index="${currentIndex}">
                 <img src="${imagenActual.despues}" alt="Después - ${trabajo.nombre}" loading="lazy">
                 <span class="etiqueta">DESPUÉS</span>
             </div>
         `;
+        
+        // Reasignar eventos de lightbox a las nuevas imágenes
+        attachLightboxEventsToCard(cardId);
         
         // Actualizar dots
         if (dotsContainer) {
@@ -250,9 +362,39 @@ function initCarruselCard(cardId, totalImagenes) {
             }
         });
     }
+    
+    // Asignar eventos de lightbox a las imágenes
+    attachLightboxEventsToCard(cardId);
 }
 
-// Configurar filtros
+// Asignar eventos de lightbox a las imágenes de una card
+function attachLightboxEventsToCard(cardId) {
+    const card = document.querySelector(`.trabajo-card[data-id="${cardId}"]`);
+    if (!card) return;
+    
+    const antesImgs = card.querySelectorAll('.trabajo-antes');
+    const despuesImgs = card.querySelectorAll('.trabajo-despues');
+    
+    antesImgs.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const imageIndex = parseInt(img.dataset.imageIndex);
+            openLightbox(cardId, imageIndex, 'antes');
+        });
+    });
+    
+    despuesImgs.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const imageIndex = parseInt(img.dataset.imageIndex);
+            openLightbox(cardId, imageIndex, 'despues');
+        });
+    });
+}
+
+// ============================================
+// CONFIGURAR FILTROS
+// ============================================
 function initFiltros() {
     const filtros = document.querySelectorAll('.filtro-btn');
     
@@ -272,10 +414,88 @@ function initFiltros() {
     });
 }
 
-// Inicializar cuando el DOM esté listo
+// ============================================
+// INICIALIZAR LIGHTBOX (eventos globales)
+// ============================================
+function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+    const whatsappBtn = document.getElementById('lightboxWhatsapp');
+    
+    if (!lightbox) return;
+    
+    // Cerrar con botón
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+    
+    // Cerrar al hacer clic fuera de la imagen
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Navegación
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevImage);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextImage);
+    }
+    
+    // Botón WhatsApp
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', openWhatsAppForCurrentService);
+    }
+    
+    // Eventos de teclado
+    document.addEventListener('keydown', (e) => {
+        if (!lightboxActive) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
+        }
+    });
+    
+    // Swipe táctil para lightbox
+    let touchStart = 0;
+    let touchEnd = 0;
+    
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStart = e.changedTouches[0].screenX;
+    });
+    
+    lightbox.addEventListener('touchend', (e) => {
+        touchEnd = e.changedTouches[0].screenX;
+        const diff = touchEnd - touchStart;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                prevImage();
+            } else {
+                nextImage();
+            }
+        }
+    });
+}
+
+// ============================================
+// INICIALIZACIÓN PRINCIPAL
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTrabajos(trabajosData);
     initFiltros();
+    initLightbox();
     
     // Botón CTA (WhatsApp)
     const btnCTA = document.getElementById('btnReservarCTA');
