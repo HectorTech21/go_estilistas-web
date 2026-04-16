@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const menu = document.createElement('div');
         menu.className = 'menu-responsive';
         
-        // Cabecera del menú - SIN SUBMENÚ
+        // Cabecera del menú - CON NUEVOS ENLACES
         menu.innerHTML = `
             <div class="menu-header">
                 <div class="logo">
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="servicios.html">Servicios</a></li>
                     <li><a href="quienes-somos.html">Quiénes somos</a></li>
-                    <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
+                    <li><a href="trabajos.html">Nuestros trabajos</a></li>
                 </ul>
                 
                 <!-- Botón Reservar Cita dentro del menú -->

@@ -1,0 +1,249 @@
+/* ============================================
+   TRABAJOS.CSS - Estilos exclusivos de la galería de trabajos
+   ============================================ */
+
+/* Hero */
+.trabajos-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 5%;
+}
+
+.trabajos-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.trabajos-hero h1 {
+    font-size: 2.8rem;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+}
+
+.trabajos-hero p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Filtros */
+.filtros-trabajos {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.filtro-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #666;
+}
+
+.filtro-btn:hover {
+    background: #4EA8DE;
+    color: white;
+}
+
+.filtro-btn.active {
+    background: #FF9F4A;
+    color: white;
+}
+
+/* Grid de trabajos */
+.trabajos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Card de trabajo */
+.trabajo-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.trabajo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* Contenedor de imágenes antes/después */
+.trabajo-imagenes {
+    display: flex;
+    gap: 0;
+    background: #f5f5f5;
+}
+
+.trabajo-antes,
+.trabajo-despues {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.trabajo-antes img,
+.trabajo-despues img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.trabajo-card:hover .trabajo-antes img,
+.trabajo-card:hover .trabajo-despues img {
+    transform: scale(1.05);
+}
+
+/* Etiquetas antes/después */
+.trabajo-antes::after,
+.trabajo-despues::after {
+    content: 'ANTES';
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.trabajo-despues::after {
+    content: 'DESPUÉS';
+    background: #4EA8DE;
+}
+
+/* Información de la card */
+.trabajo-info {
+    padding: 1.2rem;
+}
+
+.trabajo-nombre {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 0.3rem;
+}
+
+.trabajo-descripcion {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* CTA */
+.trabajos-cta {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 2rem;
+}
+
+.btn-reservar-cta {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-reservar-cta:hover {
+    background: #128C7E;
+    transform: scale(1.02);
+}
+
+/* ========== MODO OSCURO ========== */
+.dark-mode .trabajos-hero h1 {
+    color: #f0f0f0;
+}
+
+.dark-mode .trabajos-hero p {
+    color: #ccc;
+}
+
+.dark-mode .filtro-btn {
+    background: #2a2a3e;
+    color: #ccc;
+}
+
+.dark-mode .filtro-btn:hover {
+    background: #4EA8DE;
+    color: white;
+}
+
+.dark-mode .filtro-btn.active {
+    background: #FF9F4A;
+    color: white;
+}
+
+.dark-mode .trabajo-card {
+    background: #1e1e2e;
+}
+
+.dark-mode .trabajo-nombre {
+    color: #f0f0f0;
+}
+
+.dark-mode .trabajo-descripcion {
+    color: #aaa;
+}
+
+.dark-mode .trabajo-imagenes {
+    background: #2a2a3e;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+    .trabajos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .trabajos-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .trabajos-hero p {
+        font-size: 1rem;
+    }
+    
+    .filtro-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .trabajos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .trabajo-antes img,
+    .trabajo-despues img {
+        height: 200px;
+    }
+    
+    .btn-reservar-cta {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
