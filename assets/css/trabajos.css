@@ -79,11 +79,21 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
-/* Contenedor de imágenes antes/después */
+/* ============================================
+   CARRUSEL INTERNO EN CADA CARD
+   ============================================ */
+
+.trabajo-carrusel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+}
+
 .trabajo-imagenes {
     display: flex;
+    flex: 1;
     gap: 0;
-    background: #f5f5f5;
 }
 
 .trabajo-antes,
@@ -107,9 +117,7 @@
 }
 
 /* Etiquetas antes/después */
-.trabajo-antes::after,
-.trabajo-despues::after {
-    content: 'ANTES';
+.etiqueta {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -122,9 +130,67 @@
     letter-spacing: 1px;
 }
 
-.trabajo-despues::after {
-    content: 'DESPUÉS';
+.trabajo-despues .etiqueta {
     background: #4EA8DE;
+}
+
+/* Botones del carrusel */
+.carrusel-prev,
+.carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrusel-prev:hover,
+.carrusel-next:hover {
+    background: rgba(0,0,0,0.8);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carrusel-prev {
+    left: 8px;
+}
+
+.carrusel-next {
+    right: 8px;
+}
+
+/* Dots del carrusel interno */
+.carrusel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 5px;
+}
+
+.carrusel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carrusel-dots .dot.active {
+    background: #4EA8DE;
+    width: 20px;
+    border-radius: 10px;
 }
 
 /* Información de la card */
@@ -208,8 +274,16 @@
     color: #aaa;
 }
 
-.dark-mode .trabajo-imagenes {
+.dark-mode .trabajo-carrusel-container {
     background: #2a2a3e;
+}
+
+.dark-mode .carrusel-dots .dot {
+    background: #555;
+}
+
+.dark-mode .carrusel-dots .dot.active {
+    background: #FF9F4A;
 }
 
 /* ========== RESPONSIVE ========== */
@@ -245,5 +319,12 @@
     .btn-reservar-cta {
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
+    }
+    
+    .carrusel-prev,
+    .carrusel-next {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
     }
 }
