@@ -346,11 +346,25 @@
     color: #333;
     font-style: italic;
     margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+/* Botón Ver más / Ver menos */
+.testimonio-ver-mas {
+    background: none;
+    border: none;
+    color: #4EA8DE;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 0 0 0;
+    margin-top: 0.5rem;
+    text-align: left;
+    transition: color 0.3s;
+}
+
+.testimonio-ver-mas:hover {
+    color: #FF9F4A;
+    text-decoration: underline;
 }
 
 .testimonio-estrellas {
@@ -458,6 +472,14 @@
     border-top-color: #3a3a5a;
 }
 
+.dark-mode .testimonio-ver-mas {
+    color: #FF9F4A;
+}
+
+.dark-mode .testimonio-ver-mas:hover {
+    color: #4EA8DE;
+}
+
 .dark-mode .testimonios-header h2,
 .dark-mode .testimonios-header p {
     color: #ffffff;
@@ -533,27 +555,27 @@
         font-size: 0.9rem;
     }
     
-    /* MÓVIL: UNA SOLA CARD POR PANTALLA */
+    /* MÓVIL: UNA SOLA CARD POR PANTALLA CON MÁS AIRE */
     .testimonios-carrusel {
         scroll-snap-type: x mandatory;
         gap: 0;
+        padding: 1rem 0.5rem;
     }
     
     .testimonio-card {
-        min-width: calc(100% - 2rem);
-        max-width: calc(100% - 2rem);
-        width: calc(100% - 2rem);
-        margin: 0 auto;
+        min-width: calc(100% - 3rem);
+        max-width: calc(100% - 3rem);
+        width: calc(100% - 3rem);
+        margin: 0 1.5rem;
         scroll-snap-align: center;
     }
     
     .testimonio-card:last-child {
-        margin: 0 auto;
+        margin: 0 1.5rem;
     }
     
     .testimonio-texto {
         font-size: 0.8rem;
-        -webkit-line-clamp: 8;
     }
     
     .testimonio-estrellas {

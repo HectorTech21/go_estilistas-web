@@ -125,12 +125,13 @@
         const container = document.getElementById('testimoniosCarrusel');
         if (!container) return;
         
-        container.innerHTML = testimonios.map(t => `
-            <div class="testimonio-card">
+        container.innerHTML = testimonios.map((t, idx) => `
+            <div class="testimonio-card" data-idx="${idx}">
                 <div class="testimonio-estrellas">${renderEstrellas(t.estrellas)}</div>
                 <div class="testimonio-texto-container">
-                    <p class="testimonio-texto">"${t.texto}"</p>
+                    <p class="testimonio-texto" id="texto-${idx}">${t.texto}</p>
                 </div>
+                <button class="testimonio-ver-mas" data-idx="${idx}">Ver más</button>
                 <div class="testimonio-autor">
                     <div class="testimonio-avatar">${t.avatar}</div>
                     <div class="testimonio-info">
@@ -140,6 +141,40 @@
                 </div>
             </div>
         `).join('');
+        
+        // Inicializar botones "Ver más / Ver menos"
+        document.querySelectorAll('.testimonio-ver-mas').forEach(btn => {
+            const idx = btn.dataset.idx;
+            const textoElement = document.getElementById(`texto-${idx}`);
+            const textoCompleto = testimonios[idx].texto;
+            let expanded = false;
+            
+            function setInitialText() {
+                if (textoCompleto.length > 200) {
+                    textoElement.textContent = textoCompleto.substring(0, 200) + '...';
+                    btn.textContent = 'Ver más';
+                    btn.style.display = 'block';
+                } else {
+                    textoElement.textContent = textoCompleto;
+                    btn.style.display = 'none';
+                }
+                expanded = false;
+            }
+            
+            btn.addEventListener('click', () => {
+                if (!expanded) {
+                    textoElement.textContent = textoCompleto;
+                    btn.textContent = 'Ver menos';
+                    expanded = true;
+                } else {
+                    textoElement.textContent = textoCompleto.substring(0, 200) + '...';
+                    btn.textContent = 'Ver más';
+                    expanded = false;
+                }
+            });
+            
+            setInitialText();
+        });
     }
     
     function initCarruselTestimonios() {
@@ -152,7 +187,7 @@
         
         let currentIndex = 0;
         let autoScrollInterval;
-        const totalCards = testimonios.length; // Número real de reseñas (5)
+        const totalCards = testimonios.length;
         
         function updateDots() {
             if (!dotsContainer) return;
@@ -168,15 +203,14 @@
         }
         
         function scrollToIndex(index) {
-            // Obtener el ancho de la primera card + margen
             const firstCard = container.querySelector('.testimonio-card');
             if (!firstCard) return;
             
-            // Calcular el ancho real de una card (incluyendo margen)
             const cardStyle = getComputedStyle(firstCard);
             const cardWidth = firstCard.offsetWidth;
+            const marginLeft = parseInt(cardStyle.marginLeft) || 0;
             const marginRight = parseInt(cardStyle.marginRight) || 0;
-            const slideWidth = cardWidth + marginRight;
+            const slideWidth = cardWidth + marginLeft + marginRight;
             
             currentIndex = Math.min(Math.max(0, index), totalCards - 1);
             const scrollPosition = currentIndex * slideWidth;
@@ -214,19 +248,18 @@
             startAutoScroll();
         }
         
-        // Eventos
         nextBtn.addEventListener('click', () => { nextSlide(); resetAutoScroll(); });
         prevBtn.addEventListener('click', () => { prevSlide(); resetAutoScroll(); });
         
-        // Actualizar índice al hacer scroll manual
         container.addEventListener('scroll', () => {
             const firstCard = container.querySelector('.testimonio-card');
             if (!firstCard) return;
             
             const cardStyle = getComputedStyle(firstCard);
             const cardWidth = firstCard.offsetWidth;
+            const marginLeft = parseInt(cardStyle.marginLeft) || 0;
             const marginRight = parseInt(cardStyle.marginRight) || 0;
-            const slideWidth = cardWidth + marginRight;
+            const slideWidth = cardWidth + marginLeft + marginRight;
             
             const newIndex = Math.round(container.scrollLeft / slideWidth);
             if (newIndex !== currentIndex && !isNaN(newIndex) && newIndex >= 0 && newIndex < totalCards) {
@@ -238,16 +271,13 @@
         container.addEventListener('mouseenter', stopAutoScroll);
         container.addEventListener('mouseleave', startAutoScroll);
         
-        // Inicializar
         updateDots();
         startAutoScroll();
         
-        // Asegurar que las cards tienen el ancho correcto después de renderizar
         setTimeout(() => {
             scrollToIndex(0);
         }, 100);
         
-        // Actualizar en resize
         window.addEventListener('resize', () => {
             setTimeout(() => {
                 scrollToIndex(currentIndex);
@@ -272,19 +302,19 @@
 (function() {
     const imagenesCarrusel = [
         {
-            src: "assets/img/img-index/imagen1.png",
+            src: "https://placehold.co/700x500/4EA8DE/white?text=Imagen+1",
             alt: "Peluquería GoEstilistas - Imagen 1"
         },
         {
-            src: "assets/img/img-index/imagen2.png",
+            src: "https://placehold.co/700x500/FF9F4A/white?text=Imagen+2",
             alt: "Peluquería GoEstilistas - Imagen 2"
         },
         {
-            src: "assets/img/img-index/imagen3.png",
+            src: "https://placehold.co/700x500/4EA8DE/white?text=Imagen+3",
             alt: "Peluquería GoEstilistas - Imagen 3"
         },
         {
-            src: "assets/img/img-index/imagen4.png",
+            src: "https://placehold.co/700x500/FF9F4A/white?text=Imagen+4",
             alt: "Peluquería GoEstilistas - Imagen 4"
         }
     ];
