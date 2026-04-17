@@ -187,13 +187,40 @@
         
         let currentIndex = 0;
         let autoScrollInterval;
-        const totalCards = testimonios.length;
+        let totalPages = 1;
+        let isMobile = window.innerWidth <= 768;
+        
+        function calculateTotalPages() {
+            const firstCard = container.querySelector('.testimonio-card');
+            if (!firstCard) return 1;
+            
+            const totalCards = testimonios.length;
+            
+            if (isMobile) {
+                // En móvil: una card por página
+                return totalCards;
+            } else {
+                // En desktop: calcular cuántas cards se ven por pantalla
+                const containerWidth = container.clientWidth;
+                const cardStyle = getComputedStyle(firstCard);
+                const cardWidth = firstCard.offsetWidth;
+                const marginRight = parseInt(cardStyle.marginRight) || 0;
+                const slideWidth = cardWidth + marginRight;
+                
+                const cardsPerView = Math.floor(containerWidth / slideWidth);
+                // Las páginas son: totalCards - cardsPerView + 1 (mínimo 1)
+                const pages = Math.max(1, totalCards - cardsPerView + 1);
+                return pages;
+            }
+        }
         
         function updateDots() {
             if (!dotsContainer) return;
             
+            totalPages = calculateTotalPages();
+            
             dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalCards; i++) {
+            for (let i = 0; i < totalPages; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
                 if (i === currentIndex) dot.classList.add('active');
@@ -202,24 +229,44 @@
             }
         }
         
+        function getSlideWidth() {
+            const firstCard = container.querySelector('.testimonio-card');
+            if (!firstCard) return 320;
+            
+            const cardStyle = getComputedStyle(firstCard);
+            const cardWidth = firstCard.offsetWidth;
+            const marginRight = parseInt(cardStyle.marginRight) || 0;
+            const marginLeft = parseInt(cardStyle.marginLeft) || 0;
+            
+            if (isMobile) {
+                return cardWidth + marginLeft + marginRight;
+            } else {
+                return cardWidth + marginRight;
+            }
+        }
+        
         function scrollToIndex(index) {
             const firstCard = container.querySelector('.testimonio-card');
             if (!firstCard) return;
             
-            const cardStyle = getComputedStyle(firstCard);
-            const cardWidth = firstCard.offsetWidth;
-            const marginLeft = parseInt(cardStyle.marginLeft) || 0;
-            const marginRight = parseInt(cardStyle.marginRight) || 0;
-            const slideWidth = cardWidth + marginLeft + marginRight;
+            const slideWidth = getSlideWidth();
+            const maxIndex = totalPages - 1;
+            currentIndex = Math.min(Math.max(0, index), maxIndex);
             
-            currentIndex = Math.min(Math.max(0, index), totalCards - 1);
-            const scrollPosition = currentIndex * slideWidth;
+            let scrollPosition;
+            if (isMobile) {
+                scrollPosition = currentIndex * slideWidth;
+            } else {
+                // En desktop, el scroll se basa en el ancho de las cards visibles
+                scrollPosition = currentIndex * slideWidth;
+            }
+            
             container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
             updateDots();
         }
         
         function nextSlide() {
-            if (currentIndex < totalCards - 1) {
+            if (currentIndex < totalPages - 1) {
                 scrollToIndex(currentIndex + 1);
             } else {
                 scrollToIndex(0);
@@ -230,7 +277,7 @@
             if (currentIndex > 0) {
                 scrollToIndex(currentIndex - 1);
             } else {
-                scrollToIndex(totalCards - 1);
+                scrollToIndex(totalPages - 1);
             }
         }
         
@@ -248,41 +295,51 @@
             startAutoScroll();
         }
         
-        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoScroll(); });
-        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoScroll(); });
-        
-        container.addEventListener('scroll', () => {
+        function handleScroll() {
             const firstCard = container.querySelector('.testimonio-card');
             if (!firstCard) return;
             
-            const cardStyle = getComputedStyle(firstCard);
-            const cardWidth = firstCard.offsetWidth;
-            const marginLeft = parseInt(cardStyle.marginLeft) || 0;
-            const marginRight = parseInt(cardStyle.marginRight) || 0;
-            const slideWidth = cardWidth + marginLeft + marginRight;
-            
+            const slideWidth = getSlideWidth();
             const newIndex = Math.round(container.scrollLeft / slideWidth);
-            if (newIndex !== currentIndex && !isNaN(newIndex) && newIndex >= 0 && newIndex < totalCards) {
+            
+            if (newIndex !== currentIndex && !isNaN(newIndex) && newIndex >= 0 && newIndex < totalPages) {
                 currentIndex = newIndex;
                 updateDots();
             }
-        });
+        }
         
+        function handleResize() {
+            isMobile = window.innerWidth <= 768;
+            totalPages = calculateTotalPages();
+            updateDots();
+            // Recalcular la posición actual
+            const slideWidth = getSlideWidth();
+            const newIndex = Math.round(container.scrollLeft / slideWidth);
+            if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalPages) {
+                currentIndex = newIndex;
+                updateDots();
+            }
+        }
+        
+        // Eventos
+        nextBtn.addEventListener('click', () => { nextSlide(); resetAutoScroll(); });
+        prevBtn.addEventListener('click', () => { prevSlide(); resetAutoScroll(); });
+        
+        container.addEventListener('scroll', handleScroll);
         container.addEventListener('mouseenter', stopAutoScroll);
         container.addEventListener('mouseleave', startAutoScroll);
         
+        window.addEventListener('resize', () => {
+            setTimeout(handleResize, 100);
+        });
+        
+        // Inicializar
         updateDots();
         startAutoScroll();
         
         setTimeout(() => {
             scrollToIndex(0);
         }, 100);
-        
-        window.addEventListener('resize', () => {
-            setTimeout(() => {
-                scrollToIndex(currentIndex);
-            }, 100);
-        });
     }
     
     if (document.getElementById('testimoniosCarrusel')) {
@@ -302,20 +359,20 @@
 (function() {
     const imagenesCarrusel = [
         {
-            src: "https://placehold.co/700x500/4EA8DE/white?text=Imagen+1",
-            alt: "Peluquería GoEstilistas - Imagen 1"
+            src: "assets/img/img-index/imagen1.png",
+            alt: "Imagen 1"
         },
         {
-            src: "https://placehold.co/700x500/FF9F4A/white?text=Imagen+2",
-            alt: "Peluquería GoEstilistas - Imagen 2"
+            src: "assets/img/img-index/imagen2.png  ",
+            alt: "Imagen 2"
         },
         {
-            src: "https://placehold.co/700x500/4EA8DE/white?text=Imagen+3",
-            alt: "Peluquería GoEstilistas - Imagen 3"
+            src: "assets/img/img-index/imagen3.png",
+            alt: "Imagen 3"
         },
         {
-            src: "https://placehold.co/700x500/FF9F4A/white?text=Imagen+4",
-            alt: "Peluquería GoEstilistas - Imagen 4"
+            src: "assets/img/img-index/imagen4.png  ",
+            alt: "Imagen 4"
         }
     ];
     
