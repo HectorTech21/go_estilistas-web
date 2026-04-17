@@ -291,13 +291,14 @@
     transform: scale(1.05);
 }
 
-/* Contenedor de las cards */
+/* Contenedor de las cards - carrusel horizontal */
 .testimonios-carrusel {
     display: flex;
     overflow-x: auto;
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    gap: 1.5rem;
-    padding: 1rem 0.5rem;
+    gap: 0;
+    padding: 1rem 0;
     width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -307,20 +308,25 @@
     display: none;
 }
 
-/* Tarjeta de testimonio */
+/* Tarjeta de testimonio - versión para escritorio (varias cards) */
 .testimonio-card {
     min-width: 320px;
     max-width: 320px;
-    height: 380px;
+    width: 320px;
     flex: 0 0 auto;
+    scroll-snap-align: start;
     background: white;
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 1.2rem;
+    margin-right: 1.5rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+}
+
+.testimonio-card:last-child {
+    margin-right: 0;
 }
 
 .testimonio-card:hover {
@@ -330,36 +336,26 @@
 
 .testimonio-texto-container {
     flex: 1;
-    overflow-y: auto;
     margin-bottom: 1rem;
-    padding-right: 5px;
-}
-
-.testimonio-texto-container::-webkit-scrollbar {
-    width: 4px;
-}
-
-.testimonio-texto-container::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 4px;
-}
-
-.testimonio-texto-container::-webkit-scrollbar-thumb {
-    background: #4EA8DE;
-    border-radius: 4px;
+    overflow-y: visible;
 }
 
 .testimonio-texto {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.5;
     color: #333;
     font-style: italic;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .testimonio-estrellas {
     color: #FFD700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-bottom: 0.8rem;
     flex-shrink: 0;
 }
@@ -375,8 +371,8 @@
 }
 
 .testimonio-avatar {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: linear-gradient(135deg, #4EA8DE, #FF9F4A);
     display: flex;
@@ -384,6 +380,18 @@
     justify-content: center;
     color: white;
     font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.testimonio-info h4 {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    color: #1A1A1A;
+}
+
+.testimonio-info p {
+    font-size: 0.7rem;
+    color: #888;
 }
 
 /* Dots del carrusel de testimonios */
@@ -450,15 +458,6 @@
     border-top-color: #3a3a5a;
 }
 
-.dark-mode .testimonio-texto-container::-webkit-scrollbar-track {
-    background: #2a2a3e;
-}
-
-.dark-mode .testimonio-texto-container::-webkit-scrollbar-thumb {
-    background: #FF9F4A;
-}
-
-/* Testimonios header en modo oscuro */
 .dark-mode .testimonios-header h2,
 .dark-mode .testimonios-header p {
     color: #ffffff;
@@ -473,7 +472,7 @@
 }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE MÓVIL - UNA SOLA CARD POR PANTALLA
    ============================================ */
 @media (max-width: 768px) {
     .hero {
@@ -523,10 +522,6 @@
         font-size: 1.6rem;
     }
     
-    .testimonio-card {
-        min-width: 280px;
-    }
-    
     .testimonios-carrusel-container {
         gap: 0.5rem;
     }
@@ -536,5 +531,46 @@
         width: 35px;
         height: 35px;
         font-size: 0.9rem;
+    }
+    
+    /* MÓVIL: UNA SOLA CARD POR PANTALLA */
+    .testimonios-carrusel {
+        scroll-snap-type: x mandatory;
+        gap: 0;
+    }
+    
+    .testimonio-card {
+        min-width: calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+        width: calc(100% - 2rem);
+        margin: 0 auto;
+        scroll-snap-align: center;
+    }
+    
+    .testimonio-card:last-child {
+        margin: 0 auto;
+    }
+    
+    .testimonio-texto {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 8;
+    }
+    
+    .testimonio-estrellas {
+        font-size: 0.8rem;
+    }
+    
+    .testimonio-avatar {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+    
+    .testimonio-info h4 {
+        font-size: 0.85rem;
+    }
+    
+    .testimonio-info p {
+        font-size: 0.65rem;
     }
 }

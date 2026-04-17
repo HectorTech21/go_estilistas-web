@@ -152,23 +152,13 @@
         
         let currentIndex = 0;
         let autoScrollInterval;
-        let cardWidth = 344;
-        
-        function updateCardWidth() {
-            const firstCard = container.querySelector('.testimonio-card');
-            if (firstCard) {
-                cardWidth = firstCard.offsetWidth + 24;
-            }
-        }
+        const totalCards = testimonios.length; // Número real de reseñas (5)
         
         function updateDots() {
             if (!dotsContainer) return;
-            const totalCards = testimonios.length;
-            const cardsPerView = Math.max(1, Math.ceil(container.clientWidth / (cardWidth - 24)));
-            const totalDots = Math.ceil(totalCards / cardsPerView);
             
             dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalDots; i++) {
+            for (let i = 0; i < totalCards; i++) {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
                 if (i === currentIndex) dot.classList.add('active');
@@ -178,17 +168,24 @@
         }
         
         function scrollToIndex(index) {
-            updateCardWidth();
-            const scrollPosition = index * container.clientWidth;
+            // Obtener el ancho de la primera card + margen
+            const firstCard = container.querySelector('.testimonio-card');
+            if (!firstCard) return;
+            
+            // Calcular el ancho real de una card (incluyendo margen)
+            const cardStyle = getComputedStyle(firstCard);
+            const cardWidth = firstCard.offsetWidth;
+            const marginRight = parseInt(cardStyle.marginRight) || 0;
+            const slideWidth = cardWidth + marginRight;
+            
+            currentIndex = Math.min(Math.max(0, index), totalCards - 1);
+            const scrollPosition = currentIndex * slideWidth;
             container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
-            currentIndex = index;
             updateDots();
         }
         
         function nextSlide() {
-            const cardsPerView = Math.max(1, Math.ceil(container.clientWidth / (cardWidth - 24)));
-            const maxIndex = Math.ceil(testimonios.length / cardsPerView) - 1;
-            if (currentIndex < maxIndex) {
+            if (currentIndex < totalCards - 1) {
                 scrollToIndex(currentIndex + 1);
             } else {
                 scrollToIndex(0);
@@ -199,9 +196,7 @@
             if (currentIndex > 0) {
                 scrollToIndex(currentIndex - 1);
             } else {
-                const cardsPerView = Math.max(1, Math.ceil(container.clientWidth / (cardWidth - 24)));
-                const maxIndex = Math.ceil(testimonios.length / cardsPerView) - 1;
-                scrollToIndex(maxIndex);
+                scrollToIndex(totalCards - 1);
             }
         }
         
@@ -219,12 +214,22 @@
             startAutoScroll();
         }
         
+        // Eventos
         nextBtn.addEventListener('click', () => { nextSlide(); resetAutoScroll(); });
         prevBtn.addEventListener('click', () => { prevSlide(); resetAutoScroll(); });
         
+        // Actualizar índice al hacer scroll manual
         container.addEventListener('scroll', () => {
-            const newIndex = Math.round(container.scrollLeft / container.clientWidth);
-            if (newIndex !== currentIndex && !isNaN(newIndex)) {
+            const firstCard = container.querySelector('.testimonio-card');
+            if (!firstCard) return;
+            
+            const cardStyle = getComputedStyle(firstCard);
+            const cardWidth = firstCard.offsetWidth;
+            const marginRight = parseInt(cardStyle.marginRight) || 0;
+            const slideWidth = cardWidth + marginRight;
+            
+            const newIndex = Math.round(container.scrollLeft / slideWidth);
+            if (newIndex !== currentIndex && !isNaN(newIndex) && newIndex >= 0 && newIndex < totalCards) {
                 currentIndex = newIndex;
                 updateDots();
             }
@@ -233,14 +238,20 @@
         container.addEventListener('mouseenter', stopAutoScroll);
         container.addEventListener('mouseleave', startAutoScroll);
         
-        updateCardWidth();
+        // Inicializar
         updateDots();
         startAutoScroll();
         
+        // Asegurar que las cards tienen el ancho correcto después de renderizar
+        setTimeout(() => {
+            scrollToIndex(0);
+        }, 100);
+        
+        // Actualizar en resize
         window.addEventListener('resize', () => {
-            updateCardWidth();
-            updateDots();
-            scrollToIndex(currentIndex);
+            setTimeout(() => {
+                scrollToIndex(currentIndex);
+            }, 100);
         });
     }
     
@@ -262,19 +273,19 @@
     const imagenesCarrusel = [
         {
             src: "assets/img/img-index/imagen1.png",
-            alt: "Imagen 1"
+            alt: "Peluquería GoEstilistas - Imagen 1"
         },
         {
             src: "assets/img/img-index/imagen2.png",
-            alt: "Imagen 2"
+            alt: "Peluquería GoEstilistas - Imagen 2"
         },
         {
             src: "assets/img/img-index/imagen3.png",
-            alt: "Imagen 3"
+            alt: "Peluquería GoEstilistas - Imagen 3"
         },
         {
             src: "assets/img/img-index/imagen4.png",
-            alt: "Imagen 4"
+            alt: "Peluquería GoEstilistas - Imagen 4"
         }
     ];
     
