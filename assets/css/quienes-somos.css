@@ -125,23 +125,44 @@
     border-radius: 10px;
 }
 
-/* ========== TEXTO INTRODUCTORIO ========== */
-.intro-quienes {
-    padding: 3rem 5%;
+/* ========== BLOQUE DE MISIÓN ========== */
+.mision-section {
+    padding: 4rem 5%;
     background: white;
 }
 
-.intro-container {
+.mision-container {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
 }
 
-.intro-container p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #333;
-    font-style: italic;
+.mision-titulo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.mision-titulo::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #FF9F4A;
+    border-radius: 3px;
+}
+
+.mision-texto {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-top: 1.5rem;
 }
 
 /* ========== VALORES ========== */
@@ -259,12 +280,16 @@
     color: #ccc;
 }
 
-.dark-mode .intro-quienes {
+.dark-mode .mision-section {
     background: #1a1a2e;
 }
 
-.dark-mode .intro-container p {
-    color: #e0e0e0;
+.dark-mode .mision-titulo {
+    color: #f0f0f0;
+}
+
+.dark-mode .mision-texto {
+    color: #ccc;
 }
 
 .dark-mode .valores {
@@ -317,8 +342,17 @@
         font-size: 0.8rem;
     }
     
-    .intro-container p {
-        font-size: 1rem;
+    .mision-section {
+        padding: 3rem 1.5rem;
+    }
+    
+    .mision-titulo {
+        font-size: 1.6rem;
+    }
+    
+    .mision-texto {
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
     
     .valores-header h2 {
