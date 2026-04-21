@@ -197,10 +197,8 @@
             const totalCards = testimonios.length;
             
             if (isMobile) {
-                // En móvil: una card por página
                 return totalCards;
             } else {
-                // En desktop: calcular cuántas cards se ven por pantalla
                 const containerWidth = container.clientWidth;
                 const cardStyle = getComputedStyle(firstCard);
                 const cardWidth = firstCard.offsetWidth;
@@ -208,7 +206,6 @@
                 const slideWidth = cardWidth + marginRight;
                 
                 const cardsPerView = Math.floor(containerWidth / slideWidth);
-                // Las páginas son: totalCards - cardsPerView + 1 (mínimo 1)
                 const pages = Math.max(1, totalCards - cardsPerView + 1);
                 return pages;
             }
@@ -253,14 +250,7 @@
             const maxIndex = totalPages - 1;
             currentIndex = Math.min(Math.max(0, index), maxIndex);
             
-            let scrollPosition;
-            if (isMobile) {
-                scrollPosition = currentIndex * slideWidth;
-            } else {
-                // En desktop, el scroll se basa en el ancho de las cards visibles
-                scrollPosition = currentIndex * slideWidth;
-            }
-            
+            const scrollPosition = currentIndex * slideWidth;
             container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
             updateDots();
         }
@@ -312,7 +302,6 @@
             isMobile = window.innerWidth <= 768;
             totalPages = calculateTotalPages();
             updateDots();
-            // Recalcular la posición actual
             const slideWidth = getSlideWidth();
             const newIndex = Math.round(container.scrollLeft / slideWidth);
             if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalPages) {
@@ -321,7 +310,6 @@
             }
         }
         
-        // Eventos
         nextBtn.addEventListener('click', () => { nextSlide(); resetAutoScroll(); });
         prevBtn.addEventListener('click', () => { prevSlide(); resetAutoScroll(); });
         
@@ -333,7 +321,6 @@
             setTimeout(handleResize, 100);
         });
         
-        // Inicializar
         updateDots();
         startAutoScroll();
         
@@ -360,19 +347,19 @@
     const imagenesCarrusel = [
         {
             src: "assets/img/img-index/imagen1.png",
-            alt: "Imagen 1"
+            alt: "Peluquería GoEstilistas - Imagen 1"
         },
         {
-            src: "assets/img/img-index/imagen2.png  ",
-            alt: "Imagen 2"
+            src: "assets/img/img-index/imagen2.png",
+            alt: "Peluquería GoEstilistas - Imagen 2"
         },
         {
             src: "assets/img/img-index/imagen3.png",
-            alt: "Imagen 3"
+            alt: "Peluquería GoEstilistas - Imagen 3"
         },
         {
-            src: "assets/img/img-index/imagen4.png  ",
-            alt: "Imagen 4"
+            src: "assets/img/img-index/imagen4.png",
+            alt: "Peluquería GoEstilistas - Imagen 4"
         }
     ];
     
@@ -508,3 +495,16 @@
         }
     }
 })();
+
+// ========== 4. BOTÓN RESERVA DEL HERO (WhatsApp) ==========
+document.addEventListener('DOMContentLoaded', function() {
+    const btnReservaHero = document.getElementById('btnReservaHero');
+    if (btnReservaHero) {
+        btnReservaHero.addEventListener('click', function(e) {
+            e.preventDefault();
+            const telefono = '34123456789'; // Cambia por el número real
+            const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
+            window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+        });
+    }
+});
