@@ -1,6 +1,6 @@
 // ============================================
 // GLOBAL.JS - FUNCIONALIDAD COMÚN A TODAS LAS PÁGINAS
-// Menú hamburguesa responsive, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba
+// Menú hamburguesa responsive, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba, Cookies
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const menu = document.createElement('div');
         menu.className = 'menu-responsive';
         
-        // Cabecera del menú - CON NUEVOS ENLACES
+        // Cabecera del menú
         menu.innerHTML = `
             <div class="menu-header">
                 <div class="logo">
@@ -249,4 +249,75 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========== INICIALIZAR MENÚ RESPONSIVE ==========
     createMenuResponsive();
+    
+    // ========== COOKIES PANEL Y BOTÓN FLOTANTE ==========
+    
+    const cookiesPanel = document.getElementById('cookiesPanel');
+    const cookiesFloatBtn = document.getElementById('cookiesFloatBtn');
+    const acceptBtn = document.getElementById('cookiesAccept');
+    const rejectBtn = document.getElementById('cookiesReject');
+    const necessaryBtn = document.getElementById('cookiesNecessary');
+    
+    const COOKIES_KEY = 'goestilistas_cookies_consent';
+    
+    // Función para abrir el panel
+    function openCookiesPanel() {
+        if (cookiesPanel) {
+            cookiesPanel.classList.add('show');
+        }
+    }
+    
+    // Función para cerrar el panel
+    function closeCookiesPanel() {
+        if (cookiesPanel) {
+            cookiesPanel.classList.remove('show');
+        }
+    }
+    
+    // Función para guardar preferencia y cerrar
+    function saveCookiesPreference(choice) {
+        localStorage.setItem(COOKIES_KEY, choice);
+        closeCookiesPanel();
+        console.log(`Cookies: ${choice}`);
+    }
+    
+    // Eventos de los botones del panel
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => saveCookiesPreference('all'));
+    }
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => saveCookiesPreference('reject'));
+    }
+    if (necessaryBtn) {
+        necessaryBtn.addEventListener('click', () => saveCookiesPreference('necessary'));
+    }
+    
+    // Evento del botón flotante
+    if (cookiesFloatBtn) {
+        cookiesFloatBtn.addEventListener('click', openCookiesPanel);
+    }
+    
+    // Cerrar panel al hacer clic fuera del contenido
+    if (cookiesPanel) {
+        cookiesPanel.addEventListener('click', (e) => {
+            if (e.target === cookiesPanel) {
+                closeCookiesPanel();
+            }
+        });
+    }
+    
+    // Verificar si ya hay preferencia guardada
+    function checkCookiesConsent() {
+        const savedPreference = localStorage.getItem(COOKIES_KEY);
+        
+        // Si no hay preferencia guardada, mostrar el panel automáticamente
+        if (!savedPreference && cookiesPanel) {
+            setTimeout(() => {
+                openCookiesPanel();
+            }, 500);
+        }
+    }
+    
+    // Inicializar
+    checkCookiesConsent();
 });

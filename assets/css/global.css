@@ -1003,3 +1003,206 @@ footer {
 .dark-mode .feature i {
     color: #FF9F4A;
 }
+
+/* ============================================
+   COOKIES PANEL Y BOTÓN FLOTANTE
+   ============================================ */
+
+/* Panel de cookies (modal) */
+.cookies-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.cookies-panel.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cookies-panel-content {
+    background: white;
+    max-width: 450px;
+    width: 90%;
+    border-radius: 24px;
+    padding: 1.8rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.cookies-panel.show .cookies-panel-content {
+    transform: scale(1);
+}
+
+.cookies-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.cookies-header i {
+    font-size: 1.8rem;
+    color: #4EA8DE;
+}
+
+.cookies-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin: 0;
+}
+
+.cookies-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 1.2rem;
+}
+
+.cookies-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.cookies-btn {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    font-family: inherit;
+}
+
+.cookies-btn.primary {
+    background: #4EA8DE;
+    color: white;
+}
+
+.cookies-btn.primary:hover {
+    background: #FF9F4A;
+    transform: translateY(-2px);
+}
+
+.cookies-btn.secondary {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.cookies-btn.secondary:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.cookies-note {
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Botón flotante de cookies */
+.cookies-float-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #4EA8DE;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    z-index: 9999;
+}
+
+.cookies-float-btn:hover {
+    background: #FF9F4A;
+    transform: scale(1.1);
+}
+
+/* Modo oscuro cookies */
+.dark-mode .cookies-panel-content {
+    background: #1e1e2e;
+}
+
+.dark-mode .cookies-header h3 {
+    color: #f0f0f0;
+}
+
+.dark-mode .cookies-text {
+    color: #ccc;
+}
+
+.dark-mode .cookies-note {
+    color: #888;
+}
+
+.dark-mode .cookies-btn.secondary {
+    background: #2a2a3e;
+    color: #ccc;
+}
+
+.dark-mode .cookies-btn.secondary:hover {
+    background: #3a3a4e;
+}
+
+/* Responsive móvil cookies */
+@media (max-width: 768px) {
+    .cookies-panel-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .cookies-header i {
+        font-size: 1.5rem;
+    }
+    
+    .cookies-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cookies-text {
+        font-size: 0.75rem;
+    }
+    
+    .cookies-btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .cookies-note {
+        font-size: 0.6rem;
+    }
+    
+    .cookies-float-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+        bottom: 15px;
+        left: 15px;
+    }
+}
