@@ -1,5 +1,6 @@
 // ============================================
 // SERVICIOS.JS - Datos y lógica de la página de servicios
+// CON CARRUSEL INTERNO EN CADA CARD + CLASES POR CATEGORÍA
 // ============================================
 
 // Datos de servicios (basados en la lista proporcionada)
@@ -93,6 +94,22 @@ function formatearPrecio(servicio) {
     return `${servicio.precio}€`;
 }
 
+// Función para obtener la clase de categoría para el SVG decorativo
+function getCategoriaClase(genero) {
+    switch(genero) {
+        case 'mujer':
+            return 'category-mujer';
+        case 'hombre':
+            return 'category-hombre';
+        case 'pack':
+        case 'unisex':
+            if (servicio.categoria.includes('Pack')) return 'category-pack';
+            return 'category-unisex';
+        default:
+            return 'category-unisex';
+    }
+}
+
 // Renderizar categorías y servicios
 function renderizarServicios(filtro = 'todos') {
     const container = document.getElementById('categoriasContainer');
@@ -136,22 +153,30 @@ function renderizarServicios(filtro = 'todos') {
             <div class="categoria" data-categoria="${cat}">
                 <h2 class="categoria-titulo">${cat}</h2>
                 <div class="servicios-grid">
-                    ${categorias[cat].map(servicio => `
-                        <div class="servicio-item" data-genero="${servicio.genero}">
-                            <div class="servicio-info">
-                                <div class="servicio-nombre">${servicio.nombre}</div>
-                                <div class="servicio-detalles">
-                                    <span class="servicio-precio">${formatearPrecio(servicio)}</span>
-                                    <span class="servicio-duracion">
-                                        <i class="far fa-clock"></i> ${formatearDuracion(servicio.duracion)}
-                                    </span>
+                    ${categorias[cat].map(servicio => {
+                        let categoriaClase = '';
+                        if (servicio.genero === 'mujer') categoriaClase = 'category-mujer';
+                        else if (servicio.genero === 'hombre') categoriaClase = 'category-hombre';
+                        else if (servicio.categoria.includes('Pack')) categoriaClase = 'category-pack';
+                        else categoriaClase = 'category-unisex';
+                        
+                        return `
+                            <div class="servicio-item ${categoriaClase}">
+                                <div class="servicio-info">
+                                    <div class="servicio-nombre">${servicio.nombre}</div>
+                                    <div class="servicio-detalles">
+                                        <span class="servicio-precio">${formatearPrecio(servicio)}</span>
+                                        <span class="servicio-duracion">
+                                            <i class="far fa-clock"></i> ${formatearDuracion(servicio.duracion)}
+                                        </span>
+                                    </div>
                                 </div>
+                                <button class="servicio-boton" data-nombre="${servicio.nombre}">
+                                    <i class="fab fa-whatsapp"></i> Reservar
+                                </button>
                             </div>
-                            <button class="servicio-boton" data-nombre="${servicio.nombre}">
-                                <i class="fab fa-whatsapp"></i> Reservar
-                            </button>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `).join('');
