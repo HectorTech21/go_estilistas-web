@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-envelope"></i>
-                    <a href="mailto:info@goestilistas.com">info@goestilistas.com</a>
+                    <a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a>
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-map-marker-alt"></i>
