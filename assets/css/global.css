@@ -39,9 +39,33 @@ header {
     flex: 1;
 }
 
+.logo a {
+    display: inline-block;
+}
+
+/* LOGO - DOS IMÁGENES SEGÚN MODO */
+/* Por defecto (modo claro): mostrar logo claro, ocultar logo oscuro */
+.logo .logo-dark {
+    display: none;
+}
+
+.logo .logo-light {
+    display: block;
+}
+
+/* Modo oscuro: mostrar logo oscuro, ocultar logo claro */
+body.dark-mode .logo .logo-dark {
+    display: block;
+}
+
+body.dark-mode .logo .logo-light {
+    display: none;
+}
+
 .logo img {
     max-height: 65px;
     width: auto;
+    transition: opacity 0.3s ease;
 }
 
 .logo span {
@@ -749,6 +773,10 @@ footer {
 @media (max-width: 768px) {
     header {
         padding: 0.8rem 5%;
+    }
+    
+    .logo img {
+        max-height: 50px;
     }
     
     .logo span {

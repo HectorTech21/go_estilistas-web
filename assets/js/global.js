@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Actualizar logo según modo oscuro/claro
+        const logoDark = document.querySelector('.logo .logo-dark');
+        const logoLight = document.querySelector('.logo .logo-light');
+        if (logoDark && logoLight) {
+            if (isDarkMode) {
+                logoDark.style.display = 'block';
+                logoLight.style.display = 'none';
+            } else {
+                logoDark.style.display = 'none';
+                logoLight.style.display = 'block';
+            }
+        }
+        
         console.log('Modo oscuro activado:', isDarkMode);
     }
     
@@ -49,7 +62,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     darkIcon.style.display = 'block';
                 }
             });
+            
+            // Asegurar que el logo oscuro se muestra
+            const logoDark = document.querySelector('.logo .logo-dark');
+            const logoLight = document.querySelector('.logo .logo-light');
+            if (logoDark && logoLight) {
+                logoDark.style.display = 'block';
+                logoLight.style.display = 'none';
+            }
+            
             console.log('Modo oscuro cargado desde localStorage');
+        } else {
+            // Asegurar que el logo claro se muestra
+            const logoDark = document.querySelector('.logo .logo-dark');
+            const logoLight = document.querySelector('.logo .logo-light');
+            if (logoDark && logoLight) {
+                logoDark.style.display = 'none';
+                logoLight.style.display = 'block';
+            }
         }
     }
     
@@ -72,7 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
         menu.innerHTML = `
             <div class="menu-header">
                 <div class="logo">
-                    <span>GoEstilistas!</span>
+                    <a href="index.html">
+                        <img class="logo-dark" src="assets/img/Logo.png" alt="GoEstilistas! - Modo oscuro">
+                        <img class="logo-light" src="assets/img/Logo2.png" alt="GoEstilistas! - Modo claro">
+                    </a>
                 </div>
                 <div class="menu-header-buttons">
                     <button class="dark-mode-toggle" id="darkModeToggleMobile">
@@ -103,11 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4>Contacto</h4>
                 <div class="contacto-item-menu">
                     <i class="fas fa-phone"></i>
-                    <a href="tel:+34916623438">+34 916 623 438 </a>
+                    <a href="tel:+34916623438">+34 916 623 438</a>
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-envelope"></i>
-                    <a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a>
+                    <a href="mailto:info@goestilistas.com">info@goestilistas.com</a>
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-map-marker-alt"></i>
@@ -115,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="menu-social">
                     <a href="https://instagram.com" target="_blank" class="social instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/34123456789" target="_blank" class="social whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/34916623438" target="_blank" class="social whatsapp"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://facebook.com" target="_blank" class="social facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
@@ -174,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnReservarMenu = document.getElementById('btnReservarMenu');
         if (btnReservarMenu) {
             btnReservarMenu.addEventListener('click', function() {
-                const telefono = '34123456789';
+                const telefono = '34916623438';
                 const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
                 window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
                 closeMenu();
@@ -233,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnReservar = document.getElementById('btnReservar');
     if (btnReservar) {
         btnReservar.addEventListener('click', function() {
-            const telefono = '34123456789';
+            const telefono = '34916623438';
             const mensaje = encodeURIComponent('Hola, me gustaría reservar una cita en GoEstilistas!');
             window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
         });
