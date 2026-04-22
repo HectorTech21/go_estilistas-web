@@ -103,11 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h4>Contacto</h4>
                 <div class="contacto-item-menu">
                     <i class="fas fa-phone"></i>
-                    <a href="tel:+34123456789">+34 123 456 789</a>
+                    <a href="tel:+34916623438">+34 916 623 438 </a>
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-envelope"></i>
-                    <a href="mailto:info@goestilistas.com">info@goestilistas.com</a>
+                    <a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a>
                 </div>
                 <div class="contacto-item-menu">
                     <i class="fas fa-map-marker-alt"></i>
