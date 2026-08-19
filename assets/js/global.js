@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     darkIcon.style.display = 'none';
                 }
             }
+            btn.setAttribute('aria-pressed', String(isDarkMode));
+            btn.setAttribute('aria-label', isDarkMode ? 'Activar modo claro' : 'Activar modo oscuro');
         });
         
         // Actualizar logo según modo oscuro/claro
@@ -61,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     lightIcon.style.display = 'none';
                     darkIcon.style.display = 'block';
                 }
+                btn.setAttribute('aria-pressed', 'true');
+                btn.setAttribute('aria-label', 'Activar modo claro');
             });
             
             // Asegurar que el logo oscuro se muestra
@@ -73,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log('Modo oscuro cargado desde localStorage');
         } else {
+            document.querySelectorAll('.dark-mode-toggle').forEach(btn => {
+                btn.setAttribute('aria-pressed', 'false');
+                btn.setAttribute('aria-label', 'Activar modo oscuro');
+            });
             // Asegurar que el logo claro se muestra
             const logoDark = document.querySelector('.logo .logo-dark');
             const logoLight = document.querySelector('.logo .logo-light');
@@ -93,10 +101,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Crear overlay
         const overlay = document.createElement('div');
         overlay.className = 'menu-overlay';
+        overlay.setAttribute('aria-hidden', 'true');
         
         // Crear menú lateral
         const menu = document.createElement('div');
         menu.className = 'menu-responsive';
+        menu.setAttribute('role', 'dialog');
+        menu.setAttribute('aria-modal', 'true');
+        menu.setAttribute('aria-label', 'Menú de navegación');
+        menu.setAttribute('aria-hidden', 'true');
         
         // Cabecera del menú
         menu.innerHTML = `
@@ -108,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </a>
                 </div>
                 <div class="menu-header-buttons">
-                    <button class="dark-mode-toggle" id="darkModeToggleMobile">
+                    <button class="dark-mode-toggle" id="darkModeToggleMobile" type="button" aria-label="Activar modo oscuro" aria-pressed="false">
                         <svg class="light-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor">
                             <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
                         </svg>
@@ -116,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
                         </svg>
                     </button>
-                    <button class="close-menu" id="closeMenuBtn">&times;</button>
+                    <button class="close-menu" id="closeMenuBtn" type="button" aria-label="Cerrar menú">&times;</button>
                 </div>
             </div>
             <div class="menu-nav">
@@ -166,7 +179,11 @@ document.addEventListener('DOMContentLoaded', function() {
             hamburguesa.addEventListener('click', function() {
                 overlay.classList.add('active');
                 menu.classList.add('active');
+                overlay.setAttribute('aria-hidden', 'false');
+                menu.setAttribute('aria-hidden', 'false');
+                hamburguesa.setAttribute('aria-expanded', 'true');
                 document.body.style.overflow = 'hidden';
+                closeBtn?.focus();
             });
         }
         
@@ -180,12 +197,32 @@ document.addEventListener('DOMContentLoaded', function() {
         function closeMenu() {
             overlay.classList.remove('active');
             menu.classList.remove('active');
+            overlay.setAttribute('aria-hidden', 'true');
+            menu.setAttribute('aria-hidden', 'true');
+            hamburguesa?.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
+            hamburguesa?.focus();
         }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && menu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
         
         // Sincronizar modo oscuro con el botón del menú
         const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
         if (darkModeToggleMobile) {
+            const startsDark = document.body.classList.contains('dark-mode');
+            const initialLightIcon = darkModeToggleMobile.querySelector('.light-icon');
+            const initialDarkIcon = darkModeToggleMobile.querySelector('.dark-icon');
+            if (initialLightIcon && initialDarkIcon) {
+                initialLightIcon.style.display = startsDark ? 'none' : 'block';
+                initialDarkIcon.style.display = startsDark ? 'block' : 'none';
+            }
+            darkModeToggleMobile.setAttribute('aria-pressed', String(startsDark));
+            darkModeToggleMobile.setAttribute('aria-label', startsDark ? 'Activar modo claro' : 'Activar modo oscuro');
+
             darkModeToggleMobile.addEventListener('click', function() {
                 toggleDarkMode();
                 const isDarkMode = document.body.classList.contains('dark-mode');
@@ -216,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ========== SCROLL REVEAL (animaciones) ==========
-    if (typeof ScrollReveal !== 'undefined') {
+    if (typeof ScrollReveal !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
             ScrollReveal().reveal('.hero', {
@@ -246,9 +283,6 @@ document.addEventListener('DOMContentLoaded', function() {
             reset: false
         });
         
-        console.log('ScrollReveal activado');
-    } else {
-        console.error('ScrollReveal no se cargó correctamente');
     }
     
     // Asignar evento al botón de modo oscuro del header
@@ -307,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btnVolverArriba.addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth'
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
             });
         });
         
@@ -331,6 +365,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function openCookiesPanel() {
         if (cookiesPanel) {
             cookiesPanel.classList.add('show');
+            cookiesPanel.setAttribute('aria-hidden', 'false');
+            acceptBtn?.focus();
         }
     }
     
@@ -338,6 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeCookiesPanel() {
         if (cookiesPanel) {
             cookiesPanel.classList.remove('show');
+            cookiesPanel.setAttribute('aria-hidden', 'true');
         }
     }
     
@@ -366,12 +403,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Cerrar panel al hacer clic fuera del contenido
     if (cookiesPanel) {
+        cookiesPanel.setAttribute('aria-hidden', 'true');
         cookiesPanel.addEventListener('click', (e) => {
             if (e.target === cookiesPanel) {
                 closeCookiesPanel();
             }
         });
     }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && cookiesPanel?.classList.contains('show')) {
+            closeCookiesPanel();
+            cookiesFloatBtn?.focus();
+        }
+    });
     
     // Verificar si ya hay preferencia guardada
     function checkCookiesConsent() {

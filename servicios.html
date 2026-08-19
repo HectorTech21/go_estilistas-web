@@ -2,227 +2,205 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+      name="description"
+      content="Carta de servicios de Go Estilistas: corte, color, tratamientos, mechas, extensiones y packs con asesoramiento personalizado en Alcobendas."
     />
-    <title>Servicios | GoEstilistas!</title>
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <!-- CSS Global -->
+    <title>Servicios de peluquería | Go Estilistas</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/global.css" />
-    <!-- CSS específico de servicios -->
-    <link rel="stylesheet" href="assets/css/servicios.css" />
+    <link rel="stylesheet" href="assets/css/servicios.css?v=3" />
 
-    <!-- FAVICON -->
-<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-<link rel="shortcut icon" href="favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Go Estilistas" />
-<link rel="manifest" href="favicon/site.webmanifest" />
-
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Go Estilistas" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
   </head>
   <body>
-    <!-- HEADER -->
-    <header>
+    <header class="site-header">
       <div class="logo">
-        <a href="index.html">
-          <img
-            class="logo-dark"
-            src="assets/img/Logo.png"
-            alt="GoEstilistas! - Modo oscuro"
-          />
-          <img
-            class="logo-light"
-            src="assets/img/Logo2.png"
-            alt="GoEstilistas! - Modo claro"
-          />
+        <a href="index.html" aria-label="Go Estilistas, inicio">
+          <img class="logo-dark" src="assets/img/Logo.png" alt="" />
+          <img class="logo-light" src="assets/img/Logo2.png" alt="Go Estilistas" />
         </a>
       </div>
 
-      <nav>
-    <ul class="nav-links">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="quienes-somos.html">Quiénes somos</a></li>
-        <li><a href="trabajos.html">Nuestros trabajos</a></li>
-    </ul>
-</nav>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html" aria-current="page">Servicios</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="trabajos.html">Nuestros trabajos</a></li>
+        </ul>
+      </nav>
 
       <div class="header-right">
         <div class="placeholder-buttons">
-          <button class="btn-reservar" id="btnReservar">
-            <i class="fab fa-whatsapp"></i> Reservar Cita
+          <button class="btn-reservar" id="btnReservar" type="button">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span>Reservar cita</span>
           </button>
-          <button class="dark-mode-toggle" id="darkModeToggle">
-    <svg class="light-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor">
-        <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
-    </svg>
-    <svg class="dark-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" style="display: none;">
-        <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
-    </svg>
-</button>
+          <button
+            class="dark-mode-toggle"
+            id="darkModeToggle"
+            type="button"
+            aria-label="Cambiar tema de color"
+          >
+            <svg class="light-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+              <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
+            </svg>
+            <svg class="dark-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" style="display: none" aria-hidden="true">
+              <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
+            </svg>
+          </button>
         </div>
-        <div class="menu-hamburguesa">
-          <i class="fas fa-bars"></i>
-        </div>
+        <button class="menu-hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
       </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL DE SERVICIOS -->
     <main class="servicios-main">
-      <div class="servicios-hero">
-        <h1>Nuestros Servicios</h1>
-        <p>
-          Encuentra el servicio perfecto para ti. Profesionales, calidad y los
-          mejores precios.
-        </p>
-      </div>
+      <section class="servicios-hero" aria-labelledby="servicios-title">
+        <div class="servicios-shell servicios-hero-grid">
+          <div class="servicios-hero-copy">
+            <p class="eyebrow">Carta de servicios · Alcobendas</p>
+            <h1 id="servicios-title">Cuidamos tu cabello con intención.</h1>
+          </div>
+          <div class="servicios-hero-intro">
+            <p class="hero-lead">
+              Cada servicio comienza escuchando lo que necesitas y entendiendo cómo quieres sentirte con el resultado.
+            </p>
+            <p>
+              Si dudas entre varias opciones, te ayudamos a elegir la más adecuada para tu cabello, tu estilo y el tiempo que quieres dedicarle.
+            </p>
+            <button class="text-cta" id="btnAsesoramiento" type="button">Pedir asesoramiento <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </section>
 
-      <!-- Filtros rápidos -->
-      <div class="filtros-container">
-        <button class="filtro-btn active" data-filtro="todos">Todos</button>
-        <button class="filtro-btn" data-filtro="mujer">Mujer</button>
-        <button class="filtro-btn" data-filtro="hombre">Hombre</button>
-        <button class="filtro-btn" data-filtro="pack">Packs</button>
-      </div>
+      <section class="destacados-section section-space" aria-labelledby="destacados-title">
+        <div class="servicios-shell">
+          <div class="section-heading servicios-heading-row">
+            <div>
+              <p class="eyebrow">Experiencias Go Estilistas</p>
+              <h2 id="destacados-title">Una selección para empezar.</h2>
+            </div>
+            <p>Servicios representativos de nuestra forma de trabajar, seleccionados de la carta completa.</p>
+          </div>
+          <div class="destacados-grid" id="destacadosContainer"></div>
+        </div>
+      </section>
 
-      <!-- Contenedor de categorías y servicios -->
-      <div class="categorias-container" id="categoriasContainer">
-        <!-- Las categorías y servicios se cargarán con JavaScript -->
-      </div>
+      <section class="catalogo-section section-space" aria-labelledby="catalogo-title">
+        <div class="servicios-shell">
+          <div class="catalogo-heading">
+            <p class="eyebrow">Carta completa</p>
+            <h2 id="catalogo-title">Encuentra el servicio que buscas.</h2>
+            <p>Consulta duración y precio, filtra la selección o entra directamente en una categoría.</p>
+          </div>
+
+          <div class="catalogo-controls">
+            <div class="filtros-block">
+              <span class="control-label" id="filtros-label">Mostrar</span>
+              <div class="filtros-container" role="group" aria-labelledby="filtros-label">
+                <button class="filtro-btn active" type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+                <button class="filtro-btn" type="button" data-filtro="mujer" aria-pressed="false">Mujer</button>
+                <button class="filtro-btn" type="button" data-filtro="hombre" aria-pressed="false">Hombre</button>
+                <button class="filtro-btn" type="button" data-filtro="pack" aria-pressed="false">Packs</button>
+              </div>
+            </div>
+            <p class="servicios-status" id="serviciosStatus" aria-live="polite"></p>
+          </div>
+
+          <nav class="categorias-nav" aria-label="Ir a una categoría">
+            <div class="categorias-nav-track" id="categoriasNav"></div>
+          </nav>
+
+          <div class="categorias-container" id="categoriasContainer"></div>
+        </div>
+      </section>
+
+      <section class="servicios-closing" aria-labelledby="closing-title">
+        <div class="servicios-shell closing-inner">
+          <p class="eyebrow">¿No sabes qué elegir?</p>
+          <h2 id="closing-title">Lo decidimos contigo.</h2>
+          <p>Cuéntanos qué buscas y te orientaremos antes de reservar.</p>
+          <button class="btn btn-primary" id="btnClosingAdvice" type="button">Hablar con el equipo <span aria-hidden="true">↗</span></button>
+        </div>
+      </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div class="footer-container">
-        <div class="footer-col">
-          <h3>GoEstilistas!</h3>
-          <p>
-            Tu estilo, nuestra pasión. En Go Estilistas cuidamos tu imagen con cortes modernos, coloración profesional y tratamientos de calidad. Trabajamos con atención al detalle para ofrecerte un servicio personalizado en cada visita. Estamos en Alcobendas, listos para que salgas con tu mejor versión.
-          </p>
+        <div class="footer-col footer-brand">
+          <h3>Go Estilistas</h3>
+          <p>Color, corte y cuidado capilar con atención personalizada en Alcobendas.</p>
         </div>
         <div class="footer-col">
-    <h4>Enlaces rápidos</h4>
-    <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="quienes-somos.html">Quiénes somos</a></li>
-        <li><a href="trabajos.html">Nuestros trabajos</a></li>
-    </ul>
-</div>
+          <h4>Descubre</h4>
+          <ul>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="quienes-somos.html">Quiénes somos</a></li>
+            <li><a href="trabajos.html">Nuestros trabajos</a></li>
+          </ul>
+        </div>
         <div class="footer-col contacto-col">
           <h4>Contacto</h4>
+          <div class="contacto-item"><a href="tel:+34916623438">+34 916 623 438</a></div>
+          <div class="contacto-item"><a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a></div>
           <div class="contacto-item">
-            <i
-              class="fas fa-phone"
-              style="color: #4ea8de; margin-right: 12px"
-            ></i>
-            <a href="tel:+34916623438">+34 916 623 438</a>
-          </div>
-          <div class="contacto-item">
-            <i
-              class="fas fa-envelope"
-              style="color: #ff9f4a; margin-right: 12px"
-            ></i>
-            <a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a>
-          </div>
-          <div class="contacto-item">
-            <i
-              class="fas fa-map-pin"
-              style="color: #4ea8de; margin-right: 12px"
-            ></i>
-            <a
-              href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas"
-              target="_blank"
-              >Centro Comercial La Vega, Alcobendas</a
-            >
+            <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer">Centro Comercial La Vega<br />Alcobendas</a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Ubicación</h4>
-          <a
-            href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas"
-            target="_blank"
-            style="display: block; text-decoration: none"
-          >
-            <div class="mapa-miniatura">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.654321!2d-3.642800!3d40.537400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229e4b6e8e3e1%3A0x123456789abcdef!2sCentro%20Comercial%20La%20Vega!5e0!3m2!1ses!2ses!4v1234567890123!5m2!1ses!2ses"
-                width="100%"
-                height="150"
-                style="border: 0; border-radius: 14px; pointer-events: none"
-                allowfullscreen=""
-                loading="lazy"
-              ></iframe>
-            </div>
-          </a>
+          <h4>Conecta</h4>
           <div class="social-icons">
-            <a href="#" class="social instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="#" class="social whatsapp"
-              ><i class="fab fa-whatsapp"></i
-            ></a>
-            <a href="#" class="social facebook"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://wa.me/34916623438" target="_blank" rel="noopener noreferrer" class="social whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-    <div class="footer-copyright">
-        &copy; 2026 GoEstilistas! - Todos los derechos reservados.
-    </div>
-    <div class="footer-legales">
-        <a href="aviso-legal.html">Aviso Legal</a>
-        <a href="politica-privacidad.html">Política de Privacidad</a>
-        <a href="politica-cookies.html">Política de Cookies</a>
-    </div>
-</div>
+        <div class="footer-copyright">&copy; 2026 Go Estilistas. Todos los derechos reservados.</div>
+        <div class="footer-legales">
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="politica-privacidad.html">Privacidad</a>
+          <a href="politica-cookies.html">Cookies</a>
+        </div>
+      </div>
     </footer>
 
-    <!-- Botón Volver arriba -->
-    <button
-      class="btn-volver-arriba"
-      id="btnVolverArriba"
-      aria-label="Volver arriba"
-    >
-      <i class="fas fa-arrow-up"></i>
+    <button class="btn-volver-arriba" id="btnVolverArriba" type="button" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Scripts -->
-    <script src="assets/js/global.js"></script>
-    <script src="assets/js/servicios.js"></script>
-
-        <!-- COOKIES: PANEL FLOTANTE -->
-    <div id="cookiesPanel" class="cookies-panel">
-        <div class="cookies-panel-content">
-            <div class="cookies-header">
-                <i class="fas fa-cookie-bite"></i>
-                <h3>Respetamos tu privacidad</h3>
-            </div>
-            <p class="cookies-text">
-                Usamos cookies para mejorar tu experiencia, analizar el tráfico y ofrecer contenido personalizado.
-                Puedes elegir qué cookies aceptas.
-            </p>
-            <div class="cookies-buttons">
-                <button id="cookiesNecessary" class="cookies-btn secondary">Solo necesarias</button>
-                <button id="cookiesReject" class="cookies-btn secondary">Rechazar todas</button>
-                <button id="cookiesAccept" class="cookies-btn primary">Aceptar todas</button>
-            </div>
-            <p class="cookies-note">Las cookies necesarias siempre están activas para el correcto funcionamiento de la web.</p>
+    <div id="cookiesPanel" class="cookies-panel" role="dialog" aria-modal="true" aria-labelledby="cookies-title">
+      <div class="cookies-panel-content">
+        <div class="cookies-header">
+          <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+          <h3 id="cookies-title">Respetamos tu privacidad</h3>
         </div>
+        <p class="cookies-text">Usamos cookies para mejorar tu experiencia y analizar el uso de la web. Puedes elegir qué cookies aceptas.</p>
+        <div class="cookies-buttons">
+          <button id="cookiesNecessary" class="cookies-btn secondary" type="button">Solo necesarias</button>
+          <button id="cookiesReject" class="cookies-btn secondary" type="button">Rechazar todas</button>
+          <button id="cookiesAccept" class="cookies-btn primary" type="button">Aceptar todas</button>
+        </div>
+        <p class="cookies-note">Las cookies necesarias siempre están activas para el correcto funcionamiento de la web.</p>
+      </div>
     </div>
 
-    <!-- COOKIES: BOTÓN FLOTANTE FIJO -->
-    <button id="cookiesFloatBtn" class="cookies-float-btn" aria-label="Configuración de cookies">
-        <i class="fas fa-cookie-bite"></i>
+    <button id="cookiesFloatBtn" class="cookies-float-btn" type="button" aria-label="Configuración de cookies">
+      <i class="fas fa-cookie-bite" aria-hidden="true"></i>
     </button>
 
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/servicios.js?v=3"></script>
   </body>
 </html>

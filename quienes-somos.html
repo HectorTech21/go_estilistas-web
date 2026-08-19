@@ -2,204 +2,169 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+      name="description"
+      content="Conoce al equipo y la forma de trabajar de Go Estilistas, salón de peluquería en Alcobendas."
     />
-    <title>Quiénes somos | GoEstilistas!</title>
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <!-- CSS Global -->
+    <title>Quiénes somos | Go Estilistas</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/global.css" />
-    <!-- CSS específico de quienes somos -->
-    <link rel="stylesheet" href="assets/css/quienes-somos.css" />
+    <link rel="stylesheet" href="assets/css/quienes-somos.css?v=2" />
 
-    <!-- FAVICON -->
-<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-<link rel="shortcut icon" href="favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Go Estilistas" />
-<link rel="manifest" href="favicon/site.webmanifest" />
-
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Go Estilistas" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
   </head>
   <body>
-    <!-- HEADER -->
-    <header>
+    <header class="site-header">
       <div class="logo">
-        <a href="index.html">
-          <img
-            class="logo-dark"
-            src="assets/img/Logo.png"
-            alt="GoEstilistas! - Modo oscuro"
-          />
-          <img
-            class="logo-light"
-            src="assets/img/Logo2.png"
-            alt="GoEstilistas! - Modo claro"
-          />
+        <a href="index.html" aria-label="Go Estilistas, inicio">
+          <img class="logo-dark" src="assets/img/Logo.png" alt="" />
+          <img class="logo-light" src="assets/img/Logo2.png" alt="Go Estilistas" />
         </a>
       </div>
 
-      <nav>
+      <nav aria-label="Navegación principal">
         <ul class="nav-links">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="quienes-somos.html" aria-current="page">Quiénes somos</a></li>
           <li><a href="trabajos.html">Nuestros trabajos</a></li>
         </ul>
       </nav>
 
       <div class="header-right">
         <div class="placeholder-buttons">
-          <button class="btn-reservar" id="btnReservar">
-            <i class="fab fa-whatsapp"></i> Reservar Cita
+          <button class="btn-reservar" id="btnReservar" type="button">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span>Reservar cita</span>
           </button>
-          <button class="dark-mode-toggle" id="darkModeToggle">
-    <svg class="light-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor">
-        <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
-    </svg>
-    <svg class="dark-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" style="display: none;">
-        <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
-    </svg>
-</button>
+          <button class="dark-mode-toggle" id="darkModeToggle" type="button" aria-label="Cambiar tema de color">
+            <svg class="light-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+              <path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"></path>
+            </svg>
+            <svg class="dark-icon" width="22" height="22" viewBox="0 0 256 256" fill="currentColor" style="display: none" aria-hidden="true">
+              <path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path>
+            </svg>
+          </button>
         </div>
-        <div class="menu-hamburguesa">
-          <i class="fas fa-bars"></i>
-        </div>
+        <button class="menu-hamburguesa" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
       </div>
     </header>
 
-    <!-- ========== HERO CON CARRUSEL ========== -->
-    <section class="hero-quienes">
-      <div class="hero-quienes-content">
-        <h1>Conoce al equipo que hará brillar tu estilo</h1>
-        <p>
-          Más de 10 años cuidando tu imagen con pasión, cercanía y los mejores
-          profesionales.
-        </p>
-      </div>
+    <main class="about-main">
+      <section class="about-hero" aria-labelledby="about-title">
+        <div class="about-shell about-hero-grid">
+          <div class="about-hero-copy">
+            <p class="eyebrow">Personas, criterio y cuidado</p>
+            <h1 id="about-title">Detrás de cada resultado hay una forma de escucharte.</h1>
+            <p class="about-hero-text">Somos un equipo dedicado a cuidar tu imagen con cercanía, atención al detalle y una propuesta personal para cada visita.</p>
+          </div>
+          <figure class="about-hero-visual">
+            <img
+              src="assets/img/img-index/imagen3.png"
+              alt="Zona de estilismo del salón Go Estilistas"
+              width="720"
+              height="960"
+              fetchpriority="high"
+            />
+            <figcaption>Go Estilistas · Alcobendas</figcaption>
+          </figure>
+        </div>
+      </section>
 
-      <div class="carrusel-equipo-container">
-        <div class="carrusel-equipo" id="carruselEquipo">
-          <!-- Las imágenes se cargarán con JavaScript -->
-        </div>
-        <button class="carrusel-equipo-prev" id="prevEquipoBtn">❮</button>
-        <button class="carrusel-equipo-next" id="nextEquipoBtn">❯</button>
-      </div>
-      <div class="carrusel-equipo-dots" id="carruselEquipoDots"></div>
-    </section>
+      <section class="team-section" aria-labelledby="team-title">
+        <div class="about-shell">
+          <div class="team-heading">
+            <div>
+              <p class="eyebrow">El equipo</p>
+              <h2 id="team-title">Las personas que estarán contigo.</h2>
+            </div>
+            <p>Una presentación directa de quienes forman Go Estilistas. Los retratos se incorporarán cuando dispongamos de las fotografías reales.</p>
+          </div>
 
-    <!-- ========== BLOQUE DE MISIÓN / DESCRIPTIVO ========== -->
-    <section class="mision-section">
-      <div class="mision-container">
-        <h2 class="mision-titulo">Nuestra Misión</h2>
-        <p class="mision-texto">
-          En GoEstilistas, no solo cortamos el cabello; creamos tu mejor
-          versión. Somos un equipo de apasionados por la imagen y las últimas
-          tendencias, dedicados a transformar cada visita en una experiencia de
-          renovación total. Nuestra filosofía es simple: escuchar lo que buscas
-          y potenciarlo con técnica, estilo y los mejores productos. Si estás
-          listo para un cambio, estás en el lugar correcto. ¡Vamos a darle vida
-          a tu estilo!
-        </p>
-      </div>
-    </section>
+          <div class="team-overview" id="teamOverview"></div>
+          <div class="team-grid" id="teamGrid"></div>
+        </div>
+      </section>
 
-    <!-- ========== VALORES ========== -->
-    <section class="valores">
-      <div class="valores-header">
-        <h2>Nuestros Valores</h2>
-        <p>Lo que nos define y nos hace diferentes</p>
-      </div>
-      <div class="valores-grid">
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-handshake"></i>
+      <section class="philosophy-section" aria-labelledby="philosophy-title">
+        <div class="about-shell">
+          <div class="philosophy-intro">
+            <p class="eyebrow">Nuestra forma de trabajar</p>
+            <h2 id="philosophy-title">Escuchar antes de proponer.</h2>
+            <p>La filosofía actual de Go Estilistas parte de entender lo que buscas y potenciarlo con técnica, estilo y cuidado.</p>
           </div>
-          <h3>Cercanía</h3>
-          <p>Te escuchamos y entendemos tus necesidades</p>
-        </div>
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-star"></i>
-          </div>
-          <h3>Profesionalidad</h3>
-          <p>Formación continua y técnicas avanzadas</p>
-        </div>
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-heart"></i>
-          </div>
-          <h3>Pasión</h3>
-          <p>Amamos lo que hacemos y se nota</p>
-        </div>
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Innovación</h3>
-          <p>Siempre al día de las últimas tendencias</p>
-        </div>
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-medal"></i>
-          </div>
-          <h3>Calidad</h3>
-          <p>Productos premium y resultados impecables</p>
-        </div>
-        <div class="valor-card">
-          <div class="valor-icono">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>Confianza</h3>
-          <p>Relación duradera con nuestros clientes</p>
-        </div>
-      </div>
-    </section>
 
-    <!-- ========== ESTADÍSTICAS (CONTADOR ANIMADO) ========== -->
-    <section class="estadisticas" id="estadisticas">
-      <div class="estadisticas-grid">
-        <div class="estadistica-item">
-          <div class="estadistica-numero" data-target="12">0</div>
-          <div class="estadistica-label">años de experiencia</div>
+          <div class="philosophy-list">
+            <article>
+              <span aria-hidden="true">01</span>
+              <h3>Cercanía</h3>
+              <p>Te escuchamos y entendemos tus necesidades.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">02</span>
+              <h3>Criterio</h3>
+              <p>Partimos de lo que buscas para construir una propuesta con técnica y estilo.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">03</span>
+              <h3>Cuidado</h3>
+              <p>Trabajamos con atención al detalle y productos de calidad.</p>
+            </article>
+          </div>
         </div>
-        <div class="estadistica-item">
-          <div class="estadistica-numero" data-target="5230">0</div>
-          <div class="estadistica-label">clientes satisfechos</div>
-        </div>
-        <div class="estadistica-item">
-          <div class="estadistica-numero" data-target="4">0</div>
-          <div class="estadistica-label">profesionales</div>
-        </div>
-        <div class="estadistica-item">
-          <div class="estadistica-numero" data-target="4.7">0</div>
-          <div class="estadistica-label">estrellas en Treatwell</div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FOOTER -->
+      <section class="salon-approach" aria-labelledby="salon-approach-title">
+        <div class="about-shell salon-approach-grid">
+          <figure>
+            <img
+              src="assets/img/img-index/imagen1.png"
+              alt="Recepción y exposición de productos de Go Estilistas"
+              width="720"
+              height="480"
+              loading="lazy"
+            />
+          </figure>
+          <div>
+            <p class="eyebrow">La experiencia en el salón</p>
+            <h2 id="salon-approach-title">Un espacio para dedicarte tiempo.</h2>
+            <p>Queremos que cada visita tenga un propósito: escuchar lo que necesitas, cuidar el proceso y ayudarte a salir con un resultado que se sienta propio.</p>
+            <a class="text-cta" href="servicios.html">Conocer los servicios <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-cta" aria-labelledby="about-cta-title">
+        <div class="about-shell about-cta-inner">
+          <p class="eyebrow">Tu próxima visita</p>
+          <h2 id="about-cta-title">Ven a conocernos. Lo demás empieza hablando.</h2>
+          <p>Cuéntanos qué tienes en mente y te ayudaremos a elegir el siguiente paso.</p>
+          <div class="cta-actions">
+            <button class="btn btn-primary" id="btnAboutReserve" type="button">Reservar cita <span aria-hidden="true">↗</span></button>
+            <a class="text-cta" href="servicios.html">Ver servicios <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
     <footer>
       <div class="footer-container">
-        <div class="footer-col">
-          <h3>GoEstilistas!</h3>
-          <p>
-            Tu estilo, nuestra pasión. En Go Estilistas cuidamos tu imagen con
-            cortes modernos, coloración profesional y tratamientos de calidad.
-            Trabajamos con atención al detalle para ofrecerte un servicio
-            personalizado en cada visita. Estamos en Alcobendas, listos para que
-            salgas con tu mejor versión.
-          </p>
+        <div class="footer-col footer-brand">
+          <h3>Go Estilistas</h3>
+          <p>Color, corte y cuidado capilar con atención personalizada en Alcobendas.</p>
         </div>
         <div class="footer-col">
-          <h4>Enlaces rápidos</h4>
+          <h4>Descubre</h4>
           <ul>
-            <li><a href="index.html">Inicio</a></li>
             <li><a href="servicios.html">Servicios</a></li>
             <li><a href="quienes-somos.html">Quiénes somos</a></li>
             <li><a href="trabajos.html">Nuestros trabajos</a></li>
@@ -207,126 +172,56 @@
         </div>
         <div class="footer-col contacto-col">
           <h4>Contacto</h4>
+          <div class="contacto-item"><a href="tel:+34916623438">+34 916 623 438</a></div>
+          <div class="contacto-item"><a href="mailto:goestilistas@outlook.com">goestilistas@outlook.com</a></div>
           <div class="contacto-item">
-            <i
-              class="fas fa-phone"
-              style="color: #4ea8de; margin-right: 12px"
-            ></i>
-            <a href="tel:+34916623438">+34 916 623 438</a>
-          </div>
-          <div class="contacto-item">
-            <i
-              class="fas fa-envelope"
-              style="color: #ff9f4a; margin-right: 12px"
-            ></i>
-            <a href="mailto:goestilistas@outlook.com"
-              >goestilistas@outlook.com</a
-            >
-          </div>
-          <div class="contacto-item">
-            <i
-              class="fas fa-map-pin"
-              style="color: #4ea8de; margin-right: 12px"
-            ></i>
-            <a
-              href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas"
-              target="_blank"
-              >Centro Comercial La Vega, Alcobendas</a
-            >
+            <a href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas" target="_blank" rel="noopener noreferrer">Centro Comercial La Vega<br />Alcobendas</a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Ubicación</h4>
-          <a
-            href="https://www.google.com/maps?q=Centro+Comercial+La+Vega+Alcobendas"
-            target="_blank"
-            style="display: block; text-decoration: none"
-          >
-            <div class="mapa-miniatura">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.654321!2d-3.642800!3d40.537400!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229e4b6e8e3e1%3A0x123456789abcdef!2sCentro%20Comercial%20La%20Vega!5e0!3m2!1ses!2ses!4v1234567890123!5m2!1ses!2ses"
-                width="100%"
-                height="150"
-                style="border: 0; border-radius: 14px; pointer-events: none"
-                allowfullscreen=""
-                loading="lazy"
-              ></iframe>
-            </div>
-          </a>
+          <h4>Conecta</h4>
           <div class="social-icons">
-            <a href="#" class="social instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="#" class="social whatsapp"
-              ><i class="fab fa-whatsapp"></i
-            ></a>
-            <a href="#" class="social facebook"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social instagram" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://wa.me/34916623438" target="_blank" rel="noopener noreferrer" class="social whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social facebook" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-copyright">
-          &copy; 2026 GoEstilistas! - Todos los derechos reservados.
-        </div>
+        <div class="footer-copyright">&copy; 2026 Go Estilistas. Todos los derechos reservados.</div>
         <div class="footer-legales">
-          <a href="aviso-legal.html">Aviso Legal</a>
-          <a href="politica-privacidad.html">Política de Privacidad</a>
-          <a href="politica-cookies.html">Política de Cookies</a>
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="politica-privacidad.html">Privacidad</a>
+          <a href="politica-cookies.html">Cookies</a>
         </div>
       </div>
     </footer>
 
-    <!-- Botón Volver arriba -->
-    <button
-      class="btn-volver-arriba"
-      id="btnVolverArriba"
-      aria-label="Volver arriba"
-    >
-      <i class="fas fa-arrow-up"></i>
+    <button class="btn-volver-arriba" id="btnVolverArriba" type="button" aria-label="Volver arriba">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Scripts -->
-    <script src="assets/js/global.js"></script>
-    <script src="assets/js/quienes-somos.js"></script>
-
-    <!-- COOKIES: PANEL FLOTANTE -->
-    <div id="cookiesPanel" class="cookies-panel">
+    <div id="cookiesPanel" class="cookies-panel" role="dialog" aria-modal="true" aria-labelledby="cookies-title">
       <div class="cookies-panel-content">
         <div class="cookies-header">
-          <i class="fas fa-cookie-bite"></i>
-          <h3>Respetamos tu privacidad</h3>
+          <i class="fas fa-cookie-bite" aria-hidden="true"></i>
+          <h3 id="cookies-title">Respetamos tu privacidad</h3>
         </div>
-        <p class="cookies-text">
-          Usamos cookies para mejorar tu experiencia, analizar el tráfico y
-          ofrecer contenido personalizado. Puedes elegir qué cookies aceptas.
-        </p>
+        <p class="cookies-text">Usamos cookies para mejorar tu experiencia y analizar el uso de la web. Puedes elegir qué cookies aceptas.</p>
         <div class="cookies-buttons">
-          <button id="cookiesNecessary" class="cookies-btn secondary">
-            Solo necesarias
-          </button>
-          <button id="cookiesReject" class="cookies-btn secondary">
-            Rechazar todas
-          </button>
-          <button id="cookiesAccept" class="cookies-btn primary">
-            Aceptar todas
-          </button>
+          <button id="cookiesNecessary" class="cookies-btn secondary" type="button">Solo necesarias</button>
+          <button id="cookiesReject" class="cookies-btn secondary" type="button">Rechazar todas</button>
+          <button id="cookiesAccept" class="cookies-btn primary" type="button">Aceptar todas</button>
         </div>
-        <p class="cookies-note">
-          Las cookies necesarias siempre están activas para el correcto
-          funcionamiento de la web.
-        </p>
+        <p class="cookies-note">Las cookies necesarias siempre están activas para el correcto funcionamiento de la web.</p>
       </div>
     </div>
 
-    <!-- COOKIES: BOTÓN FLOTANTE FIJO -->
-    <button
-      id="cookiesFloatBtn"
-      class="cookies-float-btn"
-      aria-label="Configuración de cookies"
-    >
-      <i class="fas fa-cookie-bite"></i>
+    <button id="cookiesFloatBtn" class="cookies-float-btn" type="button" aria-label="Configuración de cookies">
+      <i class="fas fa-cookie-bite" aria-hidden="true"></i>
     </button>
+
+    <script src="assets/js/global.js"></script>
+    <script src="assets/js/quienes-somos.js?v=2"></script>
   </body>
 </html>
