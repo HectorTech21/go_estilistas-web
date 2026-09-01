@@ -110,6 +110,8 @@ const estadoServicios = {
   filtro: "todos"
 };
 
+let categoriasObserver = null;
+
 function formatearDuracion(minutos) {
   if (minutos < 60) return `${minutos} min`;
   const horas = Math.floor(minutos / 60);
@@ -175,6 +177,7 @@ function renderizarDestacados() {
       </article>
     `;
   }).join("");
+  window.GoMotion?.refresh();
 }
 
 function renderizarNavegacionCategorias(categorias) {
@@ -258,6 +261,43 @@ function renderizarServicios(filtro = "todos") {
       </section>
     `;
   }).join("");
+
+  initCategorySpy();
+  window.GoMotion?.refresh();
+}
+
+function initCategorySpy() {
+  categoriasObserver?.disconnect();
+  const sections = document.querySelectorAll(".categoria[data-categoria]");
+  if (!("IntersectionObserver" in window) || !sections.length) return;
+  const visibleCategories = new Set();
+
+  const setActiveCategory = (slug) => {
+    document.querySelectorAll(".categoria-nav-btn").forEach((button) => {
+      const active = button.dataset.categoryTarget === slug;
+      button.classList.toggle("active", active);
+      if (active) button.setAttribute("aria-current", "true");
+      else button.removeAttribute("aria-current");
+    });
+  };
+
+  categoriasObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) visibleCategories.add(entry.target);
+      else visibleCategories.delete(entry.target);
+    });
+
+    const anchor = window.innerHeight * 0.5;
+    const activeSection = [...visibleCategories].sort((a, b) =>
+      Math.abs(a.getBoundingClientRect().top - anchor) - Math.abs(b.getBoundingClientRect().top - anchor)
+    )[0];
+    if (activeSection) setActiveCategory(activeSection.dataset.categoria);
+  }, {
+    threshold: 0,
+    rootMargin: "-45% 0px -45% 0px"
+  });
+
+  sections.forEach((section) => categoriasObserver.observe(section));
 }
 
 function actualizarFiltroActivo(filtroActivo) {
@@ -273,7 +313,12 @@ function initFiltros() {
     button.addEventListener("click", () => {
       const filtro = button.dataset.filtro;
       actualizarFiltroActivo(filtro);
-      renderizarServicios(filtro);
+      const container = document.getElementById("categoriasContainer");
+      if (window.GoMotion && container) {
+        window.GoMotion.swap(container, () => renderizarServicios(filtro));
+      } else {
+        renderizarServicios(filtro);
+      }
     });
   });
 }
@@ -292,7 +337,10 @@ function initInteraccionesCatalogo() {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
       const panel = document.getElementById(toggle.getAttribute("aria-controls"));
       toggle.setAttribute("aria-expanded", String(!expanded));
-      if (panel) panel.hidden = expanded;
+      if (panel) {
+        if (window.GoMotion) window.GoMotion.togglePanel(panel, !expanded);
+        else panel.hidden = expanded;
+      }
       return;
     }
 
@@ -303,7 +351,8 @@ function initInteraccionesCatalogo() {
       const panel = sectionToggle ? document.getElementById(sectionToggle.getAttribute("aria-controls")) : null;
       if (sectionToggle && panel) {
         sectionToggle.setAttribute("aria-expanded", "true");
-        panel.hidden = false;
+        if (window.GoMotion) window.GoMotion.togglePanel(panel, true);
+        else panel.hidden = false;
       }
       section?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
@@ -324,4 +373,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const compactMedia = window.matchMedia("(max-width: 820px)");
   compactMedia.addEventListener("change", () => renderizarServicios(estadoServicios.filtro));
+  window.GoMotion?.refresh();
 });

@@ -97,6 +97,7 @@ let lightboxTrabajoId = null;
 let lightboxIndice = 0;
 let lightboxVista = "despues";
 let ultimoFoco = null;
+let lightboxCloseTimer = null;
 
 function obtenerEstado(trabajoId) {
   if (!estadosTrabajos.has(trabajoId)) {
@@ -210,6 +211,7 @@ function renderizarTrabajos() {
   }
 
   container.innerHTML = trabajos.map(renderizarCaso).join("");
+  window.GoMotion?.refresh();
 }
 
 function actualizarCaso(trabajoId) {
@@ -220,7 +222,13 @@ function actualizarCaso(trabajoId) {
   const estado = obtenerEstado(trabajoId);
   const source = trabajo.imagenes[estado.indice][estado.vista];
   const media = caseElement.querySelector(`#case-media-${trabajoId}`);
-  if (media) media.innerHTML = renderizarMedia(source, trabajo, estado.vista);
+  if (media) {
+    const updateMedia = () => {
+      media.innerHTML = renderizarMedia(source, trabajo, estado.vista);
+    };
+    if (window.GoMotion) window.GoMotion.swap(media, updateMedia, { outDuration: 110 });
+    else updateMedia();
+  }
 
   caseElement.querySelectorAll(".comparison-btn").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.view === estado.vista));
@@ -251,7 +259,12 @@ function initFiltros() {
         item.classList.toggle("active", active);
         item.setAttribute("aria-pressed", String(active));
       });
-      renderizarTrabajos();
+      const container = document.getElementById("trabajosGrid");
+      if (window.GoMotion && container) {
+        window.GoMotion.swap(container, renderizarTrabajos, { outDuration: 120 });
+      } else {
+        renderizarTrabajos();
+      }
     });
   });
 }
@@ -263,7 +276,16 @@ function actualizarLightbox() {
   const source = trabajo.imagenes[lightboxIndice][lightboxVista];
   document.getElementById("lightboxTitle").textContent = trabajo.nombre;
   document.getElementById("lightboxCategory").textContent = `${categoriasNombres[trabajo.categoria]} · ${lightboxVista === "antes" ? "Antes" : "Después"}`;
-  document.getElementById("lightboxMedia").innerHTML = renderizarMedia(source, trabajo, lightboxVista, "eager");
+  const lightbox = document.getElementById("lightbox");
+  const media = document.getElementById("lightboxMedia");
+  const updateMedia = () => {
+    media.innerHTML = renderizarMedia(source, trabajo, lightboxVista, "eager");
+  };
+  if (window.GoMotion && lightbox && !lightbox.hidden) {
+    window.GoMotion.swap(media, updateMedia, { outDuration: 100 });
+  } else {
+    updateMedia();
+  }
   document.getElementById("lightboxCounter").textContent = `Serie ${lightboxIndice + 1} de ${trabajo.imagenes.length}`;
 
   document.querySelectorAll("[data-lightbox-view]").forEach((button) => {
@@ -287,8 +309,18 @@ function openLightbox(trabajoId) {
   lightboxVista = estado.vista;
   lightboxActivo = true;
 
+  if (lightboxCloseTimer) {
+    clearTimeout(lightboxCloseTimer);
+    lightboxCloseTimer = null;
+  }
+
   actualizarLightbox();
   lightbox.hidden = false;
+  lightbox.classList.remove("is-closing");
+  if (!window.GoMotion?.isReduced()) {
+    lightbox.classList.add("is-opening");
+    requestAnimationFrame(() => requestAnimationFrame(() => lightbox.classList.remove("is-opening")));
+  }
   lightbox.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   document.getElementById("lightboxClose").focus();
@@ -297,11 +329,24 @@ function openLightbox(trabajoId) {
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (!lightboxActivo || !lightbox) return;
-  lightbox.hidden = true;
   lightbox.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
   lightboxActivo = false;
-  ultimoFoco?.focus();
+
+  const finishClose = () => {
+    lightbox.hidden = true;
+    lightbox.classList.remove("is-closing", "is-opening");
+    ultimoFoco?.focus();
+    lightboxCloseTimer = null;
+  };
+
+  if (window.GoMotion?.isReduced()) {
+    finishClose();
+    return;
+  }
+
+  lightbox.classList.add("is-closing");
+  lightboxCloseTimer = setTimeout(finishClose, 240);
 }
 
 function navegarLightbox(direction) {
@@ -425,4 +470,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnConsultarCTA")?.addEventListener("click", () => {
     abrirWhatsApp("Hola, he visto vuestro portfolio y me gustaría consultar qué cambio podría encajar conmigo.");
   });
+  window.GoMotion?.refresh();
 });

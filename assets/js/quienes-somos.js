@@ -82,6 +82,8 @@
         <p>${item.rol}</p>
       </article>
     `).join("");
+
+    window.GoMotion?.refresh();
   }
 
   function openReservation() {
@@ -92,6 +94,7 @@
   function initAboutPage() {
     renderTeam();
     document.getElementById("btnAboutReserve")?.addEventListener("click", openReservation);
+    window.GoMotion?.refresh();
   }
 
   if (document.readyState === "loading") {

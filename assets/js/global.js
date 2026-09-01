@@ -1,6 +1,6 @@
 // ============================================
 // GLOBAL.JS - FUNCIONALIDAD COMÚN A TODAS LAS PÁGINAS
-// Menú hamburguesa responsive, Scroll Reveal, Modo oscuro, Reservar cita, Volver arriba, Cookies
+// Menú responsive, motion nativo, modo oscuro, reserva, volver arriba y cookies
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -252,38 +252,162 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // ========== SCROLL REVEAL (animaciones) ==========
-    if (typeof ScrollReveal !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            ScrollReveal().reveal('.hero', {
-                origin: 'top',
-                distance: '50px',
-                duration: 1000,
-                easing: 'ease-in-out',
-                reset: false
+    // ========== SISTEMA DE MOTION NATIVO Y REUTILIZABLE ==========
+    const reducedMotionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const motionTimers = new WeakMap();
+    const panelTimers = new WeakMap();
+    let motionObserver = null;
+
+    const motionGroups = [
+        { selector: '.hero .eyebrow, .servicios-hero .eyebrow, .trabajos-hero .eyebrow, .about-hero .eyebrow', type: 'reveal', delay: 0 },
+        { selector: '.hero h1, .servicios-hero h1, .trabajos-hero h1, .about-hero h1', type: 'reveal', delay: 1 },
+        { selector: '.hero .hero-texto, .servicios-hero .hero-lead, .trabajos-hero .hero-lead, .about-hero-text', type: 'reveal', delay: 2 },
+        { selector: '.hero .hero-buttons, .servicios-hero .text-cta, .trabajos-hero-intro > p:not(.hero-lead)', type: 'reveal', delay: 3 },
+        { selector: '.hero .hero-location', type: 'reveal', delay: 4 },
+        { selector: '.hero-visual, .about-hero-visual', type: 'image', delay: 3 },
+        { selector: '.philosophy .section-heading, .philosophy-copy, .section-intro-row, .salon-story-heading, .experience-content, .testimonials-heading-row, .final-cta-inner', type: 'reveal' },
+        { selector: '.principle, .service-editorial-card, .testimonio-card', type: 'reveal', stagger: true },
+        { selector: '.salon-gallery figure, .experience-image', type: 'image', stagger: true },
+        { selector: '.servicios-heading-row, .catalogo-heading, .catalogo-controls, .closing-inner', type: 'reveal' },
+        { selector: '.destacado-card, .categoria', type: 'reveal', stagger: true },
+        { selector: '.portfolio-heading, .portfolio-notice, .portfolio-toolbar, .trabajos-cta-inner', type: 'reveal' },
+        { selector: '.trabajo-case', type: 'reveal', stagger: true },
+        { selector: '.team-heading, .philosophy-intro, .philosophy-list article, .salon-approach > .about-shell > div, .about-cta-inner', type: 'reveal', stagger: true },
+        { selector: '.team-overview-media, .salon-approach figure', type: 'image' },
+        { selector: '.team-overview-content', type: 'reveal', delay: 1 },
+        { selector: '.team-profile-media', type: 'image', stagger: true },
+        { selector: '.team-profile h3', type: 'reveal', stagger: true, offset: 1 },
+        { selector: '.team-profile p', type: 'reveal', stagger: true, offset: 1 },
+        { selector: '.footer-container', type: 'fade' }
+    ];
+
+    function decorateMotionElements() {
+        motionGroups.forEach((group) => {
+            document.querySelectorAll(group.selector).forEach((element, index) => {
+                if (element.dataset.motionBound === 'true') return;
+                element.dataset.motionBound = 'true';
+                element.classList.add(`motion-${group.type}`);
+                const delayStep = group.stagger
+                    ? Math.min((index % 7) + (group.offset || 0), 6)
+                    : (group.delay || 0);
+                if (delayStep > 0) element.classList.add(`motion-delay-${delayStep}`);
             });
-        }
-        
-        const featuresSection = document.querySelector('.features');
-        if (featuresSection) {
-            ScrollReveal().reveal('.feature', {
-                origin: 'bottom',
-                distance: '40px',
-                duration: 800,
-                interval: 200,
-                reset: false
-            });
-        }
-        
-        ScrollReveal().reveal('.footer-container', {
-            origin: 'bottom',
-            distance: '30px',
-            duration: 800,
-            reset: false
         });
-        
     }
+
+    function observeMotionElements() {
+        const pending = document.querySelectorAll('[data-motion-bound="true"]:not(.is-visible)');
+        if (!motionObserver) {
+            pending.forEach((element) => element.classList.add('is-visible'));
+            return;
+        }
+        pending.forEach((element) => motionObserver.observe(element));
+    }
+
+    function refreshMotion() {
+        decorateMotionElements();
+        observeMotionElements();
+    }
+
+    function initializeMotion() {
+        if (reducedMotionMedia.matches || !('IntersectionObserver' in window)) {
+            document.documentElement.classList.remove('motion-enabled');
+            motionObserver?.disconnect();
+            motionObserver = null;
+            document.querySelectorAll('[data-motion-bound="true"]').forEach((element) => element.classList.add('is-visible'));
+            return;
+        }
+
+        document.documentElement.classList.add('motion-enabled');
+        if (!motionObserver) {
+            motionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -8% 0px'
+            });
+        }
+        refreshMotion();
+    }
+
+    function swapMotion(element, update, options = {}) {
+        if (!element || reducedMotionMedia.matches) {
+            update();
+            refreshMotion();
+            return;
+        }
+
+        const existingTimer = motionTimers.get(element);
+        if (existingTimer) clearTimeout(existingTimer);
+        element.classList.add('motion-swap', 'is-swapping-out');
+        element.classList.toggle('motion-swap-x', options.axis === 'x');
+
+        const timer = setTimeout(() => {
+            update();
+            refreshMotion();
+            element.classList.remove('is-swapping-out');
+            element.classList.add('is-swapping-in');
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                element.classList.remove('is-swapping-in');
+            }));
+            motionTimers.delete(element);
+        }, options.outDuration || 120);
+
+        motionTimers.set(element, timer);
+    }
+
+    function toggleMotionPanel(panel, expanded) {
+        if (!panel) return;
+        const existingTimer = panelTimers.get(panel);
+        if (existingTimer) clearTimeout(existingTimer);
+        panel.classList.add('motion-panel');
+
+        if (reducedMotionMedia.matches) {
+            panel.classList.remove('is-collapsed');
+            panel.hidden = !expanded;
+            return;
+        }
+
+        if (expanded) {
+            panel.hidden = false;
+            panel.classList.add('is-collapsed');
+            requestAnimationFrame(() => requestAnimationFrame(() => panel.classList.remove('is-collapsed')));
+            return;
+        }
+
+        panel.classList.add('is-collapsed');
+        const timer = setTimeout(() => {
+            panel.hidden = true;
+            panel.classList.remove('is-collapsed');
+            panelTimers.delete(panel);
+        }, 330);
+        panelTimers.set(panel, timer);
+    }
+
+    function pulseMotion(element) {
+        if (!element || reducedMotionMedia.matches) return;
+        element.classList.remove('motion-pulse');
+        requestAnimationFrame(() => {
+            element.classList.add('motion-pulse');
+            element.addEventListener('animationend', () => element.classList.remove('motion-pulse'), { once: true });
+        });
+    }
+
+    window.GoMotion = {
+        refresh: refreshMotion,
+        swap: swapMotion,
+        togglePanel: toggleMotionPanel,
+        pulse: pulseMotion,
+        isReduced: () => reducedMotionMedia.matches
+    };
+
+    initializeMotion();
+    setTimeout(refreshMotion, 0);
+    reducedMotionMedia.addEventListener('change', initializeMotion);
     
     // Asignar evento al botón de modo oscuro del header
     const darkModeBtn = document.getElementById('darkModeToggle');
@@ -326,17 +450,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setActivePage();
     
-    // ========== BOTÓN VOLVER ARRIBA ==========
+    // ========== HEADER AL HACER SCROLL + BOTÓN VOLVER ARRIBA ==========
+    const siteHeader = document.querySelector('.site-header, header');
     const btnVolverArriba = document.getElementById('btnVolverArriba');
-    
+    let scrollStateFrame = null;
+
+    function updateScrollState() {
+        siteHeader?.classList.toggle('is-scrolled', window.scrollY > 24);
+        btnVolverArriba?.classList.toggle('visible', window.scrollY > 300);
+        scrollStateFrame = null;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (scrollStateFrame) return;
+        scrollStateFrame = requestAnimationFrame(updateScrollState);
+    }, { passive: true });
+
+    updateScrollState();
+
     if (btnVolverArriba) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                btnVolverArriba.classList.add('visible');
-            } else {
-                btnVolverArriba.classList.remove('visible');
-            }
-        });
         
         btnVolverArriba.addEventListener('click', function() {
             window.scrollTo({

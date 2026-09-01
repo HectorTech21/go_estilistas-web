@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goToPage = (page) => {
       currentPage = (page + totalPages) % totalPages;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.GoMotion?.pulse(container);
       container.scrollTo({
         left: Math.min(currentPage * getStep(), container.scrollWidth - container.clientWidth),
         behavior: reducedMotion ? 'auto' : 'smooth'
@@ -159,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateDots();
+    window.GoMotion?.refresh();
   }
 
   const heroReserveButton = document.getElementById('btnReservaHero');
@@ -169,4 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open(`https://wa.me/34916623438?text=${message}`, '_blank', 'noopener');
     });
   }
+
+  window.GoMotion?.refresh();
 });
